@@ -1,0 +1,12 @@
+<h1>SocialNetworks</h1>
+
+<p>Your content here.</p>
+
+{{outlet}}
+
+
+<ul>
+  {{#each social_network in controller}}
+  <li>{{#linkTo "social_network" social_network}}{{ social_network.name }}{{/linkTo}}</li>
+  {{/each}}
+</ul>

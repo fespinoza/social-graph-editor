@@ -1,0 +1,17 @@
+<h1>{{name}}</h1>
+
+<p>
+  social network
+</p>
+
+<h2>Actors</h2>
+
+<ul>
+  {{#each actor in actors}}
+  <li>{{ actor.name }}</li>
+  {{else}}
+  <p>
+    it doesn't have any actors
+  </p>
+  {{/each}}
+</ul>
