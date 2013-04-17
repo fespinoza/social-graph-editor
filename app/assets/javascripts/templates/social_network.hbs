@@ -10,7 +10,7 @@
           <span class="details">Details for Actor #{{id}}</span>
         {{/if}}
         {{#if isNew}}
-          <span>New Actor Form</span>
+          {{view Ember.TextField valueBinding="name" action="saveNew"}}
         {{/if}}
       </li>
     {{/view}}
