@@ -1,8 +1,16 @@
 <h1>{{name}}</h1>
 
 <ul>
-  {{#each actor in actors}}
-    <li>{{ actor.name }}</li>
+  {{#each actor in actors itemController="actor"}}
+    {{#view App.ActorView contentBinding="actor"}}
+      <li>
+        <span class="name">{{name}}</span>
+        <a href="#" {{action "toggleDetails"}}>Details</a>
+        {{#if isShowingDetails}}
+          <span class="details">Details for Actor #{{id}}</span>
+        {{/if}}
+      </li>
+    {{/view}}
   {{else}}
     <p>it doesn't have any actors</p>
   {{/each}}
