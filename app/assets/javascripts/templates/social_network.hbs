@@ -9,6 +9,9 @@
         {{#if isShowingDetails}}
           <span class="details">Details for Actor #{{id}}</span>
         {{/if}}
+        {{#if isNew}}
+          <span>New Actor Form</span>
+        {{/if}}
       </li>
     {{/view}}
   {{else}}
