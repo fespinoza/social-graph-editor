@@ -8,6 +8,7 @@
         <a href="#" {{action "toggleDetails"}}>Details</a>
         {{#if isShowingDetails}}
           <span class="details">Details for Actor #{{id}}</span>
+          <a href="#" {{action "delete"}}>Delete</a>
         {{/if}}
         {{#if isNew}}
           {{view Ember.TextField valueBinding="name" action="saveNew"}}
