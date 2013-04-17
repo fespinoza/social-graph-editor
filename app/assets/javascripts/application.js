@@ -17,4 +17,5 @@
 //= require ember-data
 //= require_self
 //= require ember_sge
+//= require d3.v3
 App = Ember.Application.create();
