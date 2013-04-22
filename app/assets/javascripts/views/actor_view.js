@@ -17,7 +17,13 @@ App.ActorView = Ember.View.extend({
     this.text = this.svgView.append("text")
          .attr("x", this.get('content.text_x'))
          .attr("y", this.get('content.text_y'))
+         .attr("text-anchor", "middle")
          .text(this.get('content.name'));
+    this.svgView.append("circle")
+         .attr("cx", this.get('content.text_x'))
+         .attr("cy", this.get('content.text_y'))
+         .attr("fill", "red")
+         .attr("r", 2);
   },
   updateName: function () {
     this.text.text(this.get('content.name'));

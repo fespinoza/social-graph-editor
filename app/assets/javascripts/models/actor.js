@@ -5,15 +5,15 @@ App.Actor = DS.Model.extend({
   social_network: DS.belongsTo('App.SocialNetwork'),
   radius: 20,
   cx: function () {
-    return this.get('x') + 60;
+    return this.get('x');
   }.property('x'),
   cy: function () {
-    return this.get('y') + 20;
+    return this.get('y') + this.get('radius');
   }.property('y'),
   text_x: function () {
     return this.get('x');
   }.property('x'),
   text_y: function () {
-    return this.get('y') + 60;
+    return this.get('y') + 3*this.get('radius');
   }.property('y'),
 });
