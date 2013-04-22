@@ -1,28 +1,10 @@
 <h1>{{name}}</h1>
 
-<ul>
+<svg id="graph_canvas" height="500" width="700" style="border: 1px solid black">
+</svg>
+
+<ul class="actor_list">
   {{#each actor in actors itemController="actor"}}
-    {{#view App.ActorView contentBinding="actor"}}
-      <li>
-        <span class="name">{{name}}</span>
-        <a href="#" {{action "toggleDetails"}}>Details</a>
-        {{#if isShowingDetails}}
-          {{#if isEditing}}
-            <span>editing</span>
-            {{view Ember.TextField valueBinding="name" action="save"}}
-            <a href="#" {{action "toggleEdit"}}>Cancel</a>
-          {{else}}
-            <span class="details">Details for Actor #{{id}}</span>
-            <a href="#" {{action "toggleEdit"}}>Edit</a>
-            <a href="#" {{action "delete"}}>Delete</a>
-          {{/if}}
-        {{/if}}
-        {{#if isNew}}
-          {{view Ember.TextField valueBinding="name" action="save"}}
-        {{/if}}
-      </li>
-    {{/view}}
-  {{else}}
-    <p>it doesn't have any actors</p>
+    {{view App.ActorView contentBinding="actor"}}
   {{/each}}
 </ul>

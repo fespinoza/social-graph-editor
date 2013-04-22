@@ -1,6 +1,11 @@
 App.SocialNetworkView = Ember.View.extend({
   click: function(event) {
     console.log("add actor!");
-    this.controller.send('addActor');
+    var offset = this.$().find('#graph_canvas').offset();
+    var coords = {
+      x: (event.pageX - offset.left),
+      y: (event.pageY - offset.top),
+    }
+    this.controller.send('addActor', coords.x, coords.y);
   }
 });
