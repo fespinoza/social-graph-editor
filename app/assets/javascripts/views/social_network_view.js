@@ -41,5 +41,5 @@ App.ActorsView = Ember.View.extend({
     .attr('x', function(d) { return d.get('text_x') })
     .attr('y', function(d) { return d.get('text_y') })
     .attr('text-anchor', 'middle');
-  },
+  }.observes('controller.length'),
 });
