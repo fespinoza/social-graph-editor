@@ -30,6 +30,10 @@ App.ActorsView = Ember.View.extend({
     .enter()
     .append("g")
     .attr("class", "actor")
+    .on("click", function(d) {
+      d3.event.stopPropagation();
+      console.log("actor "+d.get('id')+" clicked!");
+    });
 
     var circle = node.append('circle')
     .attr('r', function(d) { return d.get('radius'); })
