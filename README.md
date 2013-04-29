@@ -8,3 +8,5 @@
 * insert svg text when creating actor [DONE]
 * delete svg text when deleting actor [DONE]
 * update svg text when updating actor [DONE]
+
+* add circle to actors

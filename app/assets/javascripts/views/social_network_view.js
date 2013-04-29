@@ -6,7 +6,7 @@ App.SocialNetworkView = Ember.View.extend({
       var offset = $(this).offset(); 
       var coords = {
         x: (event.pageX - offset.left),
-        y: (event.pageY - offset.top),
+        y: (event.pageY - offset.top - 20),
       }
       view.controller.send('addActor', coords.x, coords.y);
     });
@@ -28,18 +28,24 @@ App.ActorsView = Ember.View.extend({
     var data = this.get('controller.content').toArray();
 
     // set the text element to handle
-    var text = svg.selectAll("text").data(data);
+    var text   = svg.selectAll("text").data(data);
+    var circle = svg.selectAll("circle").data(data);
 
     // enter state: append text
     text.enter().append("text").attr("text-anchor", "middle");
+    circle.enter().append("circle").attr("r", function(d) { return d.get('radius'); });
 
     // update state: update text content and coordinates
     text.text(function(d){ return d.get('name'); })
     .attr("x", function(d) { return d.get('text_x') })
     .attr("y", function(d) { return d.get('text_y') });
 
+    circle.attr('cx', function(d) { return d.get('cx'); })
+    circle.attr('cy', function(d) { return d.get('cy'); })
+
     // exit state: remove unused text
     text.exit().remove();
+    circle.exit().remove();
 
   }.observes('controller.length', 'controller.@each.name'),
 });
