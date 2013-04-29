@@ -56,6 +56,11 @@ App.ActorsView = Ember.View.extend({
     var toggleDetails = function(d) {
       d3.event.stopPropagation();
       console.log("actor details for "+d.get('name'));
+      $(".actor").each(function (index, element) {
+        if ($(element).data('actor-id') == d.get('id')) {
+          $(element).find('span').popover('show');
+        }
+      });
     };
 
     // set the text element to handle

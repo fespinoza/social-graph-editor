@@ -1,7 +1,7 @@
-Actors
+<h2>Actors</h2>
 
 {{#each actor in controller itemController="actor"}}
-  <div class="actor">
+  <div class="actor" {{bindAttr data-actor-id="actor.id"}}>
     <span>{{actor.name}}</span>
     <div class="details">
       {{#if actor.isNew}}
