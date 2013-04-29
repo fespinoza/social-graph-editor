@@ -21,6 +21,14 @@ App.ActorsView = Ember.View.extend({
     this.get('controller.content').on('didLoad', function () {
       view.renderSVG();
     });
+
+    this.$().find('.actor span').popover({
+      title: 'actor details',
+      html: true,
+      content: function () {
+        return $(this).siblings('.details').html(); 
+      }
+    });
   },
   renderSVG: function () {
     console.log("insert svg content");
