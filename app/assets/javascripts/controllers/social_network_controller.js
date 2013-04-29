@@ -9,4 +9,8 @@ App.ActorController = Ember.ObjectController.extend({
   save: function () {
     this.get('store').commit();
   },
+  delete: function () {
+    this.get('model').deleteRecord();
+    this.get('store').commit();
+  },
 });

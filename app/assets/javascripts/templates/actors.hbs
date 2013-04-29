@@ -6,6 +6,7 @@ Actors
       {{view Ember.TextField valueBinding="actor.name" action="save"}}
     {{else}}
       {{actor.name}}
+      <button {{action "delete"}}>Delete</button>
     {{/if}}
   </div>
 {{/each}}

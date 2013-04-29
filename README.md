@@ -5,6 +5,6 @@
 
 ## TASKS
 
-* insert svg g when creating actor
-* delete svg g when deleting actor
-* update svg g when updating actor
+* insert svg text when creating actor [DONE]
+* delete svg text when deleting actor
+* update svg text when updating actor
