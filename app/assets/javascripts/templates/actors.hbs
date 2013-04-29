@@ -1,0 +1,11 @@
+Actors
+
+{{#each actor in controller itemController="actor"}}
+  <div class="actor">
+    {{#if actor.isNew}}
+      {{view Ember.TextField valueBinding="actor.name" action="save"}}
+    {{else}}
+      {{actor.name}}
+    {{/if}}
+  </div>
+{{/each}}

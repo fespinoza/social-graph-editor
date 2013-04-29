@@ -4,3 +4,9 @@ App.SocialNetworkController = Ember.ObjectController.extend({
     this.get('model.actors').pushObject(actor);
   }
 });
+
+App.ActorController = Ember.ObjectController.extend({
+  save: function () {
+    this.get('store').commit();
+  },
+});
