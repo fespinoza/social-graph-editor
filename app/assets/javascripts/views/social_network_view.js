@@ -41,5 +41,5 @@ App.ActorsView = Ember.View.extend({
     // exit state: remove unused text
     text.exit().remove();
 
-  }.observes('controller.length'),
+  }.observes('controller.length', 'controller.@each.name'),
 });

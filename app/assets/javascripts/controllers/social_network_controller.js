@@ -6,11 +6,16 @@ App.SocialNetworkController = Ember.ObjectController.extend({
 });
 
 App.ActorController = Ember.ObjectController.extend({
+  isEditing: false,
   save: function () {
+    this.set('isEditing', false);
     this.get('store').commit();
   },
   delete: function () {
     this.get('model').deleteRecord();
     this.get('store').commit();
+  },
+  toggleEditing: function () {
+    this.set('isEditing', !this.get('isEditing'));
   },
 });

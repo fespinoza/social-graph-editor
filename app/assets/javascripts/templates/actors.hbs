@@ -5,8 +5,14 @@ Actors
     {{#if actor.isNew}}
       {{view Ember.TextField valueBinding="actor.name" action="save"}}
     {{else}}
-      {{actor.name}}
-      <button {{action "delete"}}>Delete</button>
+      {{#if actor.isEditing}}
+        {{view Ember.TextField valueBinding="actor.name" action="save"}}
+        <button {{action "toggleEditing"}}>Edit</button>
+      {{else}}
+        {{actor.name}}
+        <button {{action "toggleEditing"}}>Edit</button>
+        <button {{action "delete"}}>Delete</button>
+      {{/if}}
     {{/if}}
   </div>
 {{/each}}
