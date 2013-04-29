@@ -9,4 +9,9 @@
 * delete svg text when deleting actor [DONE]
 * update svg text when updating actor [DONE]
 
-* add circle to actors
+* SVG Actor = circle + text
+* actor popover form
+  * double click on SVG Actor shows the actor details
+  * click outside actor details closes details
+  * Actor Details: click edit button
+  * new actor show form in popover

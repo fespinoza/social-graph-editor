@@ -2,17 +2,19 @@ Actors
 
 {{#each actor in controller itemController="actor"}}
   <div class="actor">
-    {{#if actor.isNew}}
-      {{view Ember.TextField valueBinding="actor.name" action="save"}}
-    {{else}}
-      {{#if actor.isEditing}}
+    <span>{{actor.name}}</span>
+    <div class="details">
+      {{#if actor.isNew}}
         {{view Ember.TextField valueBinding="actor.name" action="save"}}
-        <button {{action "toggleEditing"}}>Edit</button>
       {{else}}
-        {{actor.name}}
-        <button {{action "toggleEditing"}}>Edit</button>
-        <button {{action "delete"}}>Delete</button>
+        {{#if actor.isEditing}}
+          {{view Ember.TextField valueBinding="actor.name" action="save"}}
+          <button {{action "toggleEditing"}}>Edit</button>
+        {{else}}
+          <button {{action "toggleEditing"}}>Edit</button>
+          <button {{action "delete"}}>Delete</button>
+        {{/if}}
       {{/if}}
-    {{/if}}
+    </div>
   </div>
 {{/each}}
