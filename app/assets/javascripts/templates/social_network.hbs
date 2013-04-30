@@ -1,28 +1,13 @@
 <h1>{{name}}</h1>
 
-<ul>
-  {{#each actor in actors itemController="actor"}}
-    {{#view App.ActorView contentBinding="actor"}}
-      <li>
-        <span class="name">{{name}}</span>
-        <a href="#" {{action "toggleDetails"}}>Details</a>
-        {{#if isShowingDetails}}
-          {{#if isEditing}}
-            <span>editing</span>
-            {{view Ember.TextField valueBinding="name" action="save"}}
-            <a href="#" {{action "toggleEdit"}}>Cancel</a>
-          {{else}}
-            <span class="details">Details for Actor #{{id}}</span>
-            <a href="#" {{action "toggleEdit"}}>Edit</a>
-            <a href="#" {{action "delete"}}>Delete</a>
-          {{/if}}
-        {{/if}}
-        {{#if isNew}}
-          {{view Ember.TextField valueBinding="name" action="save"}}
-        {{/if}}
-      </li>
-    {{/view}}
-  {{else}}
-    <p>it doesn't have any actors</p>
-  {{/each}}
-</ul>
+
+<div class="fluid-row">
+  <div class="span3">
+    {{render "actors" actors}}
+  </div>
+  <div class="span9">
+    <svg id="graph_canvas">
+    </svg>
+  </div>
+</div>
+

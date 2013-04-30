@@ -1,6 +1,6 @@
 App.Router.map(function() {
   this.route("social_networks");
-  this.route("social_network", {path: "social_networks/:social_network_id" });
+  this.route("social_network", { path: "social_networks/:social_network_id" });
 });
 
 

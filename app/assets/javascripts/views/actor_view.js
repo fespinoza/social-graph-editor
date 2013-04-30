@@ -1,9 +1,9 @@
 App.ActorView = Ember.View.extend({
-  classNames: ['actor'],
-  click: function(event) {
-    event.stopPropagation();
-  },
-  didInsertElement: function() {
-    $("#"+this.get('elementId')).find("input").focus();
+  templateName: 'actor',
+  didInsertElement: function () {
+    if (this.get('controller.isNew')) {
+      console.log("is new");
+      this.$().find("input").focus();
+    };
   },
 });

@@ -1,3 +1,5 @@
 class SocialNetworkSerializer < ActiveModel::Serializer
-  attributes :id, :name, :actor_ids
+  embed :ids, include: true
+  attributes :id, :name
+  has_many :actors
 end

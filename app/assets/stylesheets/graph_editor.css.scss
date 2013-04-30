@@ -1,10 +1,9 @@
-//.graph_canvas {
-//  
-//  svg {
-//    border: 1px solid black;
-//  }
-//}
+svg#graph_canvas {
+  width: 90%;
+  height: 600px;
+  border: 1px solid black;
 
-.actor {
-  background-color: lightgray;
+  circle.selected {
+    fill: purple;
+  }
 }

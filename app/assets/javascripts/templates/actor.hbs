@@ -1,0 +1,28 @@
+<h3>{{name}} details</h3>
+<ul>
+  <li>
+    <strong>ID:</strong>
+    <span>{{id}}</span>
+  </li>
+  <li>
+    <strong>Name:</strong>
+    {{#if isEditing}} 
+      <span>{{view Ember.TextField valueBinding="name" action="save"}}</span>
+    {{else}}
+      <span>{{name}}</span>
+    {{/if}}
+  </li>
+  <li>
+    <strong>X:</strong>
+    <span>{{x}}</span>
+  </li>
+  <li>
+    <strong>Y:</strong>
+    <span>{{y}}</span>
+  </li>
+</ul>
+
+<div class="operations well well-small">
+  <button class="btn" {{action "toggleEditing"}}>Edit</button>
+  <button class="btn btn-danger" {{action "delete" this}}>Delete</button>
+</div>
