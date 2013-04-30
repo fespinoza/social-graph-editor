@@ -48,7 +48,11 @@ App.ActorsView = Ember.View.extend({
     // define dragging behavior
     var draggable = d3.behavior.drag()
     .on('dragstart', function (d) {
-      //console.log("drag start for "+d.get('id'));
+      // store initial position of the actor
+      d.__init__ = { 
+        x: d.get('x'),
+        y: d.get('y')
+      }
     })
     .on('drag', function (d) {
       // move the coordinates of the actor
@@ -57,10 +61,15 @@ App.ActorsView = Ember.View.extend({
       view.tick();
     })
     .on('dragend', function (d) {
-      //console.log('drag end for '+d.get('id'));
-      // TODO: update only when position is not changed
-      // update position changes to the server
-      //d.get('store').commit();
+      // store changes only if actor was really translated
+      if (d.__init__.x != d.get('x') && d.__init__y != d.get('y')) {
+        console.log("update position");
+        // update position changes to the server
+        d.get('store').commit();
+      } else {
+        console.log("didn't update");
+      }
+      delete d.__init__;
     });
 
     var toggleDetails = function(d) {
