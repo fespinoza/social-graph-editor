@@ -9,7 +9,7 @@ App.ActorsView = Ember.View.extend({
         x: (event.pageX - offset.left),
         y: (event.pageY - offset.top - 20),
       }
-      view.controller.send('addActor', coords.x, coords.y);
+      view.controller.send('add', coords.x, coords.y);
     });
     this.get('controller.content').on('didLoad', function () {
       view.renderSVG();
