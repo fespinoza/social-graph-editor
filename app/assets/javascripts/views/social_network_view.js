@@ -29,6 +29,16 @@ App.ActorsView = Ember.View.extend({
         return $(this).siblings('.details').html(); 
       }
     });
+
+    this.ph = this.$().find('#popover_holder');
+
+    this.ph.popover({
+      trigger: 'manual',
+      title: "Awesome Title",
+      content: "Awesome Content",
+      animation: false,
+      html: true,
+    });
   },
   renderSVG: function () {
     console.log("insert svg content");
@@ -39,7 +49,7 @@ App.ActorsView = Ember.View.extend({
     // define dragging behavior
     var draggable = d3.behavior.drag()
     .on('dragstart', function (d) {
-      console.log("drag start for "+d.get('id'));
+      //console.log("drag start for "+d.get('id'));
     })
     .on('drag', function (d) {
       // move the coordinates of the actor
@@ -48,19 +58,28 @@ App.ActorsView = Ember.View.extend({
       view.tick();
     })
     .on('dragend', function (d) {
-      console.log('drag end for '+d.get('id'));
+      //console.log('drag end for '+d.get('id'));
+      // TODO: update only when position is not changed
       // update position changes to the server
-      d.get('store').commit();
+      //d.get('store').commit();
     });
 
     var toggleDetails = function(d) {
       d3.event.stopPropagation();
       console.log("actor details for "+d.get('name'));
-      $(".actor").each(function (index, element) {
-        if ($(element).data('actor-id') == d.get('id')) {
-          $(element).find('span').popover('show');
-        }
-      });
+      var offset = $(this).offset();
+      var r = 40;
+
+      //debugger;
+      // position
+      view.ph[0].style.left = (offset.left + r*2) + 'px';
+      view.ph[0].style.top = (offset.top + r) + 'px';
+
+      view.ph.attr('data-original-title', d.get('name'));
+      view.ph.attr('data-original-content', "Hola");
+
+      // show
+      view.ph.popover('show');
     };
 
     // set the text element to handle
