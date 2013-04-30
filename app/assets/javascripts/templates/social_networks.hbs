@@ -1,12 +1,20 @@
-<h1>SocialNetworks</h1>
+<div class="fluid-row">
+  <div class="span12">
+    <ul class="breadcrumb">
+      <li><a href="/"><i class="icon-home"></i></a> <span class="divider">/</span></li>
+      <li class="active">Social Networks <span class="divider">/</span></li>
+    </ul>
+  </div>
+</div>
 
-<p>Your content here.</p>
-
-{{outlet}}
-
-
-<ul>
-  {{#each social_network in controller}}
-  <li>{{#linkTo "social_network" social_network}}{{ social_network.name }}{{/linkTo}}</li>
-  {{/each}}
-</ul>
+<div class="fluid-row">
+  <div class="span4">
+    <ul class="nav nav-list well">
+      {{#each social_network in controller}}
+      <li>{{#linkTo "social_network" social_network}}{{ social_network.name }}{{/linkTo}}</li>
+      {{/each}}
+    </ul>
+  </div>
+  <div class="span8">
+  </div>
+</div>
