@@ -35,7 +35,6 @@ App.ActorsView = Ember.View.extend({
     this.ph.popover({
       trigger: 'manual',
       title: "Awesome Title",
-      content: "Awesome Content",
       animation: false,
       html: true,
     });
@@ -75,8 +74,10 @@ App.ActorsView = Ember.View.extend({
       view.ph[0].style.left = (offset.left + r*2) + 'px';
       view.ph[0].style.top = (offset.top + r) + 'px';
 
+      var actor_details_content = $(".actor[data-actor-id='"+d.get('id')+"'] .details").html()
+
       view.ph.attr('data-original-title', d.get('name'));
-      view.ph.attr('data-original-content', "Hola");
+      view.ph.attr('data-content', actor_details_content);
 
       // show
       view.ph.popover('show');
