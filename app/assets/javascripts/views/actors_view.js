@@ -49,7 +49,9 @@ App.ActorsView = Ember.View.extend({
       if (d.__init__.x != d.get('x') && d.__init__y != d.get('y')) {
         console.log("update position");
         // update position changes to the server
-        d.get('store').commit();
+        if(!d.get('isNew')) {
+          d.get('store').commit();
+        };
       } else {
         console.log("didn't update");
       }
