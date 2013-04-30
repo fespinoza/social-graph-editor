@@ -15,11 +15,18 @@
           {{#linkTo "social_network" social_network}}
             {{ social_network.name }}
           {{/linkTo}}
+          <a href="#" {{action "edit" social_network}}><i class="icon-edit"></i></a>
           <a href="#" {{action "delete" social_network}}><i class="icon-trash"></i></a>
         </li>
       {{/each}}
     </ul>
   </div>
   <div class="span8">
+    <div class="pull-right">
+      {{#linkTo "social_networks" class="btn btn-large"}}
+        <i class="icon-plus-sign"></i>
+        Add Social Network
+      {{/linkTo}}
+    </div>
   </div>
 </div>
