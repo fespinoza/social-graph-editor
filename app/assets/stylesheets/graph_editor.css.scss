@@ -1,9 +1,19 @@
 svg#graph_canvas {
-  width: 90%;
+  width: 100%;
   height: 600px;
   border: 1px solid black;
 
   circle.selected {
     fill: purple;
+  }
+}
+
+#current-actor {
+  h3 {
+    margin-top: 0;
+  }
+
+  .operations {
+    overflow: hidden;
   }
 }
