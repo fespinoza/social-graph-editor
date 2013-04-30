@@ -1,22 +1,5 @@
-<h2>Actors</h2>
-
-{{#each actor in controller itemController="actor"}}
-  <div class="actor" {{bindAttr data-actor-id="actor.id"}}>
-    <span>{{actor.name}}</span>
-    <div class="details">
-      {{#if actor.isNew}}
-        {{view Ember.TextField valueBinding="actor.name" action="save"}}
-      {{else}}
-        {{#if actor.isEditing}}
-          {{view Ember.TextField valueBinding="actor.name" action="save"}}
-          <button {{action "toggleEditing"}}>Edit</button>
-        {{else}}
-          <button {{action "toggleEditing"}}>Edit</button>
-          <button {{action "delete"}}>Delete</button>
-        {{/if}}
-      {{/if}}
-    </div>
-  </div>
-{{/each}}
-
-<div id="popover_holder" style="position: absolute;"></div>
+{{#if currentActor}}
+  {{render "actor" currentActor}}
+{{else}}
+  <h3>there is not any actor selected</h3>
+{{/if}}

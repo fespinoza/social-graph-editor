@@ -1,6 +1,13 @@
 <h1>{{name}}</h1>
 
-<svg id="graph_canvas">
-</svg>
 
-{{render "actors" actors}}
+<div class="fluid-row">
+  <div class="span3">
+    {{render "actors" actors}}
+  </div>
+  <div class="span9">
+    <svg id="graph_canvas">
+    </svg>
+  </div>
+</div>
+
