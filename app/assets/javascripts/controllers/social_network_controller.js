@@ -6,7 +6,6 @@ App.SocialNetworkController = Ember.ObjectController.extend({
 });
 
 App.ActorController = Ember.ObjectController.extend({
-  isEditing: false,
   save: function () {
     this.set('isEditing', false);
     this.get('store').commit();

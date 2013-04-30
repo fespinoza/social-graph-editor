@@ -29,15 +29,6 @@ App.ActorsView = Ember.View.extend({
         return $(this).siblings('.details').html(); 
       }
     });
-
-    this.ph = this.$().find('#popover_holder');
-
-    this.ph.popover({
-      trigger: 'manual',
-      title: "Awesome Title",
-      animation: false,
-      html: true,
-    });
   },
   renderSVG: function () {
     console.log("insert svg content");
@@ -75,21 +66,7 @@ App.ActorsView = Ember.View.extend({
     var toggleDetails = function(d) {
       d3.event.stopPropagation();
       console.log("actor details for "+d.get('name'));
-      var offset = $(this).offset();
-      var r = 40;
-
-      //debugger;
-      // position
-      view.ph[0].style.left = (offset.left + r*2) + 'px';
-      view.ph[0].style.top = (offset.top + r) + 'px';
-
-      var actor_details_content = $(".actor[data-actor-id='"+d.get('id')+"'] .details").html()
-
-      view.ph.attr('data-original-title', d.get('name'));
-      view.ph.attr('data-content', actor_details_content);
-
-      // show
-      view.ph.popover('show');
+      d.set('isEditing', !d.get('isEditing'));
     };
 
     // set the text element to handle

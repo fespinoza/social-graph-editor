@@ -16,4 +16,7 @@ App.Actor = DS.Model.extend({
   text_y: function () {
     return this.get('y') + 3*this.get('radius');
   }.property('y'),
+  isEditing: function () {
+    return false; 
+  }.property(),
 });
