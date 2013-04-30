@@ -3,15 +3,18 @@ App.ActorsController = Ember.ArrayController.extend({
   currentNewActor: null,
 
   add: function(x, y) {
-    if (this.get('currentNewActor')) {
-      console.log("there was a previous new actor");
-      this.get('currentNewActor').deleteRecord();
-    }
+    // clear unsaved new actor
+    this.clearCurrentNewActor();
 
+    // create actor
     var actor = App.Actor.createRecord({name: "New Actor", x: x, y: y});
     actor.set('isEditing', true);
+
+    // set as current actor and current new actor
     this.set('currentActor', actor);
     this.set('currentNewActor', actor);
+    
+    // add actor to the actors lists
     this.get('content').pushObject(actor);
   },
 
@@ -23,4 +26,12 @@ App.ActorsController = Ember.ArrayController.extend({
       this.get('store').commit();
     }
   },
+
+  clearCurrentNewActor: function () {
+    if (this.get('currentNewActor') != null) {
+      this.get('currentNewActor').deleteRecord();
+      this.set('currentNewActor', null);
+    }
+  },
+
 });

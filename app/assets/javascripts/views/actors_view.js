@@ -65,6 +65,8 @@ App.ActorsView = Ember.View.extend({
       d3.select(this).classed('selected', d.get('isSelected'));
       // set the controller current actor to this actor
       view.set('controller.currentActor', d);
+      // remove current new actor
+      view.get('controller').send('clearCurrentNewActor');
     };
 
     // set the text element to handle
