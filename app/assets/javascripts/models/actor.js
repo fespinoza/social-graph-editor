@@ -19,4 +19,7 @@ App.Actor = DS.Model.extend({
   isEditing: function () {
     return false; 
   }.property(),
+  isSelected: function () {
+    return false;
+  }.property(),
 });

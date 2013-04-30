@@ -63,9 +63,11 @@ App.ActorsView = Ember.View.extend({
       delete d.__init__;
     });
 
-    var toggleDetails = function(d) {
+    var toggleSelected = function (d) {
       d3.event.stopPropagation();
-      console.log("actor details for "+d.get('name'));
+      console.log("actor clicked "+d.get('name'));
+      d.set('isSelected', !d.get('isSelected'));
+      d3.select(this).classed('selected', d.get('isSelected'));
       d.set('isEditing', !d.get('isEditing'));
     };
 
@@ -76,14 +78,13 @@ App.ActorsView = Ember.View.extend({
     // enter state: append text
     this.text.enter().append("text")
       .attr("text-anchor", "middle")
+      .attr("data-selected", false)
       .call(draggable)
-      .on('click', function() { d3.event.stopPropagation(); })
-      .on('dblclick', toggleDetails);
+      .on('click', toggleSelected);
     this.circle.enter().append("circle")
       .attr("r", function(d) { return d.get('radius'); })
       .call(draggable)
-      .on('click', function() { d3.event.stopPropagation(); })
-      .on('dblclick', toggleDetails);
+      .on('click', toggleSelected);
 
     this.tick();
 
