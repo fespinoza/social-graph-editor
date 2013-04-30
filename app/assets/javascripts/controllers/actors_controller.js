@@ -16,6 +16,12 @@ App.ActorsController = Ember.ArrayController.extend({
     
     // add actor to the actors lists
     this.get('content').pushObject(actor);
+
+    // unlink from current new actor if actor was saved
+    controller = this;
+    actor.on('didCreate', function () {
+      controller.set('currentNewActor', null);        
+    });
   },
 
   delete: function (actor) {
