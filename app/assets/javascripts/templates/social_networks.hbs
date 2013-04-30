@@ -11,7 +11,12 @@
   <div class="span4">
     <ul class="nav nav-list well">
       {{#each social_network in controller}}
-      <li>{{#linkTo "social_network" social_network}}{{ social_network.name }}{{/linkTo}}</li>
+        <li>
+          {{#linkTo "social_network" social_network}}
+            {{ social_network.name }}
+          {{/linkTo}}
+          <a href="#" {{action "delete" social_network}}><i class="icon-trash"></i></a>
+        </li>
       {{/each}}
     </ul>
   </div>
