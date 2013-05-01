@@ -9,17 +9,17 @@
 
 <div class="fluid-row">
   <div class="span4">
-    <ul class="nav nav-list well">
+     <div id="social_networks" class="well"> 
       {{#each social_network in controller}}
-        <li>
+        <div class="item_list">
           {{#linkTo "social_network" social_network}}
             {{ social_network.name }}
           {{/linkTo}}
           <a href="#" {{action "edit" social_network}}><i class="icon-edit"></i></a>
           <a href="#" {{action "delete" social_network}}><i class="icon-trash"></i></a>
-        </li>
+        </div>
       {{/each}}
-    </ul>
+    </div>
   </div>
   <div class="span8">
     {{outlet}}

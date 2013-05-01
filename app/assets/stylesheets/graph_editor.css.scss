@@ -17,3 +17,13 @@ svg#graph_canvas {
     overflow: hidden;
   }
 }
+
+#social_networks {
+  .item_list {
+    padding: 7px 15px;
+    margin: 0 -20px;
+    &:hover {
+      background-color: lightgray;
+    }
+  }
+}
