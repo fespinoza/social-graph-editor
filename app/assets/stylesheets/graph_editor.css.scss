@@ -25,5 +25,9 @@ svg#graph_canvas {
     &:hover {
       background-color: lightgray;
     }
+
+    .edit {
+      text-decoration: none;
+    }
   }
 }
