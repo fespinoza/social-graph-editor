@@ -16,3 +16,13 @@ App.SocialNetworksNewController = Ember.ObjectController.extend({
     this.transitionToRoute('social_networks');
   },
 });
+
+App.SocialNetworksEditController = Ember.ObjectController.extend({
+  cancel: function () {
+    this.transitionToRoute('social_networks');
+  },
+  save: function () {
+    this.get('store').commit();
+    this.transitionToRoute('social_networks');
+  },
+});

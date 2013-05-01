@@ -15,7 +15,9 @@
           {{#linkTo "social_network" social_network}}
             {{ social_network.name }}
           {{/linkTo}}
-          <a href="#" {{action "edit" social_network}}><i class="icon-edit"></i></a>
+          {{#linkTo "social_networks.edit" social_network}}
+            <i class="icon-edit"></i>
+          {{/linkTo}}
           <a href="#" {{action "delete" social_network}}><i class="icon-trash"></i></a>
         </div>
       {{/each}}
