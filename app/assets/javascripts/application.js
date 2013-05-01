@@ -19,4 +19,6 @@
 //= require_self
 //= require ember_sge
 //= require d3.v3
-App = Ember.Application.create();
+App = Ember.Application.create({
+  LOG_TRANSITIONS: true,
+});
