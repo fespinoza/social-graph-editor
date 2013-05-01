@@ -2,7 +2,7 @@
   <div class="span12">
     <ul class="breadcrumb">
       <li><a href="/"><i class="icon-home"></i></a> <span class="divider">/</span></li>
-      <li class="active">Social Networks <span class="divider">/</span></li>
+      <li>{{#linkTo "social_networks"}}Social Networks{{/linkTo}} <span class="divider">/</span></li>
     </ul>
   </div>
 </div>
@@ -22,11 +22,6 @@
     </ul>
   </div>
   <div class="span8">
-    <div class="pull-right">
-      {{#linkTo "social_networks" class="btn btn-large"}}
-        <i class="icon-plus-sign"></i>
-        Add Social Network
-      {{/linkTo}}
-    </div>
+    {{outlet}}
   </div>
 </div>

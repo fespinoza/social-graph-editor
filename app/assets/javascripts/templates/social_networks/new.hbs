@@ -1,0 +1,13 @@
+<h1>New Social Network</h1>
+
+<div class="field">
+  <strong>Name</strong>
+  {{view Ember.TextField valueBinding="name"}}
+</div>
+
+<div class="operations well">
+  <div class="pull-right">
+    {{#linkTo "social_networks" class="btn"}}Cancel{{/linkTo}}
+    <button class="btn btn-primary" {{action "save"}}>Create Social Network</button>
+  </div>
+</div>

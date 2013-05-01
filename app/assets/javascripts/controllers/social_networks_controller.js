@@ -6,3 +6,10 @@ App.SocialNetworksController = Ember.ArrayController.extend({
     }
   },
 });
+
+App.SocialNetworksNewController = Ember.ObjectController.extend({
+  save: function () {
+    this.get('store').commit();
+    this.transitionToRoute('social_networks');
+  },
+});
