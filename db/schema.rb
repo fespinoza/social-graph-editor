@@ -13,13 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130501155739) do
 
-  create_table "actor_relations", :force => true do |t|
-    t.integer  "actor_id"
-    t.integer  "relation_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "actors", :force => true do |t|
     t.string   "name"
     t.integer  "x"
@@ -31,10 +24,16 @@ ActiveRecord::Schema.define(:version => 20130501155739) do
 
   add_index "actors", ["social_network_id"], :name => "index_actors_on_social_network_id"
 
+  create_table "actors_relations", :force => true do |t|
+    t.integer "actor_id"
+    t.integer "relation_id"
+  end
+
   create_table "relations", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.integer  "social_network_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   create_table "social_networks", :force => true do |t|
