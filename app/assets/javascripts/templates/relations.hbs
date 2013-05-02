@@ -1,0 +1,13 @@
+<ul>
+  {{#each r in controller}}
+  <li>{{r.name}}</li>
+  <li>{{r.id}}</li>
+    <ol>
+      {{#each a in r.actors}}
+        <li>{{a.name}}</li>
+        <li>{{a.x}}</li>
+        <li>{{a.y}}</li>
+      {{/each}}
+    </ol>
+  {{/each}}
+</ul>
