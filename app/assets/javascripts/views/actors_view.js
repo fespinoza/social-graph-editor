@@ -72,16 +72,18 @@ App.ActorsView = Ember.View.extend({
     };
 
     // set the text element to handle
-    this.text   = svg.selectAll("text").data(data);
-    this.circle = svg.selectAll("circle").data(data);
+    this.text   = svg.selectAll("text.actor").data(data);
+    this.circle = svg.selectAll("circle.actor").data(data);
 
     // enter state: append text
     this.text.enter().append("text")
+      .attr("class", "actor")
       .attr("text-anchor", "middle")
       .attr("data-selected", false)
       .call(draggable)
       .on('click', toggleSelected);
     this.circle.enter().append("circle")
+      .attr("class", "actor")
       .attr("r", function(d) { return d.get('radius'); })
       .call(draggable)
       .on('click', toggleSelected);
