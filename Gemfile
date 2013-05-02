@@ -16,12 +16,12 @@ group :development do
   gem 'better_errors'       # awesome errors page
   gem 'binding_of_caller'   # for better errors live console work
   gem 'meta_request'        # to enable the chrome rails panel
-  gem 'pry'                 # awesome replacement of irb
 end
 
 group :development, :test do
   gem 'sqlite3'
   gem 'rspec-rails'
+  gem 'pry'                 # awesome replacement of irb
 end
 
 group :production do
