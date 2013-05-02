@@ -31,10 +31,12 @@ App.RelationsView = Ember.View.extend({
       .attr('class', 'relation')
       .attr('r', 2)
       .attr('fill', "blue")
+      .on('click', this.relationClick);
     this.text.enter()
       .append('text')
       .attr('class', 'relation')
       .attr('text-anchor', 'middle')
+      .on('click', this.relationClick);
 
     // update state: set line coordinates
     this.tick();
