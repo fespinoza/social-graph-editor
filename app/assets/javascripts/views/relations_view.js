@@ -5,6 +5,11 @@ App.RelationsView = Ember.View.extend({
     this.get('controller.content').on('didLoad', function () {
       view.renderSVG();
     });
+    // update lines when actor was updated
+    var $graphCanvas = $("#graph_canvas");
+    $graphCanvas.on('actorTick', function () {
+      view.tick();
+    });
   },
   renderSVG: function() {
     console.log("render svg relations");
@@ -22,11 +27,7 @@ App.RelationsView = Ember.View.extend({
       .on('click', this.relationClick);
 
     // update state: set line coordinates
-    this.line
-      .attr("x1", function(d) { return d.get('actors').toArray()[0].get('cx'); })
-      .attr("y1", function(d) { return d.get('actors').toArray()[0].get('cy'); })
-      .attr("x2", function(d) { return d.get('actors').toArray()[1].get('cx'); })
-      .attr("y2", function(d) { return d.get('actors').toArray()[1].get('cy'); })
+    this.tick();
 
     // exit state: when relations are deleted
     this.line.exit().remove();
@@ -34,5 +35,15 @@ App.RelationsView = Ember.View.extend({
   relationClick: function(d) {
     d3.event.stopPropagation();
     console.log("click on relation "+d.get('name'));
+  },
+  tick: function() {
+    console.log("relation tick");
+    if (this.line) {
+      this.line
+        .attr("x1", function(d) { return d.get('actors').toArray()[0].get('cx'); })
+        .attr("y1", function(d) { return d.get('actors').toArray()[0].get('cy'); })
+        .attr("x2", function(d) { return d.get('actors').toArray()[1].get('cx'); })
+        .attr("y2", function(d) { return d.get('actors').toArray()[1].get('cy'); });
+    }
   },
 });

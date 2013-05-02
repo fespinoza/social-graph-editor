@@ -101,5 +101,7 @@ App.ActorsView = Ember.View.extend({
 
     this.circle.attr('cx', function(d) { return d.get('cx'); })
       .attr('cy', function(d) { return d.get('cy'); });
+    
+    $("#graph_canvas").trigger("actorTick");
   }.observes('controller.@each.name')
 });
