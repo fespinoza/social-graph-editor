@@ -1,13 +1,44 @@
-<ul>
-  {{#each r in controller}}
-  <li>{{r.name}}</li>
-  <li>{{r.id}}</li>
-    <ol>
-      {{#each a in r.actors}}
-        <li>{{a.name}}</li>
-        <li>{{a.x}}</li>
-        <li>{{a.y}}</li>
-      {{/each}}
-    </ol>
+<div id="current-relation" class="current_object">
+  {{#if currentRelation}}
+    <h3>{{currentRelation.name}} details</h3>
+    <ul>
+      <li>
+        <strong>ID:</strong>
+        <span>{{currentRelation.id}}</span>
+      </li>
+      <li>
+        <strong>Name:</strong>
+        {{#if currentRelation.isEditing}} 
+          <span>{{view Ember.TextField valueBinding="currentRelation.name" action="save"}}</span>
+        {{else}}
+          <span>{{currentRelation.name}}</span>
+        {{/if}}
+      </li>
+    </ul>
+
+    <div class="operations well well-small">
+      <div class="pull-right">
+        <button class="btn" {{action "toggleEditing"}}>Edit</button>
+        <button class="btn btn-danger" {{action "delete"}}>Delete</button>
+      </div>
+    </div>
+  {{else}}
+    <h3>Select a relation to display its details</h3>
+    Social Network: {{controllers.social_network.title}}
+  {{/if}}
+</div>
+
+<div class="relations">
+  {{#each relation in controller}}
+    <div style="margin-bottom: 20px;">
+      <ol>
+        <li>{{relation.id}}</li>
+        <li>{{relation.name}}</li>
+        <li>{{relation.actors.length}}</li>
+        <li>{{relation.x}}</li>
+        <li>{{relation.y}}</li>
+      </ol>
+    </div>
   {{/each}}
-</ul>
+</div>
+

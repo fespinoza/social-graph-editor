@@ -16,4 +16,7 @@ App.Relation = DS.Model.extend({
     }, 0);
     return sum / actors.length;
   }.property('actors.@each.y'),
+  isEditing: function() {
+    return false;
+  }.property(),
 });

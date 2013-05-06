@@ -33,4 +33,7 @@ describe Relation do
     expect(relation).to be_valid
     expect(relation.save).to be_true
   end
+
+  it "is removed when its actors are all removed"
+  it "is removed when it only remains 1 actor in it"
 end

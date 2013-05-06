@@ -2,7 +2,13 @@ class RelationsController < ApplicationController
   respond_to :json
 
   def index
-    respond_with Relation.find(params[:ids])
+    # TODO: check security of this
+    relations = if params[:ids]
+                  Relation.find(params[:ids])
+                else
+                  Relation.all
+                end
+    respond_with relations
   end
 
   def show
@@ -10,6 +16,7 @@ class RelationsController < ApplicationController
   end
 
   def create
+    params[:relation][:actors] = Actor.find(params[:relation][:actors].map {|a| a[:id] })
     respond_with Relation.create(params[:relation])
   end
 
