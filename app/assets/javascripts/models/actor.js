@@ -3,6 +3,7 @@ App.Actor = DS.Model.extend({
   x: DS.attr('number'),
   y: DS.attr('number'),
   social_network: DS.belongsTo('App.SocialNetwork'),
+  relations: DS.hasMany('App.Relation'),
   radius: 20,
   cx: function () {
     return this.get('x');
