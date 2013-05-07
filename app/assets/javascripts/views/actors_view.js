@@ -14,23 +14,53 @@ App.ActorsView = Ember.View.extend({
     this.get('controller.content').on('didLoad', function () {
       view.renderSVG();
     });
-
-    this.$().find('.actor span').popover({
-      title: 'actor details',
-      html: true,
-      content: function () {
-        return $(this).siblings('.details').html(); 
-      }
-    });
   },
   renderSVG: function () {
     console.log("insert svg content");
     var view = this;
-    var svg = d3.select("#graph_canvas");
+    var svg  = d3.select("#graph_canvas");
     var data = this.get('controller.content').toArray();
     
-    // define dragging behavior
-    var draggable = d3.behavior.drag()
+    // set the text element to handle
+    this.text   = svg.selectAll("text.actor").data(data);
+    this.circle = svg.selectAll("circle.actor").data(data);
+
+    // enter state: append text
+    this.text.enter().append("text")
+      .attr("class", "actor")
+      .attr("text-anchor", "middle")
+      .attr("data-selected", false)
+      .call(this.actorDraggable())
+      .on('click', this.actorClick());
+    this.circle.enter().append("circle")
+      .attr("class", "actor")
+      .attr("r", function(d) { return d.get('radius'); })
+      .call(this.actorDraggable())
+      .on('click', this.actorClick());
+
+    this.tick();
+
+    // exit state: remove unused text
+    this.text.exit().remove();
+    this.circle.exit().remove();
+
+  }.observes('controller.length'),
+  tick: function () {
+    // update state: update text content and coordinates
+    this.text.text(function(d){ return d.get('name'); })
+      .attr("x", function(d) { return d.get('text_x') })
+      .attr("y", function(d) { return d.get('text_y') });
+
+    this.circle.attr('cx', function(d) { return d.get('cx'); })
+      .attr('cy', function(d) { return d.get('cy'); });
+    
+    $("#graph_canvas").trigger("actorTick");
+  }.observes('controller.@each.name'),
+  actorClick: function(d) {
+  },
+  actorDraggable: function() {
+    var view = this;
+    return d3.behavior.drag()
     .on('dragstart', function (d) {
       // store initial position of the actor
       d.__init__ = { 
@@ -57,49 +87,23 @@ App.ActorsView = Ember.View.extend({
       }
       delete d.__init__;
     });
-
-    // handles actions when svg actor clicked
-    var toggleSelected = function (d) {
+  },
+  actorClick: function() {
+    var view = this;
+    return function (d) {
       d3.event.stopPropagation();
       console.log("actor clicked "+d.get('name'));
-      // add selected class to actor
       d.set('isSelected', !d.get('isSelected'));
-      d3.select(this).classed('selected', d.get('isSelected'));
       // set the controller current actor to this actor
       view.set('controller.currentActor', d);
       // remove current new actor
       view.get('controller').send('clearCurrentNewActor');
     };
-
-    // set the text element to handle
-    this.text   = svg.selectAll("text").data(data);
-    this.circle = svg.selectAll("circle").data(data);
-
-    // enter state: append text
-    this.text.enter().append("text")
-      .attr("text-anchor", "middle")
-      .attr("data-selected", false)
-      .call(draggable)
-      .on('click', toggleSelected);
-    this.circle.enter().append("circle")
-      .attr("r", function(d) { return d.get('radius'); })
-      .call(draggable)
-      .on('click', toggleSelected);
-
-    this.tick();
-
-    // exit state: remove unused text
-    this.text.exit().remove();
-    this.circle.exit().remove();
-
-  }.observes('controller.length'),
-  tick: function () {
-    // update state: update text content and coordinates
-    this.text.text(function(d){ return d.get('name'); })
-      .attr("x", function(d) { return d.get('text_x') })
-      .attr("y", function(d) { return d.get('text_y') });
-
-    this.circle.attr('cx', function(d) { return d.get('cx'); })
-      .attr('cy', function(d) { return d.get('cy'); });
-  }.observes('controller.@each.name')
+  },
+  toggleActorSelection: function() {
+    console.log("toggle actor selection");
+    // add selected class to actor
+    var actorCircles = d3.selectAll("circle.actor");  
+    actorCircles.classed("selected", function(d){ return d.get('isSelected') })
+  }.observes("controller.@each.isSelected"),
 });

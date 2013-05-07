@@ -5,17 +5,20 @@
       <li>{{#linkTo "social_networks"}}Social Networks{{/linkTo}} <span class="divider">/</span></li>
       <li class="active">{{name}}</li>
     </ul>
+
+    <div id="toolbar" class="well well-small">
+      <a href="#" class="btn btn-small" id="add_relation">Add Relation</a>
+    </div>
   </div>
 </div>
-
 
 <div class="fluid-row">
   <div class="span3">
     {{render "actors" actors}}
+    {{render "relations" relations socialNetworkBinding="this"}}
   </div>
   <div class="span9">
-    <svg id="graph_canvas">
+    <svg id="graph_canvas" {{bindAttr data-social-network-id="id"}}>
     </svg>
   </div>
 </div>
-
