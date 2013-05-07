@@ -24,21 +24,5 @@
     </div>
   {{else}}
     <h3>Select a relation to display its details</h3>
-    Social Network: {{controllers.social_network.title}}
   {{/if}}
 </div>
-
-<div class="relations">
-  {{#each relation in controller}}
-    <div style="margin-bottom: 20px;">
-      <ol>
-        <li>{{relation.id}}</li>
-        <li>{{relation.name}}</li>
-        <li>{{relation.actors.length}}</li>
-        <li>{{relation.x}}</li>
-        <li>{{relation.y}}</li>
-      </ol>
-    </div>
-  {{/each}}
-</div>
-
