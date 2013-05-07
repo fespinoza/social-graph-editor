@@ -1,3 +1,8 @@
+# Social Graph Editor
+
+A tool to represent and edit social networks as a graph structure, a demo executable version can be found in
+http://social-graph-editor.heroku.com
+
 # Ember Notes
 
 * when I have an array of records it responds to the didLoad event to
