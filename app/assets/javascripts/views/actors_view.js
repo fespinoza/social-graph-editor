@@ -28,7 +28,7 @@ App.ActorsView = Ember.View.extend({
     var view = this;
     var svg  = d3.select("#graph_canvas");
     var data = this.get('controller.content').toArray();
-
+    
     // set the text element to handle
     this.text   = svg.selectAll("text.actor").data(data);
     this.circle = svg.selectAll("circle.actor").data(data);
@@ -39,12 +39,12 @@ App.ActorsView = Ember.View.extend({
       .attr("text-anchor", "middle")
       .attr("data-selected", false)
       .call(this.actorDraggable())
-      .on('click', this.actorClick);
+      .on('click', this.actorClick());
     this.circle.enter().append("circle")
       .attr("class", "actor")
       .attr("r", function(d) { return d.get('radius'); })
       .call(this.actorDraggable())
-      .on('click', this.actorClick);
+      .on('click', this.actorClick());
 
     this.tick();
 
@@ -65,15 +65,6 @@ App.ActorsView = Ember.View.extend({
     $("#graph_canvas").trigger("actorTick");
   }.observes('controller.@each.name'),
   actorClick: function(d) {
-    d3.event.stopPropagation();
-    console.log("actor clicked "+d.get('name'));
-    // add selected class to actor
-    d.set('isSelected', !d.get('isSelected'));
-    d3.select(this).classed('selected', d.get('isSelected'));
-    // set the controller current actor to this actor
-    view.set('controller.currentActor', d);
-    // remove current new actor
-    view.get('controller').send('clearCurrentNewActor');
   },
   actorDraggable: function() {
     var view = this;
@@ -104,5 +95,19 @@ App.ActorsView = Ember.View.extend({
       }
       delete d.__init__;
     });
+  },
+  actorClick: function() {
+    var view = this;
+    return function (d) {
+      d3.event.stopPropagation();
+      console.log("actor clicked "+d.get('name'));
+      // add selected class to actor
+      d.set('isSelected', !d.get('isSelected'));
+      d3.select(this).classed('selected', d.get('isSelected'));
+      // set the controller current actor to this actor
+      view.set('controller.currentActor', d);
+      // remove current new actor
+      view.get('controller').send('clearCurrentNewActor');
+    };
   },
 });
