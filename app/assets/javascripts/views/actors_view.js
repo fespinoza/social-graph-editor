@@ -14,14 +14,6 @@ App.ActorsView = Ember.View.extend({
     this.get('controller.content').on('didLoad', function () {
       view.renderSVG();
     });
-
-    this.$().find('.actor span').popover({
-      title: 'actor details',
-      html: true,
-      content: function () {
-        return $(this).siblings('.details').html(); 
-      }
-    });
   },
   renderSVG: function () {
     console.log("insert svg content");
@@ -101,13 +93,17 @@ App.ActorsView = Ember.View.extend({
     return function (d) {
       d3.event.stopPropagation();
       console.log("actor clicked "+d.get('name'));
-      // add selected class to actor
       d.set('isSelected', !d.get('isSelected'));
-      d3.select(this).classed('selected', d.get('isSelected'));
       // set the controller current actor to this actor
       view.set('controller.currentActor', d);
       // remove current new actor
       view.get('controller').send('clearCurrentNewActor');
     };
   },
+  toggleActorSelection: function() {
+    console.log("toggle actor selection");
+    // add selected class to actor
+    var actorCircles = d3.selectAll("circle.actor");  
+    actorCircles.classed("selected", function(d){ return d.get('isSelected') })
+  }.observes("controller.@each.isSelected"),
 });
