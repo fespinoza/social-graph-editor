@@ -37,12 +37,10 @@ App.RelationsView = Ember.View.extend({
     this.line.enter().append("line")
       .attr("stroke-width", 2)
       .attr("stroke", "red")
-      .on('click', this.relationClick());
     this.circle.enter().append("circle")
       .attr('class', 'relation')
       .attr('r', 2)
       .attr('fill', "blue")
-      .on('click', this.relationClick());
     this.text.enter()
       .append('text')
       .attr('class', 'relation')

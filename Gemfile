@@ -24,6 +24,10 @@ group :development, :test do
   gem 'pry'                 # awesome replacement of irb
 end
 
+group :test do
+  gem 'factory_girl_rails'
+end
+
 group :production do
   gem 'pg'
 end
