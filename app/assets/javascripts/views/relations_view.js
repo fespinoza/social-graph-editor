@@ -59,20 +59,20 @@ App.RelationsView = Ember.View.extend({
   }.observes('controller.length'),
   tick: function() {
     console.log("relation tick");
-    //if (this.line) {
-      //this.line
-        //.attr("x1", function(d) { return d.get('actors').toArray()[0].get('cx'); })
-        //.attr("y1", function(d) { return d.get('actors').toArray()[0].get('cy'); })
-        //.attr("x2", function(d) { return d.get('actors').toArray()[1].get('cx'); })
-        //.attr("y2", function(d) { return d.get('actors').toArray()[1].get('cy'); });
-      //this.circle
-        //.attr('cx', function(d) { return d.get('x'); })
-        //.attr('cy', function(d) { return d.get('y'); });
-      //this.text
-        //.text(function(d) { return d.get('name');})
-        //.attr('x', function(d) { return d.get('x'); })
-        //.attr('y', function(d) { return d.get('y') + 20; });
-    //}
+    if (this.line) {
+      this.line
+        .attr("x1", function(d) { return d.get('actors').toArray()[0].get('cx'); })
+        .attr("y1", function(d) { return d.get('actors').toArray()[0].get('cy'); })
+        .attr("x2", function(d) { return d.get('actors').toArray()[1].get('cx'); })
+        .attr("y2", function(d) { return d.get('actors').toArray()[1].get('cy'); });
+      this.circle
+        .attr('cx', function(d) { return d.get('x'); })
+        .attr('cy', function(d) { return d.get('y'); });
+      this.text
+        .text(function(d) { return d.get('name');})
+        .attr('x', function(d) { return d.get('x'); })
+        .attr('y', function(d) { return d.get('y') + 20; });
+    }
   },
   relationClick: function() {
     var view = this;
