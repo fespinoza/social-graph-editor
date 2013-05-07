@@ -5,9 +5,7 @@ App.RelationsController = Ember.ArrayController.extend({
   },
   add: function () {
     // get the selected actors
-    var actors = this.get('socialNetwork.actors').toArray().filter(function (element) {
-      return element.get("isSelected") == true;
-    });
+    var actors = this.getSelectedActors();
     // create the new relation with those actors
     var newRelation = App.Relation.createRecord({ name: "New Relation" });
     newRelation.get('actors').pushObjects(actors);
@@ -26,5 +24,10 @@ App.RelationsController = Ember.ArrayController.extend({
   save: function() {
     this.get('store').commit();
     this.set('currentRelation.isEditing', false);
+  },
+  getSelectedActors: function () {
+    return this.get('socialNetwork.actors').toArray().filter(function (element) {
+      return element.get("isSelected") == true;
+    });
   },
 });

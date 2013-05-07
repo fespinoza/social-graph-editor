@@ -1,5 +1,6 @@
 class RelationsController < ApplicationController
   respond_to :json
+  before_filter :get_actors, only: [:create, :update]
 
   def index
     # TODO: check security of this
@@ -16,7 +17,6 @@ class RelationsController < ApplicationController
   end
 
   def create
-    params[:relation][:actors] = Actor.find(params[:relation][:actors].map {|a| a[:id] })
     respond_with Relation.create(params[:relation])
   end
 
@@ -26,5 +26,13 @@ class RelationsController < ApplicationController
 
   def destroy
     respond_with Relation.destroy(params[:id])
+  end
+
+  private
+
+  def get_actors
+    if ids = params[:relation].delete(:actor_ids)
+      params[:relation][:actors] = Actor.find(ids)
+    end
   end
 end
