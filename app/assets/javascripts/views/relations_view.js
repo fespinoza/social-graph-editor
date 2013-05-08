@@ -25,7 +25,7 @@ App.RelationsView = Ember.View.extend({
   renderSVG: function() {
     console.log("render svg relations");
     var view = this;
-    var svg  = d3.select("#graph_canvas");
+    var svg  = d3.select("#graph_canvas .root");
     var data = this.get('controller.content').toArray();
     var lineData = this.relationLines();
 
