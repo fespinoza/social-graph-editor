@@ -19,3 +19,7 @@
 ### Social Network
 
 * edit SN info button from show
+
+### Graph Canvas
+
+* when zooming, clicking behaves strangely
