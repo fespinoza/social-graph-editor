@@ -27,16 +27,14 @@ App.RelationsView = Ember.View.extend({
     var view = this;
     var svg  = d3.select("#graph_canvas");
     var data = this.get('controller.content').toArray();
+    var lineData = this.relationLines();
 
     // set the svg element which will habdle the data
-    this.line   = svg.selectAll("line").data(data);
     this.circle = svg.selectAll("circle.relation").data(data);
     this.text   = svg.selectAll("text.relation").data(data);
+    this.line   = svg.selectAll("line").data(lineData);
 
-    // enter state: when new lines are created
-    this.line.enter().append("line")
-      .attr("stroke-width", 2)
-      .attr("stroke", "red")
+    // enter state: when new relations are created
     this.circle.enter().append("circle")
       .attr('class', 'relation')
       .attr('r', 2)
@@ -46,23 +44,27 @@ App.RelationsView = Ember.View.extend({
       .attr('class', 'relation')
       .attr('text-anchor', 'middle')
       .on('click', this.relationClick());
+    this.line.enter().append("line")
+      .attr("stroke-width", 2)
+      .attr("stroke", "red")
 
-    // update state: set line coordinates
+    // update state: relations are changed
     this.tick();
 
     // exit state: when relations are deleted
-    this.line.exit().remove();
     this.circle.exit().remove();
     this.text.exit().remove();
+    this.line.exit().remove();
+
   }.observes('controller.length'),
   tick: function() {
     console.log("relation tick");
     if (this.line) {
       this.line
-        .attr("x1", function(d) { return d.get('actors').toArray()[0].get('cx'); })
-        .attr("y1", function(d) { return d.get('actors').toArray()[0].get('cy'); })
-        .attr("x2", function(d) { return d.get('actors').toArray()[1].get('cx'); })
-        .attr("y2", function(d) { return d.get('actors').toArray()[1].get('cy'); });
+        .attr("x1", function(d) { return d.x1; })
+        .attr("y1", function(d) { return d.y1; })
+        .attr("x2", function(d) { return d.x2; })
+        .attr("y2", function(d) { return d.y2; });
       this.circle
         .attr('cx', function(d) { return d.get('x'); })
         .attr('cy', function(d) { return d.get('y'); });
@@ -80,5 +82,34 @@ App.RelationsView = Ember.View.extend({
       // set the clicked relation as current relation in controller
       view.set('controller.currentRelation', d);
     };
+  },
+  relationLines: function() {
+    console.log("call relationLines");
+    // returns an array of objects
+    // and each object has the coordinates x, y of a relation and an actor
+
+    // example: (r:relation, a:actor)
+    // given
+    //r1: a1 a2 a3
+    //r2: a1 a4
+
+    // returns
+    //[[r1 a1], [r1 a2], [r1 a3], [r2 a1], [r2 a4]}
+    var results = [],
+        relations = this.get('controller.content').toArray();
+
+    relations.forEach(function (relation) {
+      relation.get('actors').toArray().forEach(function (actor) {
+        line = {
+          x1: relation.get('x'),
+          y1: relation.get('y'),
+          x2: actor.get('cx'),
+          y2: actor.get('cy'),
+        }
+        results.push(line);
+      });
+    });
+
+    return results;
   },
 });
