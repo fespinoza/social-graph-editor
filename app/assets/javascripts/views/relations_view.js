@@ -35,6 +35,9 @@ App.RelationsView = Ember.View.extend({
     this.line   = svg.selectAll("line").data(lineData);
 
     // enter state: when new relations are created
+    this.line.enter().append("line")
+      .attr("stroke-width", 2)
+      .attr("stroke", "red")
     this.circle.enter().append("circle")
       .attr('class', 'relation')
       .attr('r', 2)
@@ -44,9 +47,6 @@ App.RelationsView = Ember.View.extend({
       .attr('class', 'relation')
       .attr('text-anchor', 'middle')
       .on('click', this.relationClick());
-    this.line.enter().append("line")
-      .attr("stroke-width", 2)
-      .attr("stroke", "red")
 
     // update state: relations are changed
     this.tick();
@@ -61,10 +61,10 @@ App.RelationsView = Ember.View.extend({
     console.log("relation tick");
     if (this.line) {
       this.line
-        .attr("x1", function(d) { return d.x1; })
-        .attr("y1", function(d) { return d.y1; })
-        .attr("x2", function(d) { return d.x2; })
-        .attr("y2", function(d) { return d.y2; });
+        .attr("x1", function(d) { return d.from.get('x'); })
+        .attr("y1", function(d) { return d.from.get('y'); })
+        .attr("x2", function(d) { return d.toActor.get('cx'); })
+        .attr("y2", function(d) { return d.toActor.get('cy'); });
       this.circle
         .attr('cx', function(d) { return d.get('x'); })
         .attr('cy', function(d) { return d.get('y'); });
@@ -100,13 +100,7 @@ App.RelationsView = Ember.View.extend({
 
     relations.forEach(function (relation) {
       relation.get('actors').toArray().forEach(function (actor) {
-        line = {
-          x1: relation.get('x'),
-          y1: relation.get('y'),
-          x2: actor.get('cx'),
-          y2: actor.get('cy'),
-        }
-        results.push(line);
+        results.push({ from: relation, toActor: actor });
       });
     });
 
