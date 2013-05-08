@@ -6,6 +6,8 @@
 * Testing with Konacha
 * 2+ relations [DONE]
 * zoom/pan graph canvas [DONE]
+* deleting a relation when deleting one actor and only has 1 left.
+* add types for Actors and Relations
 
 ## Improvements
 
