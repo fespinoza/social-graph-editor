@@ -2,26 +2,28 @@ App.NodesView = Ember.View.extend({
   templateName: 'nodes',
 
   didInsertElement: function () {
-    var view = this;
-    $('#graph_canvas').on('click', function (event) {
+    var view = this,
+      $graphCanvas = $("#graph_canvas"),
+      socialNetwork = App.SocialNetwork.find($graphCanvas.data('social-network-id'));
+
+    $graphCanvas.on('click', function (event) {
       console.log("click: add node");
       var offset = $(this).offset(); 
+
+      // TODO: manage the scaling case
+      console.log("click: " + event.pageX + " " + event.pageY);
+      console.log("translation " + socialNetwork.translationString());
+      console.log("scale: " + socialNetwork.get('scale'));
+
       var coords = {
-        x: (event.pageX - offset.left),
-        y: (event.pageY - offset.top - 20),
+        x: (event.pageX - offset.left - socialNetwork.get('translation_x')),
+        y: (event.pageY - offset.top - 20 - socialNetwork.get('translation_y')),
       }
       view.controller.send('add', coords.x, coords.y);
     });
+
     this.get('controller.content').on('didLoad', function () {
       view.renderSVG();
-    });
-
-    this.$().find('.node span').popover({
-      title: 'node details',
-      html: true,
-      content: function () {
-        return $(this).siblings('.details').html(); 
-      }
     });
   },
 
