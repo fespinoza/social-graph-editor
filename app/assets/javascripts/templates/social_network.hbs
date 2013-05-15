@@ -11,10 +11,16 @@
 
 <div class="fluid-row">
   <div class="span3">
+    <div class="well well-small">
+      <button {{action resetTranslationAndScale target="view"}} class="btn btn-small">
+        (0.0)
+      </button>
+    </div>
+
     {{render "nodes" nodes}}
   </div>
   <div class="span9">
-    <svg id="graph_canvas">
+    <svg id="graph_canvas" data-social-network-id="{{unbound id}}">
     </svg>
   </div>
 </div>
