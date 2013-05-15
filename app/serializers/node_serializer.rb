@@ -1,3 +1,3 @@
-class ActorSerializer < ActiveModel::Serializer
+class NodeSerializer < ActiveModel::Serializer
   attributes :id, :name, :social_network_id, :x, :y
 end

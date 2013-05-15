@@ -1,4 +1,4 @@
-App.ActorController = Ember.ObjectController.extend({
+App.NodeController = Ember.ObjectController.extend({
   save: function () {
     this.set('isEditing', false);
     this.get('store').commit();

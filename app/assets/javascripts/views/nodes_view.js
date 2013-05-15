@@ -1,9 +1,9 @@
-App.ActorsView = Ember.View.extend({
-  templateName: 'actors',
+App.NodesView = Ember.View.extend({
+  templateName: 'nodes',
   didInsertElement: function () {
     var view = this;
     $('#graph_canvas').on('click', function (event) {
-      console.log("click: add actor");
+      console.log("click: add node");
       var offset = $(this).offset(); 
       var coords = {
         x: (event.pageX - offset.left),
@@ -15,8 +15,8 @@ App.ActorsView = Ember.View.extend({
       view.renderSVG();
     });
 
-    this.$().find('.actor span').popover({
-      title: 'actor details',
+    this.$().find('.node span').popover({
+      title: 'node details',
       html: true,
       content: function () {
         return $(this).siblings('.details').html(); 
@@ -32,20 +32,20 @@ App.ActorsView = Ember.View.extend({
     // define dragging behavior
     var draggable = d3.behavior.drag()
     .on('dragstart', function (d) {
-      // store initial position of the actor
+      // store initial position of the node
       d.__init__ = { 
         x: d.get('x'),
         y: d.get('y')
       }
     })
     .on('drag', function (d) {
-      // move the coordinates of the actor
+      // move the coordinates of the node
       d.set('x', d.get('x') + d3.event.dx);  
       d.set('y', d.get('y') + d3.event.dy);  
       view.tick();
     })
     .on('dragend', function (d) {
-      // store changes only if actor was really translated
+      // store changes only if node was really translated
       if (d.__init__.x != d.get('x') && d.__init__y != d.get('y')) {
         console.log("update position");
         // update position changes to the server
@@ -58,17 +58,17 @@ App.ActorsView = Ember.View.extend({
       delete d.__init__;
     });
 
-    // handles actions when svg actor clicked
+    // handles actions when svg node clicked
     var toggleSelected = function (d) {
       d3.event.stopPropagation();
-      console.log("actor clicked "+d.get('name'));
-      // add selected class to actor
+      console.log("node clicked "+d.get('name'));
+      // add selected class to node
       d.set('isSelected', !d.get('isSelected'));
       d3.select(this).classed('selected', d.get('isSelected'));
-      // set the controller current actor to this actor
-      view.set('controller.currentActor', d);
-      // remove current new actor
-      view.get('controller').send('clearCurrentNewActor');
+      // set the controller current node to this node
+      view.set('controller.currentNode', d);
+      // remove current new node
+      view.get('controller').send('clearCurrentNewNode');
     };
 
     // set the text element to handle

@@ -1,6 +1,6 @@
-class CreateActors < ActiveRecord::Migration
+class CreateNodes < ActiveRecord::Migration
   def change
-    create_table :actors do |t|
+    create_table :nodes do |t|
       t.string :name
       t.integer :x
       t.integer :y
@@ -8,6 +8,6 @@ class CreateActors < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :actors, :social_network_id
+    add_index :nodes, :social_network_id
   end
 end
