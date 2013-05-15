@@ -13,6 +13,10 @@
     {{/if}}
   </li>
   <li>
+    <strong>Kind:</strong>
+    <span>{{kind}}</span>
+  </li>
+  <li>
     <strong>X:</strong>
     <span>{{x}}</span>
   </li>
@@ -24,7 +28,12 @@
 
 <div class="operations">
   <div class="pull-right">
-    <button class="btn" {{action "toggleEditing"}}>Edit</button>
-    <button class="btn btn-danger" {{action "delete" this}}>Delete</button>
+    {{#if isEditing}}
+      <button class="btn" {{action "toggleEditing"}}>Cancel</button>
+      <button class="btn btn-primary" {{action "save"}}>Update</button>
+    {{else}}
+      <button class="btn btn-danger" {{action "delete" this}}>Delete</button>
+      <button class="btn" {{action "toggleEditing"}}>Edit</button>
+    {{/if}}
   </div>
 </div>
