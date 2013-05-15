@@ -1,0 +1,26 @@
+{{#linkTo "families.new" class="btn btn-small"}}Add Family{{/linkTo}}
+
+<ul>
+  {{#each family in controller}}
+    <li>
+      <strong>ID:</strong>
+      <span>{{id}}</span>
+    </li>
+    <li>
+      <strong>Name:</strong>
+      <span>{{name}}</span>
+    </li>
+    <li>
+      <strong>Color:</strong>
+      <span>{{color}}</span>
+    </li>
+    <li>
+      <strong>Kind:</strong>
+      <span>{{kind}}</span>
+    </li>
+  {{/each}}
+</ul>
+
+
+now content 
+{{outlet}}
