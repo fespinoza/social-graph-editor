@@ -1,5 +1,6 @@
 App.NodesView = Ember.View.extend({
   templateName: 'nodes',
+
   didInsertElement: function () {
     var view = this;
     $('#graph_canvas').on('click', function (event) {
@@ -23,10 +24,11 @@ App.NodesView = Ember.View.extend({
       }
     });
   },
+
   renderSVG: function () {
     console.log("insert svg content");
     var view = this;
-    var svg = d3.select("#graph_canvas");
+    var svg = d3.select("#graph_canvas .root");
     var data = this.get('controller.content').toArray();
     
     // define dragging behavior
@@ -93,6 +95,7 @@ App.NodesView = Ember.View.extend({
     this.circle.exit().remove();
 
   }.observes('controller.length'),
+
   tick: function () {
     // update state: update text content and coordinates
     this.text.text(function(d){ return d.get('name'); })
@@ -102,4 +105,5 @@ App.NodesView = Ember.View.extend({
     this.circle.attr('cx', function(d) { return d.get('cx'); })
       .attr('cy', function(d) { return d.get('cy'); });
   }.observes('controller.@each.name')
+
 });
