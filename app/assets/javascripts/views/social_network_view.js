@@ -6,19 +6,24 @@ App.SocialNetworkView = Ember.View.extend({
     this.socialNetwork = this.get('controller.content');
     this.persistChangesInterval = null;
 
+    // TODO: kind of reset the d3 coordinates when reloading the page
+    //       and when pressing the reset cooridnates button
+
     var zoom = d3.behavior.zoom()
       .on("zoom", function () {
         view.socialNetwork.set('scale', d3.event.scale);
-        view.socialNetwork.set( 'translation_x', d3.event.translate[0]);
-        view.socialNetwork.set( 'translation_y', d3.event.translate[1]);
+        view.socialNetwork.set('translation_x', d3.event.translate[0]);
+        view.socialNetwork.set('translation_y', d3.event.translate[1]);
         view.tick();
 
         // reset the timeout to persist the social network changes
-        window.clearTimeout(view.persistChangesInterval);
-        view.persistChangesInterval = window.setTimeout(function () {
-          console.log("persisting SN changes");
-          view.socialNetwork.get('store').commit();
-        }, 1000);
+        // TODO: find a better way to do this, it interferes with the
+        //       creation of nodes
+        //window.clearTimeout(view.persistChangesInterval);
+        //view.persistChangesInterval = window.setTimeout(function () {
+          //console.log("persisting SN changes");
+          //view.socialNetwork.get('store').commit();
+        //}, 1000);
       });
     canvas.call(zoom);
     this.tick();
