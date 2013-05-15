@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130515160531) do
+ActiveRecord::Schema.define(:version => 20130515162724) do
+
+  create_table "families", :force => true do |t|
+    t.string   "name"
+    t.string   "color"
+    t.string   "kind"
+    t.integer  "social_network_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "nodes", :force => true do |t|
     t.string   "name"
