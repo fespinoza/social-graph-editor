@@ -35,10 +35,9 @@ App.SocialNetworkView = Ember.View.extend({
   resetTranslationAndScale: function() {
     this.socialNetwork.set('translation_x', 0);
     this.socialNetwork.set('translation_y', 0);
-    this.socialNetwork.set('scale', 0);
+    this.socialNetwork.set('scale', 1.0);
     this.socialNetwork.get('store').commit();
-    // reset the transform attr in root
-    this.root.attr("transform", null);
+    this.tick();
   },
 
 });

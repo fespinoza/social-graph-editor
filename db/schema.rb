@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(:version => 20130515143440) do
     t.string   "name"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
-    t.float    "scale",         :default => 0.0
+    t.float    "scale",         :default => 1.0
     t.float    "translation_x", :default => 0.0
     t.float    "translation_y", :default => 0.0
   end
