@@ -7,7 +7,7 @@ App.NodesController = Ember.ArrayController.extend({
     this.clearCurrentNewNode();
 
     // create node
-    var node = App.Node.createRecord({name: "New Node", x: x, y: y});
+    var node = App.Node.createRecord({name: "New Node", kind: "Actor", x: x, y: y});
     node.set('isEditing', true);
 
     // set as current node and current new node

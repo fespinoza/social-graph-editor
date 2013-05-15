@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130515143440) do
+ActiveRecord::Schema.define(:version => 20130515160531) do
 
   create_table "nodes", :force => true do |t|
     t.string   "name"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(:version => 20130515143440) do
     t.integer  "social_network_id"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "kind"
   end
 
   add_index "nodes", ["social_network_id"], :name => "index_nodes_on_social_network_id"
