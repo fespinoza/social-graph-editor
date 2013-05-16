@@ -6,6 +6,7 @@ App.NodeController = Ember.ObjectController.extend({
 
     this.set('isEditing', false);
     this.get('store').commit();
+    $("#graph_canvas").trigger('nodeUpdate');
   },
 
   toggleEditing: function () {

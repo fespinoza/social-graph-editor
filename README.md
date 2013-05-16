@@ -6,21 +6,23 @@
 ## TASKS
 
 * families
-  * delete
+  * delete [DONE]
    * delete operation [DONE]
-   * (update node display)
-  * edit
+   * (update node display) [DONE]
+  * edit [DONE]
    * edit actual operation [DONE]
-   * (update node display)
+   * (update node display) [DONE]
   * better color selection
   * modal form
-* Node-Family
+* Node-Family [DONE]
   * accept empty value on select [DONE]
-  * update view
+  * update view [DONE]
 * actorsFamilies [DONE]
   * clean array [DONE]
 * selection
   * replace color with stroke
+
+* treat canvas as an object
 
 * insert svg text when creating actor [DONE]
 * delete svg text when deleting actor [DONE]

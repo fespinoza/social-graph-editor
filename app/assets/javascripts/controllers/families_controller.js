@@ -15,6 +15,7 @@ App.FamiliesController = Ember.ArrayController.extend({
     this.transaction.commit();
     this.transaction = null;
     this.set('currentFamily', null);
+    $("#graph_canvas").trigger('nodeUpdate');
   },
 
   cancel: function() {
@@ -29,6 +30,7 @@ App.FamiliesController = Ember.ArrayController.extend({
     if (confirm("Are you sure to delete the family "+family.get('name')+"?")) {
       family.deleteRecord(); 
       this.get('store').commit();
+      $("#graph_canvas").trigger('nodeUpdate');
     }
   },
 });

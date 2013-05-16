@@ -25,6 +25,9 @@ App.NodesView = Ember.View.extend({
     this.get('controller.content').on('didLoad', function () {
       view.renderSVG();
     });
+    $graphCanvas.on('nodeUpdate', function () {
+      view.tick(); 
+    });
   },
 
   renderSVG: function () {
