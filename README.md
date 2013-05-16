@@ -12,15 +12,15 @@
   * edit [DONE]
    * edit actual operation [DONE]
    * (update node display) [DONE]
-  * better color selection
+  * better color selection [DONE]
   * modal form
 * Node-Family [DONE]
   * accept empty value on select [DONE]
   * update view [DONE]
 * actorsFamilies [DONE]
   * clean array [DONE]
-* selection
-  * replace color with stroke
+* selection [DONE]
+  * replace color with stroke [DONE]
 
 * treat canvas as an object
 

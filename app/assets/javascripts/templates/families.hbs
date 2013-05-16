@@ -32,7 +32,10 @@
 
     <li>
       <strong>Color</strong>
-      {{view Ember.TextField valueBinding="currentFamily.color" action="save"}}
+      {{view Ember.TextField valueBinding="currentFamily.color" action="save" id="familyColor"}}
+      <script type="text/javascript" charset="utf-8">
+        $("#familyColor").colorPicker();
+      </script>
     </li>
 
     <li>
