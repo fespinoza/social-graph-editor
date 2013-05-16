@@ -21,29 +21,35 @@
   {{/each}}
 </div>
 
-{{#if newFamily}}
+{{#if currentFamily}}
   <h4>New Family</h4>
 
   <ul>
     <li>
       <strong>Name</strong>
-      {{view Ember.TextField valueBinding="newFamily.name" action="save"}}
+      {{view Ember.TextField valueBinding="currentFamily.name" action="save"}}
     </li>
 
     <li>
       <strong>Color</strong>
-      {{view Ember.TextField valueBinding="newFamily.color" action="save"}}
+      {{view Ember.TextField valueBinding="currentFamily.color" action="save"}}
     </li>
 
     <li>
       <strong>Kind</strong>
       {{view Ember.Select contentBinding="App.nodeKinds"
-                          valueBinding="newFamily.kind"
+                          valueBinding="currentFamily.kind"
                           prompt="Select Kind"}}
     </li>
 
     <div class="operations">
-      <button {{action "save"}} class="btn btn-primary">Create</button>
+      <button {{action "save"}} class="btn btn-primary">
+        {{#if currentFamily.isNew}}
+          Create
+        {{else}}
+          Update 
+        {{/if}}
+      </button>
       <button {{action "cancel"}} class="btn">Cancel</button>
     </div>
   </ul>

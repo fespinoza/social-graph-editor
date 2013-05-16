@@ -10,7 +10,7 @@
    * delete operation [DONE]
    * (update node display)
   * edit
-   * edit actual operation
+   * edit actual operation [DONE]
    * (update node display)
   * better color selection
   * modal form
