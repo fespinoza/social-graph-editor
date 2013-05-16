@@ -18,4 +18,11 @@ App.FamiliesController = Ember.ArrayController.extend({
       this.set('newFamily', null);
     }
   },
+
+  delete: function(family) {
+    if (confirm("Are you sure to delete the family "+family.get('name')+"?")) {
+      family.deleteRecord(); 
+      this.get('store').commit();
+    }
+  },
 });

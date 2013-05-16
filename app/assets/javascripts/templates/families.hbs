@@ -29,23 +29,20 @@
 {{/if}}
 
 <h3>Families</h3>
-{{#each family in controller}}
-  <ul>
-    <li>
-      <strong>ID:</strong>
-      <span>{{family.id}}</span>
-    </li>
-    <li>
-      <strong>Name:</strong>
-      <span>{{family.name}}</span>
-    </li>
-    <li>
-      <strong>Color:</strong>
-      <span>{{family.color}}</span>
-    </li>
-    <li>
-      <strong>Kind:</strong>
-      <span>{{family.kind}}</span>
-    </li>
-  </ul>
-{{/each}}
+
+<div id="families" class="items_list">
+  {{#each family in controller}}
+    <div id="family_{{unbound family.id}}" class="item">
+      <strong>{{family.name}}</strong>
+
+      <div class="operations">
+        <a href="#" {{action "edit" family}} title="edit" class="edit">
+          <i class="icon-edit"></i>
+        </a>
+        <a href="#" {{action "delete" family}} title="delete" class="delete">
+          <i class="icon-trash"></i>
+        </a>
+      </div>
+    </div>
+  {{/each}}
+</div>

@@ -18,16 +18,23 @@ svg#graph_canvas {
   }
 }
 
-#social_networks {
-  .item_list {
+.items_list {
+  .item {
     padding: 7px 15px;
-    margin: 0 -20px;
     &:hover {
       background-color: lightgray;
     }
 
-    .edit {
-      text-decoration: none;
+    .operations {
+      display: inline-block;
+      float: right;
+      a {
+        text-decoration: none;
+      }
     }
   }
+}
+
+#social_networks {
+  .item { margin: 0 -20px; }
 }

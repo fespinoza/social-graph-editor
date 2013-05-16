@@ -6,8 +6,12 @@
 ## TASKS
 
 * families
-  * delete (update node display)
-  * edit (update node display)
+  * delete
+   * delete operation [DONE]
+   * (update node display)
+  * edit
+   * edit actual operation
+   * (update node display)
   * better color selection
   * modal form
 * Node-Family
