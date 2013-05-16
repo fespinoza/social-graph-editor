@@ -8,6 +8,7 @@
 * families
   * delete (update node display)
   * edit (update node display)
+  * better color selection
   * modal form
 * Node-Family
   * accept empty value on select [DONE]

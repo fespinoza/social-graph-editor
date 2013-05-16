@@ -16,7 +16,9 @@
 
     <li>
       <strong>Kind</strong>
-      {{view Ember.Select contentBinding="App.nodeKinds" valueBinding="newFamily.kind"}}
+      {{view Ember.Select contentBinding="App.nodeKinds"
+                          valueBinding="newFamily.kind"
+                          prompt="Select Kind"}}
     </li>
 
     <div class="operations">
