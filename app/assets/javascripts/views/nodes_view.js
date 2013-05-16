@@ -71,7 +71,15 @@ App.NodesView = Ember.View.extend({
       console.log("node clicked "+d.get('name'));
       // add selected class to node
       d.set('isSelected', !d.get('isSelected'));
-      d3.select(this).classed('selected', d.get('isSelected'));
+      element = d3.select(this);
+      element.attr('stroke', 'blue')
+             .attr('stroke-width', function (d) {
+               if(d.get('isSelected')) {
+                 return 5;
+               } else {
+                 return 0;
+               } 
+             });
       // set the controller current node to this node
       view.set('controller.currentNode', d);
       // remove current new node
