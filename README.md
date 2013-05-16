@@ -5,13 +5,18 @@
 
 ## TASKS
 
+* families
+  * delete (update node display)
+  * edit (update node display)
+  * modal form
+* Node-Family
+  * accept empty value on select
+  * update view
+* actorsFamilies [DONE]
+  * clean array [DONE]
+* selection
+  * replace color with stroke
+
 * insert svg text when creating actor [DONE]
 * delete svg text when deleting actor [DONE]
 * update svg text when updating actor [DONE]
-
-* SVG Actor = circle + text
-* actor popover form
-  * double click on SVG Actor shows the actor details
-  * click outside actor details closes details
-  * Actor Details: click edit button
-  * new actor show form in popover

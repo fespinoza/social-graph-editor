@@ -11,10 +11,8 @@ App.SocialNetwork = DS.Model.extend({
   },
 
   actorFamilies: function() {
-    return this.get('families').toArray().map(function (family) {
-      if(family.get("kind") == "Actor") {
-        return family;
-      }
+    return this.get('families').toArray().filter(function (family) {
+      return (family.get("kind") === "Actor");
     })
   }.property("families"),
 
