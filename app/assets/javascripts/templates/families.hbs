@@ -7,7 +7,9 @@
 <div id="families" class="items_list">
   {{#each family in controller}}
     <div id="family_{{unbound family.id}}" class="item">
-      <strong>{{family.name}}</strong>
+      <span class="label" style="background-color: {{unbound family.color}};">
+        {{family.name}}
+      </span>
 
       <div class="operations">
         <a href="#" {{action "edit" family}} title="edit" class="edit">
