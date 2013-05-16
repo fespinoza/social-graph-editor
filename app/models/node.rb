@@ -1,4 +1,5 @@
 class Node < ActiveRecord::Base
   belongs_to :social_network
-  attr_accessible :name, :x, :y, :social_network_id, :kind
+  belongs_to :family
+  attr_accessible :name, :x, :y, :social_network_id, :kind, :family_id
 end
