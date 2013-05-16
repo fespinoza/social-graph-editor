@@ -19,6 +19,7 @@
       {{view Ember.Select contentBinding="social_network.actorFamilies"
                           optionValuePath="content.id"
                           optionLabelPath="content.name"
+                          prompt="Select Family"
                           valueBinding="family_id"}}
     {{else}}
       <span>{{family.name}}</span>

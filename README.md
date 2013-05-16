@@ -10,7 +10,7 @@
   * edit (update node display)
   * modal form
 * Node-Family
-  * accept empty value on select
+  * accept empty value on select [DONE]
   * update view
 * actorsFamilies [DONE]
   * clean array [DONE]
