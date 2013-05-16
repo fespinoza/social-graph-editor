@@ -5,7 +5,17 @@ App.SocialNetwork = DS.Model.extend({
   translation_y: DS.attr('number', { defaultValue: 0 }),
   nodes: DS.hasMany('App.Node'),
   families: DS.hasMany('App.Family'),
+
   translationString: function() {
     return this.get('translation_x') + ", " + this.get('translation_y');
   },
+
+  actorFamilies: function() {
+    return this.get('families').toArray().map(function (family) {
+      if(family.get("kind") == "Actor") {
+        return family;
+      }
+    })
+  }.property("families"),
+
 });

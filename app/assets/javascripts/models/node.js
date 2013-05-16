@@ -4,6 +4,7 @@ App.Node = DS.Model.extend({
   x: DS.attr('number'),
   y: DS.attr('number'),
   social_network: DS.belongsTo('App.SocialNetwork'),
+  family: DS.belongsTo('App.Family'),
   radius: 20,
   cx: function () {
     return this.get('x');
