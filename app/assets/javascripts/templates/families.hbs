@@ -1,4 +1,25 @@
-<button {{action "new"}} class="btn btn-small">New Family</button>
+<button {{action "new"}} class="btn btn-small pull-right">
+  <i class="icon-plus-sign"></i> New
+</button>
+
+<h4>Families</h4>
+
+<div id="families" class="items_list">
+  {{#each family in controller}}
+    <div id="family_{{unbound family.id}}" class="item">
+      <strong>{{family.name}}</strong>
+
+      <div class="operations">
+        <a href="#" {{action "edit" family}} title="edit" class="edit">
+          <i class="icon-edit"></i>
+        </a>
+        <a href="#" {{action "delete" family}} title="delete" class="delete">
+          <i class="icon-trash"></i>
+        </a>
+      </div>
+    </div>
+  {{/each}}
+</div>
 
 {{#if newFamily}}
   <h4>New Family</h4>
@@ -28,21 +49,3 @@
   </ul>
 {{/if}}
 
-<h3>Families</h3>
-
-<div id="families" class="items_list">
-  {{#each family in controller}}
-    <div id="family_{{unbound family.id}}" class="item">
-      <strong>{{family.name}}</strong>
-
-      <div class="operations">
-        <a href="#" {{action "edit" family}} title="edit" class="edit">
-          <i class="icon-edit"></i>
-        </a>
-        <a href="#" {{action "delete" family}} title="delete" class="delete">
-          <i class="icon-trash"></i>
-        </a>
-      </div>
-    </div>
-  {{/each}}
-</div>
