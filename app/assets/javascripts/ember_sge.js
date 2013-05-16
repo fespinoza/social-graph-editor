@@ -7,3 +7,5 @@
 //= require ./router
 //= require_tree ./routes
 //= require_self
+
+App.nodeKinds = ["Actor", "Relation"]

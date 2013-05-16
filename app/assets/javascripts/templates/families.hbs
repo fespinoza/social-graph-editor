@@ -1,26 +1,50 @@
-{{#linkTo "families.new" class="btn btn-small"}}Add Family{{/linkTo}}
+<button {{action "new"}} class="btn btn-small">New Family</button>
 
-<ul>
-  {{#each family in controller}}
+{{#if newFamily}}
+  <h4>New Family</h4>
+
+  <ul>
+    <li>
+      <strong>Name</strong>
+      {{view Ember.TextField valueBinding="newFamily.name" action="save"}}
+    </li>
+
+    <li>
+      <strong>Color</strong>
+      {{view Ember.TextField valueBinding="newFamily.color" action="save"}}
+    </li>
+
+    <li>
+      <strong>Kind</strong>
+      {{view Ember.Select contentBinding="App.nodeKinds" valueBinding="newFamily.kind"}}
+    </li>
+
+    <div class="operations">
+      <button {{action "save"}} class="btn btn-primary">Create</button>
+      <button {{action "cancel"}} class="btn">Cancel</button>
+    </div>
+
+  </ul>
+{{/if}}
+
+<h3>Families</h3>
+{{#each family in controller}}
+  <ul>
     <li>
       <strong>ID:</strong>
-      <span>{{id}}</span>
+      <span>{{family.id}}</span>
     </li>
     <li>
       <strong>Name:</strong>
-      <span>{{name}}</span>
+      <span>{{family.name}}</span>
     </li>
     <li>
       <strong>Color:</strong>
-      <span>{{color}}</span>
+      <span>{{family.color}}</span>
     </li>
     <li>
       <strong>Kind:</strong>
-      <span>{{kind}}</span>
+      <span>{{family.kind}}</span>
     </li>
-  {{/each}}
-</ul>
-
-
-now content 
-{{outlet}}
+  </ul>
+{{/each}}
