@@ -10,7 +10,7 @@ App.NodesView = Ember.View.extend({
       console.log("click: add node");
       var offset = $(this).offset(); 
 
-      // TODO: manage the scaling case
+      // TODO: manage the scaling case in position when adding new actor
       console.log("click: " + event.pageX + " " + event.pageY);
       console.log("translation " + socialNetwork.translationString());
       console.log("scale: " + socialNetwork.get('scale'));
@@ -104,8 +104,14 @@ App.NodesView = Ember.View.extend({
       .attr("x", function(d) { return d.get('text_x') })
       .attr("y", function(d) { return d.get('text_y') });
 
-    this.circle.attr('cx', function(d) { return d.get('cx'); })
-      .attr('cy', function(d) { return d.get('cy'); });
+    this.circle
+      .attr('cx', function(d) { return d.get('cx'); })
+      .attr('cy', function(d) { return d.get('cy'); })
+      .attr('fill', function (d) {
+        if (d.get('family.color')) {
+          return d.get('family.color');
+        }
+      });
   }.observes('controller.@each.name')
 
 });
