@@ -13,6 +13,18 @@
     {{/if}}
   </li>
   <li>
+    <strong>Family:</strong>
+    {{#if isEditing}}
+      <!-- TODO: handle case when family is already set -->
+      {{view Ember.Select contentBinding="social_network.actorFamilies"
+                          optionValuePath="content.id"
+                          optionLabelPath="content.name"
+                          valueBinding="family_id"}}
+    {{else}}
+      <span>{{family.name}}</span>
+    {{/if}}
+  </li>
+  <li>
     <strong>Kind:</strong>
     <span>{{kind}}</span>
   </li>

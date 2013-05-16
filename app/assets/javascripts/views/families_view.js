@@ -7,4 +7,5 @@ App.FamiliesView = Ember.View.extend({
     socialNetwork = App.SocialNetwork.find(socialNetworkId);
     this.set('controller.socialNetwork', socialNetwork); 
   },
+
 });
