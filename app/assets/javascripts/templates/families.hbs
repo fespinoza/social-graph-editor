@@ -36,28 +36,36 @@
     </div>
 
     <div class="modal-body">
-      <ul>
-        <li>
-          <strong>Name</strong>
-          {{view Ember.TextField valueBinding="currentFamily.name" action="save"}}
-        </li>
+      <div class="form-horizontal">
 
-        <li>
-          <strong>Color</strong>
-          {{view Ember.TextField valueBinding="currentFamily.color" action="save" id="familyColor"}}
-          <script type="text/javascript" charset="utf-8">
-            $("#familyColor").colorPicker();
-          </script>
-        </li>
+        <div class="control-group">
+          <label class="control-label" for="familyName">Name</label>
+          <div class="controls">
+            {{view Ember.TextField elementId="familyName" valueBinding="currentFamily.name" action="save"}}
+          </div>
+        </div>
 
-        <li>
-          <strong>Kind</strong>
-          {{view Ember.Select contentBinding="App.nodeKinds"
-                              valueBinding="currentFamily.kind"
-                              prompt="Select Kind"}}
-        </li>
+        <div class="control-group">
+          <label class="control-label" for="familyColor">Color</label>
+          <div class="controls">
+            {{view Ember.TextField elementId="familyColor" valueBinding="currentFamily.color" action="save"}}
+            <script type="text/javascript" charset="utf-8">
+              $("#familyColor").colorPicker();
+            </script>
+          </div>
+        </div>
 
-      </ul>
+        <div class="control-group">
+          <label class="control-label" for="familyKind">Kind</label>
+          <div class="controls">
+            {{view Ember.Select contentBinding="App.nodeKinds"
+                                valueBinding="currentFamily.kind"
+                                elementId="familyKind"
+                                prompt="Select Kind"}}
+          </div>
+        </div>
+
+      </div>
     </div>
 
     <div class="modal-footer">
