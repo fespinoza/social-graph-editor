@@ -1,6 +1,6 @@
-<button {{action "new"}} class="btn btn-small pull-right">
+<a {{action "new"}} href="#current_family" role="button" class="btn btn-small pull-right" data-toggle="modal">
   <i class="icon-plus-sign"></i> New
-</button>
+</a>
 
 <h4>Families</h4>
 
@@ -12,7 +12,7 @@
       </span>
 
       <div class="operations">
-        <a href="#" {{action "edit" family}} title="edit" class="edit">
+        <a href="#current_family" {{action "edit" family}} title="edit" class="edit" data-toggle="modal">
           <i class="icon-edit"></i>
         </a>
         <a href="#" {{action "delete" family}} title="delete" class="delete">
@@ -24,39 +24,53 @@
 </div>
 
 {{#if currentFamily}}
-  <h4>New Family</h4>
+  <div id="current_family" class="modal hide" tabindex="-1" role="dialog">
 
-  <ul>
-    <li>
-      <strong>Name</strong>
-      {{view Ember.TextField valueBinding="currentFamily.name" action="save"}}
-    </li>
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      {{#if currentFamily.isNew}}
+        <h3>New Family</h3>
+      {{else}}
+        <h3>Edit Family</h3>
+      {{/if}}
+    </div>
 
-    <li>
-      <strong>Color</strong>
-      {{view Ember.TextField valueBinding="currentFamily.color" action="save" id="familyColor"}}
-      <script type="text/javascript" charset="utf-8">
-        $("#familyColor").colorPicker();
-      </script>
-    </li>
+    <div class="modal-body">
+      <ul>
+        <li>
+          <strong>Name</strong>
+          {{view Ember.TextField valueBinding="currentFamily.name" action="save"}}
+        </li>
 
-    <li>
-      <strong>Kind</strong>
-      {{view Ember.Select contentBinding="App.nodeKinds"
-                          valueBinding="currentFamily.kind"
-                          prompt="Select Kind"}}
-    </li>
+        <li>
+          <strong>Color</strong>
+          {{view Ember.TextField valueBinding="currentFamily.color" action="save" id="familyColor"}}
+          <script type="text/javascript" charset="utf-8">
+            $("#familyColor").colorPicker();
+          </script>
+        </li>
 
-    <div class="operations">
-      <button {{action "save"}} class="btn btn-primary">
+        <li>
+          <strong>Kind</strong>
+          {{view Ember.Select contentBinding="App.nodeKinds"
+                              valueBinding="currentFamily.kind"
+                              prompt="Select Kind"}}
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="modal-footer">
+      <button {{action "cancel"}} class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      <button {{action "save"}} class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
         {{#if currentFamily.isNew}}
           Create
         {{else}}
           Update 
         {{/if}}
       </button>
-      <button {{action "cancel"}} class="btn">Cancel</button>
     </div>
-  </ul>
-{{/if}}
 
+  </div>
+
+{{/if}}
