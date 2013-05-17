@@ -5,7 +5,7 @@
 
 ## TASKS
 
-* families
+* families [DONE]
   * delete [DONE]
    * delete operation [DONE]
    * (update node display) [DONE]
@@ -13,7 +13,7 @@
    * edit actual operation [DONE]
    * (update node display) [DONE]
   * better color selection [DONE]
-  * modal form
+  * modal form [DONE]
 * Node-Family [DONE]
   * accept empty value on select [DONE]
   * update view [DONE]
