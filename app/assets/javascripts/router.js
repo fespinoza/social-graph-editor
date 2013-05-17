@@ -3,7 +3,11 @@ App.Router.map(function() {
     this.route("new");
     this.route("edit", { path: '/:social_network_id/edit' });
   });
-  this.route("social_network", { path: "social_networks/:social_network_id" });
+  this.resource("social_network", { path: "social_networks/:social_network_id" }, function () {
+    this.resource("families", function () {
+      this.route("new"); 
+    });
+  });
 });
 
 App.IndexRoute = Ember.Route.extend({

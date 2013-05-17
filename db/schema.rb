@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130515160531) do
+ActiveRecord::Schema.define(:version => 20130516161121) do
+
+  create_table "families", :force => true do |t|
+    t.string   "name"
+    t.string   "color"
+    t.string   "kind"
+    t.integer  "social_network_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "nodes", :force => true do |t|
     t.string   "name"
@@ -21,8 +30,10 @@ ActiveRecord::Schema.define(:version => 20130515160531) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.string   "kind"
+    t.integer  "family_id"
   end
 
+  add_index "nodes", ["family_id"], :name => "index_nodes_on_family_id"
   add_index "nodes", ["social_network_id"], :name => "index_nodes_on_social_network_id"
 
   create_table "social_networks", :force => true do |t|

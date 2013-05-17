@@ -1,0 +1,84 @@
+<a {{action "new"}} href="#current_family" role="button" class="btn btn-small pull-right" data-toggle="modal">
+  <i class="icon-plus-sign"></i> New
+</a>
+
+<h4>Families</h4>
+
+<div id="families" class="items_list">
+  {{#each family in controller}}
+    <div id="family_{{unbound family.id}}" class="item">
+      <span class="label" style="background-color: {{unbound family.color}};">
+        {{family.name}}
+      </span>
+
+      <div class="operations">
+        <a href="#current_family" {{action "edit" family}} title="edit" class="edit" data-toggle="modal">
+          <i class="icon-edit"></i>
+        </a>
+        <a href="#" {{action "delete" family}} title="delete" class="delete">
+          <i class="icon-trash"></i>
+        </a>
+      </div>
+    </div>
+  {{/each}}
+</div>
+
+{{#if currentFamily}}
+  <div id="current_family" class="modal hide" tabindex="-1" role="dialog">
+
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+      {{#if currentFamily.isNew}}
+        <h3>New Family</h3>
+      {{else}}
+        <h3>Edit Family</h3>
+      {{/if}}
+    </div>
+
+    <div class="modal-body">
+      <div class="form-horizontal">
+
+        <div class="control-group">
+          <label class="control-label" for="familyName">Name</label>
+          <div class="controls">
+            {{view Ember.TextField elementId="familyName" valueBinding="currentFamily.name" action="save"}}
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="familyColor">Color</label>
+          <div class="controls">
+            {{view Ember.TextField elementId="familyColor" valueBinding="currentFamily.color" action="save"}}
+            <script type="text/javascript" charset="utf-8">
+              $("#familyColor").colorPicker();
+            </script>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="familyKind">Kind</label>
+          <div class="controls">
+            {{view Ember.Select contentBinding="App.nodeKinds"
+                                valueBinding="currentFamily.kind"
+                                elementId="familyKind"
+                                prompt="Select Kind"}}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button {{action "cancel"}} class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      <button {{action "save"}} class="btn btn-primary" data-dismiss="modal" aria-hidden="true">
+        {{#if currentFamily.isNew}}
+          Create
+        {{else}}
+          Update 
+        {{/if}}
+      </button>
+    </div>
+
+  </div>
+
+{{/if}}
