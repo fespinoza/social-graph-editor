@@ -1,22 +1,7 @@
-<div class="fluid-row">
-  <div class="span12">
-    <ul class="breadcrumb">
-      <li><a href="/"><i class="icon-home"></i></a> <span class="divider">/</span></li>
-      <li>{{#linkTo "social_networks"}}Social Networks{{/linkTo}} <span class="divider">/</span></li>
-      <li class="active">{{name}}</li>
-      <li class="pull-right"><a href="/social_networks/{{unbound id}}.json" target="_blank">API View</a></li>
-    </ul>
-  </div>
-</div>
+{{partial "top_bar"}}
 
 <div class="fluid-row">
   <div class="span3">
-    <div class="well well-small">
-      <button {{action resetTranslationAndScale target="view"}} class="btn btn-small">
-        (0.0)
-      </button>
-    </div>
-
     <div class="well well-small">
       {{render "families" families}}      
     </div>

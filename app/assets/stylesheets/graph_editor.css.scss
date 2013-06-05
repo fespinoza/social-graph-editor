@@ -1,6 +1,6 @@
 svg#graph_canvas {
   width: 100%;
-  height: 600px;
+  height: 540px;
   border: 1px solid black;
 }
 
@@ -37,4 +37,17 @@ svg#graph_canvas {
 
 #current_family {
   .colorPicker-picker { margin-top: 7px; }
+}
+
+#top-bar {
+  overflow: hidden;
+  .edition-buttons {
+    float: right;
+    div {
+      display: inline-block;
+    }
+    .states {
+      margin-right: 50px;
+    }
+  }
 }

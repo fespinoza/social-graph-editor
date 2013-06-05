@@ -1,11 +1,18 @@
 App.Node = DS.Model.extend({
+  // attributes
   name: DS.attr('string'),
   kind: DS.attr('string'),
   x: DS.attr('number'),
   y: DS.attr('number'),
+
+  // relationships
   social_network: DS.belongsTo('App.SocialNetwork'),
   family: DS.belongsTo('App.Family'),
-  radius: 20,
+
+  // computed attributes
+  radius: function(){
+    return 20;
+  }.property(),
   cx: function () {
     return this.get('x');
   }.property('x'),
@@ -18,10 +25,4 @@ App.Node = DS.Model.extend({
   text_y: function () {
     return this.get('y') + 3*this.get('radius');
   }.property('y'),
-  isEditing: function () {
-    return false; 
-  }.property(),
-  isSelected: function () {
-    return false;
-  }.property(),
 });
