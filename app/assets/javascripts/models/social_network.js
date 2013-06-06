@@ -16,4 +16,8 @@ App.SocialNetwork = DS.Model.extend({
     })
   }.property("families"),
 
+  currentMode: function() {
+    return "Hand"; // Other values "Actor", "Relation", "Role"
+  }.property(),
+
 });

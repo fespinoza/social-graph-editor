@@ -5,6 +5,12 @@
 
 ## TASKS
 
+* Basic Edition Mode
+  * set defaut mode [DONE]
+  * change modes when clicking the mode buttons [DONE]
+  * dragging only in hand mode [DONE]
+  * creating new actors only in actor mode [DONE]
+
 * families [DONE]
   * delete [DONE]
    * delete operation [DONE]
