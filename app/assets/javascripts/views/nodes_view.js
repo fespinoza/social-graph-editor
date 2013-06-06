@@ -61,17 +61,19 @@ App.NodesView = Ember.View.extend({
   addActor: function() {
     view = this;
     return function (event) {
-      console.log("click: add node");
-      var offset = $(this).offset(); 
+      if(view.get('socialNetwork.currentMode') == "Actor") {
+        console.log("click: add node");
+        var offset = $(this).offset(); 
 
-      // TODO: manage the scaling case in position when adding new actor
+        // TODO: manage the scaling case in position when adding new actor
 
-      var coords = {
-        x: (event.pageX - offset.left),
-        y: (event.pageY - offset.top - 20),
-      }
-      view.controller.send('add', coords.x, coords.y);
-    };
+        var coords = {
+          x: (event.pageX - offset.left),
+          y: (event.pageY - offset.top - 20),
+        }
+        view.controller.send('add', coords.x, coords.y);
+      };
+    }
   },
 
   actorDraggable: function() {  
@@ -79,23 +81,29 @@ App.NodesView = Ember.View.extend({
     return d3.behavior.drag()
     .on('dragstart', function (d) {
       // store initial position of the node
-      d.__init__ = { x: d.get('x'), y: d.get('y') }
+      if (view.get('socialNetwork.currentMode') == "Hand") {
+        d.__init__ = { x: d.get('x'), y: d.get('y') }
+      }
     })
     .on('drag', function (d) {
-      // move the coordinates of the node
-      d.set('x', d.get('x') + d3.event.dx);  
-      d.set('y', d.get('y') + d3.event.dy);  
-      view.tick();
+      if (view.get('socialNetwork.currentMode') == "Hand") {
+        // move the coordinates of the node
+        d.set('x', d.get('x') + d3.event.dx);  
+        d.set('y', d.get('y') + d3.event.dy);  
+        view.tick();
+      }
     })
     .on('dragend', function (d) {
-      // store changes only if node was really translated
-      if (d.__init__.x != d.get('x') && d.__init__y != d.get('y')) {
-        // update position changes to the server
-        if(!d.get('isNew')) {
-          d.get('store').commit();
-        };
+      if (view.get('socialNetwork.currentMode') == "Hand") {
+        // store changes only if node was really translated
+        if (d.__init__.x != d.get('x') && d.__init__y != d.get('y')) {
+          // update position changes to the server
+          if(!d.get('isNew')) {
+            d.get('store').commit();
+          };
+        }
+        delete d.__init__;
       }
-      delete d.__init__;
     });
   },
 

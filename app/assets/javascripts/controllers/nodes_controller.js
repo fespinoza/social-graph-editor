@@ -33,6 +33,11 @@ App.NodesController = Ember.ArrayController.extend({
     }
   },
 
+  cancel: function() {
+    this.set('currentNode', null);
+    this.clearCurrentNewNode(); 
+  },
+
   clearCurrentNewNode: function () {
     if (this.get('currentNewNode') != null) {
       this.get('currentNewNode').deleteRecord();
