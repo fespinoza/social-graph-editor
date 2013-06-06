@@ -25,4 +25,7 @@ App.Node = DS.Model.extend({
   text_y: function () {
     return this.get('y') + 3*this.get('radius');
   }.property('y'),
+  family_id: function() {
+    return this.get('family.id'); 
+  }.property('family'),
 });

@@ -90,13 +90,10 @@ App.NodesView = Ember.View.extend({
     .on('dragend', function (d) {
       // store changes only if node was really translated
       if (d.__init__.x != d.get('x') && d.__init__y != d.get('y')) {
-        console.log("update position");
         // update position changes to the server
         if(!d.get('isNew')) {
           d.get('store').commit();
         };
-      } else {
-        console.log("didn't update");
       }
       delete d.__init__;
     });
