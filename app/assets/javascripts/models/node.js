@@ -27,5 +27,5 @@ App.Node = DS.Model.extend({
   }.property('y'),
   family_id: function() {
     return this.get('family.id'); 
-  }.property('family'),
+  }.property('family.id'),
 });

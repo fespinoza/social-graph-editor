@@ -11,8 +11,8 @@
     * represent them as squares
     * persist them [DONE]
     * go to role mode after persisting [DONE]
-  * edit
-  * delete
+  * edit [DONE]
+  * delete [DONE]
 
 * Basic Edition Mode
   * set defaut mode [DONE]
