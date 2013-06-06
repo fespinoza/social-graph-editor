@@ -5,11 +5,21 @@
 
 ## TASKS
 
+* Relations
+  * add relation
+    * filter option families
+    * represent them as squares
+    * persist them [DONE]
+    * go to role mode after persisting [DONE]
+  * edit
+  * delete
+
 * Basic Edition Mode
   * set defaut mode [DONE]
   * change modes when clicking the mode buttons [DONE]
   * dragging only in hand mode [DONE]
   * creating new actors only in actor mode [DONE]
+  * scope families given the current mode
 
 * families [DONE]
   * delete [DONE]

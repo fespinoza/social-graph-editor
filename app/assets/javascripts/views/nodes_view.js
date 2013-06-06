@@ -5,7 +5,7 @@ App.NodesView = Ember.View.extend({
     view = this;
     $graphCanvas = $("#graph_canvas");
     this.socialNetwork = App.SocialNetwork.find($graphCanvas.data('social-network-id'));
-    $graphCanvas.on('click', this.addActor());
+    $graphCanvas.on('click', this.addNode());
     this.get('controller.content').on('didLoad', function () { view.renderSVG(); });
     $graphCanvas.on('nodeUpdate', function () { view.tick(); });
   },
@@ -58,12 +58,16 @@ App.NodesView = Ember.View.extend({
       });
   },
 
-  addActor: function() {
+  addNode: function() {
     view = this;
     return function (event) {
-      if(view.get('socialNetwork.currentMode') == "Actor") {
+      enabled = view.get('socialNetwork.currentMode') == "Actor" ||
+                view.get('socialNetwork.currentMode') == "Relation";
+      if(enabled) {
         console.log("click: add node");
         var offset = $(this).offset(); 
+
+        kind = view.get('socialNetwork.currentMode');
 
         // TODO: manage the scaling case in position when adding new actor
 
@@ -71,7 +75,7 @@ App.NodesView = Ember.View.extend({
           x: (event.pageX - offset.left),
           y: (event.pageY - offset.top - 20),
         }
-        view.controller.send('add', coords.x, coords.y);
+        view.controller.send('add', kind, coords.x, coords.y);
       };
     }
   },
