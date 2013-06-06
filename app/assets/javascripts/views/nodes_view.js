@@ -14,37 +14,71 @@ App.NodesView = Ember.View.extend({
     console.log("insert svg content");
     this.svg = d3.select("#graph_canvas .root");
     this.renderActorsSVG();
+    this.renderRelationsSVG();
   }.observes('controller.length'),
 
   renderActorsSVG: function() {
-    data = this.get('controller.content').toArray();
+    data = this.get('controller.content').toArray().filter(function(node){
+      return node.get('kind') == "Actor";
+    });
     // set the text element to handle
-    this.actorText   = this.svg.selectAll("text").data(data);
-    this.actorCircle = this.svg.selectAll("circle").data(data);
+    this.actorText   = this.svg.selectAll("text.actor").data(data);
+    this.actorCircle = this.svg.selectAll("circle.actor").data(data);
 
     // enter state: append text
     this.actorText.enter().append("text")
+      .attr("class", "actor")
       .attr("text-anchor", "middle")
       .attr("data-selected", false)
-      .call(this.actorDraggable())
-      .on('click', this.actorClick());
+      .call(this.draggableNode())
+      .on('click', this.nodeClick());
     this.actorCircle.enter().append("circle")
       .attr("r", function(d) { return d.get('radius'); })
-      .call(this.actorDraggable())
-      .on('click', this.actorClick());
+      .attr("class", "actor")
+      .call(this.draggableNode())
+      .on('click', this.nodeClick());
     this.tickActors();
     // exit state: remove unused text
     this.actorText.exit().remove();
     this.actorCircle.exit().remove();
   },
 
+  renderRelationsSVG: function() {
+    data = this.get('controller.content').toArray().filter(function(node){
+      return node.get('kind') == "Relation";
+    });
+    // set the text element to handle
+    this.relationText = this.svg.selectAll("text.relation").data(data);
+    this.relationRect = this.svg.selectAll("rect.relation").data(data);
+
+    // enter state: append text
+    this.relationText.enter().append("text")
+      .attr("class", "relation")
+      .attr("text-anchor", "middle")
+      .attr("data-selected", false)
+      .call(this.draggableNode())
+      .on('click', this.nodeClick());
+    this.relationRect.enter().append("rect")
+      .attr("width", function(d) { return d.get('radius'); })
+      .attr("height", function(d) { return d.get('radius'); })
+      .attr("class", "relation")
+      .call(this.draggableNode())
+      .on('click', this.nodeClick());
+    this.tickRelations();
+    // exit state: remove unused text
+    this.relationText.exit().remove();
+    this.relationRect.exit().remove();
+  },
+
   tick: function () {
     this.tickActors();
+    this.tickRelations();
   }.observes('controller.@each.name'),
 
   tickActors: function() {
     // update state: update text content and coordinates
-    this.actorText.text(function(d){ return d.get('name'); })
+    this.actorText
+      .text(function(d){ return d.get('name'); })
       .attr("x", function(d) { return d.get('text_x') })
       .attr("y", function(d) { return d.get('text_y') });
 
@@ -56,6 +90,23 @@ App.NodesView = Ember.View.extend({
           return d.get('family.color');
         }
       });
+  },
+
+  tickRelations: function() {
+    this.relationText
+      .text(function(d) { return d.get('name'); })
+      .attr("x", function(d) { return d.get('text_x') })
+      .attr("y", function(d) { return d.get('text_y') - 7 });
+
+    this.relationRect
+      .attr('x', function(d) { return d.get('x') - d.get('radius')/2; })
+      .attr('y', function(d) { return d.get('y') + d.get('radius')/2; })
+      .attr('fill', function (d) {
+        if (d.get('family.color')) {
+          return d.get('family.color');
+        }
+      });
+    
   },
 
   addNode: function() {
@@ -70,7 +121,6 @@ App.NodesView = Ember.View.extend({
         kind = view.get('socialNetwork.currentMode');
 
         // TODO: manage the scaling case in position when adding new actor
-
         var coords = {
           x: (event.pageX - offset.left),
           y: (event.pageY - offset.top - 20),
@@ -80,7 +130,7 @@ App.NodesView = Ember.View.extend({
     }
   },
 
-  actorDraggable: function() {  
+  draggableNode: function() {  
     view = this;
     return d3.behavior.drag()
     .on('dragstart', function (d) {
@@ -111,7 +161,7 @@ App.NodesView = Ember.View.extend({
     });
   },
 
-  actorClick: function() {
+  nodeClick: function() {
     view = this;
     return function (d) {
       d3.event.stopPropagation();

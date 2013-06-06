@@ -8,7 +8,7 @@
 * Relations
   * add relation
     * filter option families
-    * represent them as squares
+    * represent them as squares [DONE]
     * persist them [DONE]
     * go to role mode after persisting [DONE]
   * edit [DONE]
