@@ -16,6 +16,12 @@ App.SocialNetwork = DS.Model.extend({
     })
   }.property("families"),
 
+  relationFamilies: function() {
+    return this.get('families').toArray().filter(function (family) {
+      return (family.get("kind") === "Relation");
+    })
+  }.property("families"),
+
   currentMode: function() {
     return "Hand"; // Other values "Actor", "Relation", "Role"
   }.property(),

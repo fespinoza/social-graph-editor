@@ -6,16 +6,28 @@
     {{view Ember.TextField valueBinding="name" action="save"}}
   </label>
 
-  <label>
-    Family
-    <!-- TODO: handle case when family is already set -->
-    {{view Ember.Select contentBinding="social_network.families"
-                        optionValuePath="content.id"
-                        optionLabelPath="content.name"
-                        prompt="Select Family"
-                        action="save"
-                        valueBinding="family_id"}}
-  </label>
+  {{#if isActor}}
+    <label>
+      Family
+      {{view Ember.Select contentBinding="social_network.actorFamilies"
+                          optionValuePath="content.id"
+                          optionLabelPath="content.name"
+                          prompt="Select Family"
+                          action="save"
+                          valueBinding="family_id"}}
+    </label>
+  {{else}}
+    <label>
+      Family
+      {{view Ember.Select contentBinding="social_network.relationFamilies"
+                          optionValuePath="content.id"
+                          optionLabelPath="content.name"
+                          prompt="Select Family"
+                          action="save"
+                          valueBinding="family_id"}}
+    </label>
+  {{/if}}
+
 <form>
 
 <div class="operations">

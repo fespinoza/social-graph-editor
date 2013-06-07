@@ -106,7 +106,6 @@ App.NodesView = Ember.View.extend({
           return d.get('family.color');
         }
       });
-    
   },
 
   addNode: function() {

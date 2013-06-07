@@ -5,9 +5,15 @@
 
 ## TASKS
 
-* Relations
-  * add relation
-    * filter option families
+* Multiple Families
+
+* Click Families
+
+* Roles
+
+* Relations [DONE]
+  * add relation [DONE]
+    * filter option families [DONE]
     * represent them as squares [DONE]
     * persist them [DONE]
     * go to role mode after persisting [DONE]
