@@ -1,0 +1,5 @@
+class Role < ActiveRecord::Base
+  belongs_to :actor, class_name: "Node", foreign_key: "actor_id", conditions: "kind = 'Actor'"
+  belongs_to :relation, class_name: "Node", foreign_key: "relation_id", conditions: "kind = 'Relation'"
+  attr_accessible :name, :actor_id, :relation_id
+end

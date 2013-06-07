@@ -10,6 +10,19 @@
 * Click Families
 
 * Roles
+  * backend
+    * crear modelo de roles [DONE]
+    * hacer relaciones con nodos [DONE]
+    * que el rol se destruya cuando se elimina uno de sus nodos (?)
+  * front
+    * crear roles
+      * habilitar drag and drop
+      * formulario de roles
+    * editar rol
+    * clickear y editar
+    * eliminar
+    * que eliminar actor elimine sus roles
+    * que eliminar relaciones elimine sus roles
 
 * Relations [DONE]
   * add relation [DONE]
