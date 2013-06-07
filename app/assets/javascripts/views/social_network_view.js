@@ -45,4 +45,13 @@ App.SocialNetworkView = Ember.View.extend({
     this.tick();
   },
 
+  selectModeButton: function() {
+    buttonClass = "." + this.get('controller.currentMode').toLowerCase();
+    // fix the active button if the value was change inside the app
+    if(!$(".states "+buttonClass).hasClass("active")) {
+      $(".states .btn").removeClass("active");
+      $(".states "+buttonClass).addClass("active");
+    }
+  }.observes('controller.currentMode'),
+
 });

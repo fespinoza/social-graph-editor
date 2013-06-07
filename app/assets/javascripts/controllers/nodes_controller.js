@@ -2,13 +2,14 @@ App.NodesController = Ember.ArrayController.extend({
   currentNode: null,
   currentNewNode: null,
 
-  add: function(x, y) {
+  add: function(kind, x, y) {
     // clear unsaved new node
     this.clearCurrentNewNode();
 
     // create node
-    var node = App.Node.createRecord({name: "New Node", kind: "Actor", x: x, y: y});
-    node.set('isEditing', true);
+    var node = App.Node.createRecord({
+      name: "New "+kind, kind: kind, x: x, y: y
+    });
 
     // set as current node and current new node
     this.set('currentNode', node);
@@ -25,9 +26,14 @@ App.NodesController = Ember.ArrayController.extend({
   },
 
   delete: function (node) {
-    if (confirm("Are you sure to delete the node "+node.get('name')+"?")) {
+    kind = node.get('kind').toLowerCase();
+    message = "Are you sure to delete the "+kind
+              +" "+node.get('name')+"?";
+    if (confirm(message)) {
       console.log("deleting an node");
+      // set null the family_id to fix issue
       this.set('currentNode', null);
+      node.set('family_id', null);
       node.deleteRecord();
       this.get('store').commit();
     }
