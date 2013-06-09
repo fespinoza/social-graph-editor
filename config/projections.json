@@ -1,4 +1,12 @@
 {
+  "app/serializers/*_serializer.rb": {
+    "command": "serializer",
+    "affinity": "model",
+    "test": "spec/serializers/%s_spec.rb",
+    "related": "app/models/%s.rb",
+    "template": "class %SSerializer < ActiveModel::Serializer\nend"
+  },
+
   "app/assets/javascripts/models/*.js": {
     "command": "jmodel",
     "alternate": "spec/javascripts/models/%s_spec.js",
