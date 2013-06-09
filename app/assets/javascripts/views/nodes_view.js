@@ -204,6 +204,7 @@ App.NodesView = Ember.View.extend({
           }
         }
       }
+      view.drag_line.classed('hidden', true)
       view.set('targetNode', null);
     });
   },
