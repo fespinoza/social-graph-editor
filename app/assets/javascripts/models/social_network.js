@@ -5,6 +5,7 @@ App.SocialNetwork = DS.Model.extend({
   translation_y: DS.attr('number', { defaultValue: 0 }),
   nodes: DS.hasMany('App.Node'),
   families: DS.hasMany('App.Family'),
+  roles: DS.hasMany('App.Role'),
 
   translationString: function() {
     return this.get('translation_x') + ", " + this.get('translation_y');
