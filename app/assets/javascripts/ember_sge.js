@@ -9,3 +9,9 @@
 //= require_self
 
 App.nodeKinds = ["Actor", "Relation"]
+
+window.printNamesFor = function(object, relationName) {
+  object.get(relationName).toArray().forEach(function(relation){
+    console.log(relation.get('name'));
+  });
+}
