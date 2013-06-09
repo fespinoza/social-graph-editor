@@ -23,12 +23,13 @@
           * le asigna un nombre automáticamente [DONE]
           * lo guarda automáticamente [DONE]
         * si no está el par actor-rol ok, se cancela todo [DONE]
-        * disappear the creation arrow
-      * visualizar roles
-        * nombre
-        * line
+        * disappear the creation arrow [DONE]
+      * visualizar roles [DONE]
+        * nombre [DONE]
+        * line [DONE]
       * formulario de roles
     * editar rol
+      * dragging updates role [DONE]
     * clickear y editar
     * eliminar
     * que eliminar actor elimine sus roles

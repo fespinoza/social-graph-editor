@@ -4,7 +4,7 @@ App.NodesView = Ember.View.extend({
   didInsertElement: function () {
     view = this;
     this.targetNode = null;
-    $graphCanvas = $("#graph_canvas");
+    $graphCanvas = this.$graphCanvas = $("#graph_canvas");
     this.socialNetwork = App.SocialNetwork.find($graphCanvas.data('social-network-id'));
     this.set('controller.socialNetwork', socialNetwork);
     $graphCanvas.on('click', this.addNode());
@@ -97,6 +97,7 @@ App.NodesView = Ember.View.extend({
   tick: function () {
     this.tickActors();
     this.tickRelations();
+    if (this.$graphCanvas) { this.$graphCanvas.trigger('nodeTick'); }
   }.observes('controller.@each.name'),
 
   tickActors: function() {
