@@ -13,6 +13,24 @@ App.NodesView = Ember.View.extend({
   renderSVG: function () {
     console.log("insert svg content");
     this.svg = d3.select("#graph_canvas .root");
+    // define the end arrow
+    this.svg
+      .append('svg:defs')
+      .append('svg:marker')
+      .attr('id', 'end-arrow')
+      .attr('viewBox', '0 -5 10 10')
+      .attr('refX', 6)
+      .attr('markerWidth', 3)
+      .attr('markerHeight', 3)
+      .attr('orient', 'auto')
+      .append('svg:path')
+      .attr('d', 'M0,-5L10,0L0,5')
+      .attr('fill', '#000');
+
+    // line displayed when dragging new nodes
+    this.drag_line = this.svg.append('svg:path')
+      .attr('class', 'link dragline hidden')
+      .attr('d', 'M0,0L0,0');
     this.renderActorsSVG();
     this.renderRelationsSVG();
   }.observes('controller.length'),
@@ -136,6 +154,14 @@ App.NodesView = Ember.View.extend({
       // store initial position of the node
       if (view.get('socialNetwork.currentMode') == "Hand") {
         d.__init__ = { x: d.get('x'), y: d.get('y') }
+      } else {
+        if (view.get('socialNetwork.currentMode') == "Role" && d.get('kind') == "Actor") {
+          // reposition drag line
+          view.drag_line
+            .style('marker-end', 'url(#end-arrow)')
+            .classed('hidden', false)
+            .attr('d', 'M' + d.get('cx') + ',' + d.get('cy') + 'L' + d.get('cx') + ',' + d.get('cy'));
+        }
       }
     })
     .on('drag', function (d) {
@@ -144,7 +170,13 @@ App.NodesView = Ember.View.extend({
         d.set('x', d.get('x') + d3.event.dx);  
         d.set('y', d.get('y') + d3.event.dy);  
         view.tick();
+      } else {
+        if (view.get('socialNetwork.currentMode') == "Role" && d.get('kind') == "Actor") {
+          // update drag line
+          view.drag_line.attr('d', 'M' + d.get('cx') + ',' + d.get('cy') + 'L' + d3.mouse(this)[0] + ',' + d3.mouse(this)[1]);
+        }
       }
+
     })
     .on('dragend', function (d) {
       if (view.get('socialNetwork.currentMode') == "Hand") {
