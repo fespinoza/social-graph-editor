@@ -40,12 +40,14 @@ ActiveRecord::Schema.define(:version => 20130607141025) do
     t.string   "name"
     t.integer  "actor_id"
     t.integer  "relation_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.integer  "social_network_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   add_index "roles", ["actor_id"], :name => "index_roles_on_actor_id"
   add_index "roles", ["relation_id"], :name => "index_roles_on_relation_id"
+  add_index "roles", ["social_network_id"], :name => "index_roles_on_social_network_id"
 
   create_table "social_networks", :force => true do |t|
     t.string   "name"
