@@ -5,23 +5,23 @@ App.Role = DS.Model.extend({
   social_network: DS.belongsTo("App.SocialNetwork"),
   
   x1: function() {
-      return this.get('relation.cx');
-    }.property('relation.cx'),
+    return this.get('actor.cx');
+  }.property('actor.x'),
   y1: function() {
-      return this.get('relation.cy');
-    }.property('relation.cy'),
+    return this.get('actor.cy');
+  }.property('actor.y'),
   x2: function() {
-      return this.get('actor.cx');
-    }.property('actor.x'),
+    return this.get('relation.cx');
+  }.property('relation.cx'),
   y2: function() {
-      return this.get('actor.cy');
-    }.property('actor.y'),
+    return this.get('relation.cy');
+  }.property('relation.cy'),
 
   text_x: function() {
-      return (this.get('x1') + this.get('x2'))/2; 
-    }.property('x1', 'x2'),
+    return (this.get('x1') + this.get('x2'))/2; 
+  }.property('x1', 'x2'),
   text_y: function() {
-      return (this.get('y1') + this.get('y2'))/2 + 10; 
-    }.property('y1', 'y2'),
+    return (this.get('y1') + this.get('y2'))/2 + 10; 
+  }.property('y1', 'y2'),
   
 });
