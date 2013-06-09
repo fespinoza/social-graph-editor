@@ -19,10 +19,14 @@
       * habilitar drag and drop
         * mostrar flecha mientras hago drag and drop sólo para actores [DONE]
         * cuando la suelto, debe crear el rol correspondiente entre el actor y
-          la relación
-          * le asigna un nombre automáticamente
-          * lo guarda automáticamente
-        * si no está el par actor-rol ok, se cancela todo
+          la relación [DONE]
+          * le asigna un nombre automáticamente [DONE]
+          * lo guarda automáticamente [DONE]
+        * si no está el par actor-rol ok, se cancela todo [DONE]
+        * disappear the creation arrow
+      * visualizar roles
+        * nombre
+        * line
       * formulario de roles
     * editar rol
     * clickear y editar

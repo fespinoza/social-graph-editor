@@ -3,8 +3,10 @@ App.NodesView = Ember.View.extend({
 
   didInsertElement: function () {
     view = this;
+    this.targetNode = null;
     $graphCanvas = $("#graph_canvas");
     this.socialNetwork = App.SocialNetwork.find($graphCanvas.data('social-network-id'));
+    this.set('controller.socialNetwork', socialNetwork);
     $graphCanvas.on('click', this.addNode());
     this.get('controller.content').on('didLoad', function () { view.renderSVG(); });
     $graphCanvas.on('nodeUpdate', function () { view.tick(); });
@@ -49,12 +51,14 @@ App.NodesView = Ember.View.extend({
       .attr("text-anchor", "middle")
       .attr("data-selected", false)
       .call(this.draggableNode())
-      .on('click', this.nodeClick());
+      .on('click', this.nodeClick())
+      .on('mouseover', this.nodeHover());
     this.actorCircle.enter().append("circle")
       .attr("r", function(d) { return d.get('radius'); })
       .attr("class", "actor")
       .call(this.draggableNode())
-      .on('click', this.nodeClick());
+      .on('click', this.nodeClick())
+      .on('mouseover', this.nodeHover());
     this.tickActors();
     // exit state: remove unused text
     this.actorText.exit().remove();
@@ -75,13 +79,15 @@ App.NodesView = Ember.View.extend({
       .attr("text-anchor", "middle")
       .attr("data-selected", false)
       .call(this.draggableNode())
-      .on('click', this.nodeClick());
+      .on('click', this.nodeClick())
+      .on('mouseover', this.nodeHover());
     this.relationRect.enter().append("rect")
       .attr("width", function(d) { return d.get('radius'); })
       .attr("height", function(d) { return d.get('radius'); })
       .attr("class", "relation")
       .call(this.draggableNode())
-      .on('click', this.nodeClick());
+      .on('click', this.nodeClick())
+      .on('mouseover', this.nodeHover());
     this.tickRelations();
     // exit state: remove unused text
     this.relationText.exit().remove();
@@ -151,6 +157,7 @@ App.NodesView = Ember.View.extend({
     view = this;
     return d3.behavior.drag()
     .on('dragstart', function (d) {
+      view.set('targetNode', null);
       // store initial position of the node
       if (view.get('socialNetwork.currentMode') == "Hand") {
         d.__init__ = { x: d.get('x'), y: d.get('y') }
@@ -188,7 +195,16 @@ App.NodesView = Ember.View.extend({
           };
         }
         delete d.__init__;
+      } else {
+        if (view.get('socialNetwork.currentMode') == "Role" && d.get('kind') == "Actor") {
+          if (view.get('targetNode.kind') == "Relation") {
+            view.get('controller').send('addRole', d, view.get('targetNode'));
+          } else {
+            console.log("you can't create role between actors");
+          }
+        }
       }
+      view.set('targetNode', null);
     });
   },
 
@@ -202,6 +218,14 @@ App.NodesView = Ember.View.extend({
       // remove current new node
       view.get('controller').send('clearCurrentNewNode');
     };
-  }
+  },
+
+  nodeHover: function() {
+    view = this;
+    return function(d) {
+      console.log("hover on "+d.get('kind')+" "+d.get('name'));
+      view.set('targetNode', d);
+    }
+  },
 
 });
