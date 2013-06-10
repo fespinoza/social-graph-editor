@@ -1,15 +1,18 @@
 App.RolesView = Ember.View.extend({
   didInsertElement: function() {
     $graphCanvas = $("#graph_canvas");
-    this.renderSVG();
+    this.socialNetwork = App.SocialNetwork.find($graphCanvas.data('social-network-id'));
+    this.set('controller.socialNetwork', socialNetwork);
     roleView = this;
-    $graphCanvas.on('nodeTick', function() {
-      roleView.tick();
-    }); 
+    $graphCanvas.on('nodeTick', function() { roleView.tick(); }); 
+    $graphCanvas.on('roleTick', function() { roleView.tick(); }); 
+    $graphCanvas.on('addRole', function(event, actor, relation) {
+      roleView.get('controller').send('add', actor, relation);
+    });
+    this.renderSVG();
   },
 
   renderSVG: function() {
-    console.log("rendering role svg");
     svg = d3.select("#graph_canvas .root");
     data = this.get('controller.content').toArray();
     this.roleLine = svg.selectAll("line.role").data(data);
@@ -31,7 +34,6 @@ App.RolesView = Ember.View.extend({
   }.observes('controller.length'),
 
   tick: function() {
-    console.log("tick called");
     this.roleLine
       .attr('x1', function(d) { return d.get('x1'); })
       .attr('y1', function(d) { return d.get('y1'); })
@@ -41,7 +43,7 @@ App.RolesView = Ember.View.extend({
       .text(function(d) { return d.get('name'); })
       .attr('x', function(d) { return d.get('text_x'); })
       .attr('y', function(d) { return d.get('text_y'); })
-  }.observes('controller.@each.name'),
+  },
 
   roleClick: function() {
     roleView = this;

@@ -53,13 +53,4 @@ App.NodesController = Ember.ArrayController.extend({
       this.set('currentNewNode', null);
     }
   },
-
-  addRole: function(actor, relation) {
-    role = App.Role.createRecord({ name: "" });
-    role.set('actor', actor);
-    role.set('relation', relation);
-    role.set('social_network', this.get('socialNetwork'));
-    this.get('store').commit();
-  },
-
 });

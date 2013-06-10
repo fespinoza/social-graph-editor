@@ -199,7 +199,7 @@ App.NodesView = Ember.View.extend({
       } else {
         if (view.get('socialNetwork.currentMode') == "Role" && d.get('kind') == "Actor") {
           if (view.get('targetNode.kind') == "Relation") {
-            view.get('controller').send('addRole', d, view.get('targetNode'));
+            view.$graphCanvas.trigger('addRole', [d, view.get('targetNode')]);
           } else {
             console.log("you can't create role between actors");
           }
@@ -225,7 +225,6 @@ App.NodesView = Ember.View.extend({
   nodeHover: function() {
     view = this;
     return function(d) {
-      console.log("hover on "+d.get('kind')+" "+d.get('name'));
       view.set('targetNode', d);
     }
   },
