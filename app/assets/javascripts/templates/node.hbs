@@ -32,10 +32,11 @@
 
 <div class="operations">
   <div class="pull-right">
-    <button class="btn btn-primary" {{action "save"}}>Update</button>
     {{#if isNew}}
+      <button class="btn btn-primary" {{action "save"}}>Create</button>
       <button class="btn" {{action "cancel"}}>Cancel</button>
     {{else}}
+      <button class="btn btn-primary" {{action "save"}}>Update</button>
       <button class="btn btn-danger" {{action "delete" this}}>Delete</button>
     {{/if}}
   </div>

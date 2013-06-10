@@ -9,7 +9,31 @@
 
 * Click Families
 
-* Roles
+* Roles [DONE]
+  * backend [DONE]
+    * crear modelo de roles [DONE]
+    * hacer relaciones con nodos [DONE]
+    * que el rol se destruya cuando se elimina uno de sus nodos [DONE]
+  * front [DONE]
+    * crear roles [DONE]
+      * habilitar drag and drop [DONE]
+        * mostrar flecha mientras hago drag and drop sólo para actores [DONE]
+        * cuando la suelto, debe crear el rol correspondiente entre el actor y
+          la relación [DONE]
+          * le asigna un nombre automáticamente [DONE]
+          * lo guarda automáticamente [DONE]
+        * si no está el par actor-rol ok, se cancela todo [DONE]
+        * disappear the creation arrow [DONE]
+      * visualizar roles [DONE]
+        * nombre [DONE]
+        * line [DONE]
+      * formulario de roles [DONE]
+    * editar rol [DONE]
+      * dragging updates role [DONE]
+    * clickear y editar [DONE]
+    * eliminar [DONE]
+    * que eliminar actor elimine sus roles [DONE]
+    * que eliminar relaciones elimine sus roles [DONE]
 
 * Relations [DONE]
   * add relation [DONE]

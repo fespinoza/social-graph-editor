@@ -2,9 +2,57 @@ svg#graph_canvas {
   width: 100%;
   height: 540px;
   border: 1px solid black;
+
+  background-color: #FFF;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+ 
+  &:not(.active):not(.ctrl) {
+    cursor: crosshair;
+  }
+   
+  path.link {
+    fill: none;
+    stroke: #000;
+    stroke-width: 4px;
+    cursor: default;
+
+    &.selected { stroke-dasharray: 10,2; }
+    &.dragline { pointer-events: none; }
+    &.hidden { stroke-width: 0; }
+  }
+   
+  svg:not(.active):not(.ctrl) path.link {
+    cursor: pointer;
+  }
+   
+  circle.node {
+    stroke-width: 1.5px;
+    cursor: pointer;
+
+    &.reflexive {
+      stroke: #000 !important;
+      stroke-width: 2.5px;
+    }
+  }
+   
+  text {
+    font: 12px sans-serif;
+    pointer-events: none;
+
+    &.id {
+      text-anchor: middle;
+      font-weight: bold;
+    }
+  }
 }
 
-#current_node {
+#current_node,
+#current_role {
   h3 {
     margin-top: 0;
   }
@@ -51,3 +99,4 @@ svg#graph_canvas {
     }
   }
 }
+
