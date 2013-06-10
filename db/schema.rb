@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(:version => 20130516161121) do
   add_index "nodes", ["family_id"], :name => "index_nodes_on_family_id"
   add_index "nodes", ["social_network_id"], :name => "index_nodes_on_social_network_id"
 
+  create_table "actors_relations", :force => true do |t|
+    t.integer "actor_id"
+    t.integer "relation_id"
+  end
+
+  create_table "relations", :force => true do |t|
+    t.string   "name"
+    t.integer  "social_network_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
   create_table "social_networks", :force => true do |t|
     t.string   "name"
     t.datetime "created_at",                     :null => false

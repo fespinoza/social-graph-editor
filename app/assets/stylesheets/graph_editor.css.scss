@@ -4,7 +4,9 @@ svg#graph_canvas {
   border: 1px solid black;
 }
 
-#current_node {
+.current_object {
+  margin-bottom: 30px;
+
   h3 {
     margin-top: 0;
   }
