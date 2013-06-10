@@ -18,9 +18,11 @@ App.RolesView = Ember.View.extend({
     this.roleLine.enter().append("line")
         .classed('role', true)
         .attr("stroke", "black")
-        .attr("stroke-width", 2);
+        .attr("stroke-width", 2)
+        .on('click', this.roleClick());
     this.roleText.enter().append("text")
-        .classed('role', true);
+        .classed('role', true)
+        .on('click', this.roleClick());
     // update
     this.tick();
     // exit
@@ -39,5 +41,13 @@ App.RolesView = Ember.View.extend({
       .text(function(d) { return d.get('name'); })
       .attr('x', function(d) { return d.get('text_x'); })
       .attr('y', function(d) { return d.get('text_y'); })
+  }.observes('controller.@each.name'),
+
+  roleClick: function() {
+    roleView = this;
+    return function(d) {
+      console.log("role "+d.get('id')+" clicked!");
+      roleView.set('controller.currentRole', d);
+    }
   },
 });

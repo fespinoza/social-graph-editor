@@ -15,8 +15,8 @@
     * hacer relaciones con nodos [DONE]
     * que el rol se destruya cuando se elimina uno de sus nodos (?)
   * front
-    * crear roles
-      * habilitar drag and drop
+    * crear roles [DONE]
+      * habilitar drag and drop [DONE]
         * mostrar flecha mientras hago drag and drop sólo para actores [DONE]
         * cuando la suelto, debe crear el rol correspondiente entre el actor y
           la relación [DONE]
@@ -27,11 +27,11 @@
       * visualizar roles [DONE]
         * nombre [DONE]
         * line [DONE]
-      * formulario de roles
-    * editar rol
+      * formulario de roles [DONE]
+    * editar rol [DONE]
       * dragging updates role [DONE]
-    * clickear y editar
-    * eliminar
+    * clickear y editar [DONE]
+    * eliminar [DONE]
     * que eliminar actor elimine sus roles
     * que eliminar relaciones elimine sus roles
 
