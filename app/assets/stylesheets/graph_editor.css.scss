@@ -98,6 +98,14 @@ svg#graph_canvas {
 
 #families {
   .family {
+    &:not(.enabled) {
+      background-color: gray;
+
+      &:hover {
+        background-color: darkgray;
+      }
+    }
+
     &.selected {
       background-color: blue;
 

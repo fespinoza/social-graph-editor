@@ -4,6 +4,8 @@
 
 <h4>Families</h4>
 
+<p id="family_instructions"><em>Click on a family to be assigned by default to new actors or relations</em></p>
+
 <div id="families" class="items_list">
   {{#each family in controller}}
     {{view App.FamilyView contentBinding="family"}}
@@ -51,7 +53,6 @@
                                 prompt="Select Kind"}}
           </div>
         </div>
-
       </div>
     </div>
 
