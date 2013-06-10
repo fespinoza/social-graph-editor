@@ -39,4 +39,8 @@ App.FamiliesController = Ember.ArrayController.extend({
       $("#graph_canvas").trigger('nodeUpdate');
     }
   },
+
+  selectFamily: function(family) {
+    this.set('socialNetwork.selectedFamily', family);
+  },
 });

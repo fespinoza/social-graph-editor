@@ -7,12 +7,12 @@
 
 * Multiple Families
 
-* Click Families
+* Click Families [DONE]
   * set an uniq selected family [DONE]
   * set only actor families clickable in actor mode [DONE]
   * set only relation families clickable in relaiton mode [DONE]
-  * create actors of this family
-  * create relations of this family
+  * create actors of this family [DONE]
+  * create relations of this family [DONE]
 
 * Roles [DONE]
   * backend [DONE]
