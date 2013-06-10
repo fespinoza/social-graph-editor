@@ -16,6 +16,7 @@
   "app/assets/javascripts/controllers/*_controller.js": {
     "command": "jcontroller",
     "alternate": "spec/javascripts/controllers/%s_spec.js",
+    "related": "app/assets/javascript/models/%s.js",
     "template": "App.%SController = Ember.ObjectController.extend"
   },
  
