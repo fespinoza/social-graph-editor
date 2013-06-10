@@ -96,3 +96,14 @@ svg#graph_canvas {
   }
 }
 
+#families {
+  .family {
+    &.selected {
+      background-color: blue;
+
+      &:hover {
+        background-color: black;
+      }
+    }
+  }
+}
