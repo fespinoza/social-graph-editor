@@ -14,6 +14,11 @@ svg#graph_canvas {
   &:not(.active):not(.ctrl) {
     cursor: crosshair;
   }
+
+  .node.figure.selected {
+    stroke: blue;
+    stroke-width: 2;
+  }
    
   path.link {
     fill: none;
@@ -26,28 +31,13 @@ svg#graph_canvas {
     &.hidden { stroke-width: 0; }
   }
    
-  svg:not(.active):not(.ctrl) path.link {
+  .node.figure {
     cursor: pointer;
-  }
-   
-  circle.node {
-    stroke-width: 1.5px;
-    cursor: pointer;
-
-    &.reflexive {
-      stroke: #000 !important;
-      stroke-width: 2.5px;
-    }
   }
    
   text {
     font: 12px sans-serif;
     pointer-events: none;
-
-    &.id {
-      text-anchor: middle;
-      font-weight: bold;
-    }
   }
 }
 

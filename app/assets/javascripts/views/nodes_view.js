@@ -55,7 +55,7 @@ App.NodesView = Ember.View.extend({
       .on('mouseover', this.nodeHover());
     this.actorCircle.enter().append("circle")
       .attr("r", function(d) { return d.get('radius'); })
-      .attr("class", "actor")
+      .attr("class", "actor node figure")
       .call(this.draggableNode())
       .on('click', this.nodeClick())
       .on('mouseover', this.nodeHover());
@@ -84,7 +84,7 @@ App.NodesView = Ember.View.extend({
     this.relationRect.enter().append("rect")
       .attr("width", function(d) { return d.get('radius'); })
       .attr("height", function(d) { return d.get('radius'); })
-      .attr("class", "relation")
+      .attr("class", "relation node figure")
       .call(this.draggableNode())
       .on('click', this.nodeClick())
       .on('mouseover', this.nodeHover());
@@ -213,12 +213,14 @@ App.NodesView = Ember.View.extend({
   nodeClick: function() {
     view = this;
     return function (d) {
+      d3.selectAll(".node.figure").classed("selected", false);
       d3.event.stopPropagation();
       console.log("node clicked "+d.get('name'));
       // set the controller current node to this node
       view.set('controller.currentNode', d);
       // remove current new node
       view.get('controller').send('clearCurrentNewNode');
+      d3.select(this).classed("selected", true)
     };
   },
 
