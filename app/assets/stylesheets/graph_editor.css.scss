@@ -38,6 +38,12 @@ svg#graph_canvas {
   text {
     font: 12px sans-serif;
     pointer-events: none;
+    fill: "#ffcc99";
+  }
+  
+  line.role.selected {
+    stroke-width: 4;
+    stroke: blue;
   }
 }
 
