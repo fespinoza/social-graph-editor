@@ -1,7 +1,13 @@
 App.FamiliesController = Ember.ArrayController.extend({
   new: function() {
+    colors = d3.scale.category10();
+    attributes = { color: colors(this.get('content.length')) };
+    mode = this.get('socialNetwork.currentMode');
+    if (mode == "Actor" || mode == "Relation") {
+      attributes['kind'] = mode
+    }
     this.transaction = this.get('store').transaction();
-    this.set('currentFamily', this.transaction.createRecord(App.Family, {}));
+    this.set('currentFamily', this.transaction.createRecord(App.Family, attributes));
   },
 
   edit: function (family) {
