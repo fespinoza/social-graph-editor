@@ -27,4 +27,8 @@ App.SocialNetwork = DS.Model.extend({
     return "Hand"; // Other values "Actor", "Relation", "Role"
   }.property(),
 
+  selectedFamily: function() {
+    return null;
+  }.property(),
+
 });

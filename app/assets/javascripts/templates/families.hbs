@@ -4,22 +4,13 @@
 
 <h4>Families</h4>
 
+<p id="family_instructions">
+  <em>Click on a family to be assigned by default to new actors or relations</em>
+</p>
+
 <div id="families" class="items_list">
   {{#each family in controller}}
-    <div id="family_{{unbound family.id}}" class="item">
-      <span class="label" style="background-color: {{unbound family.color}};">
-        {{family.name}}
-      </span>
-
-      <div class="operations">
-        <a href="#current_family" {{action "edit" family}} title="edit" class="edit" data-toggle="modal">
-          <i class="icon-edit"></i>
-        </a>
-        <a href="#" {{action "delete" family}} title="delete" class="delete">
-          <i class="icon-trash"></i>
-        </a>
-      </div>
-    </div>
+    {{view App.FamilyView contentBinding="family"}}
   {{/each}}
 </div>
 
@@ -64,7 +55,6 @@
                                 prompt="Select Kind"}}
           </div>
         </div>
-
       </div>
     </div>
 

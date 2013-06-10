@@ -11,6 +11,11 @@ App.NodesController = Ember.ArrayController.extend({
       name: "New "+kind, kind: kind, x: x, y: y
     });
 
+    selectedFamily = this.get('socialNetwork.selectedFamily');
+    if (selectedFamily != null) {
+      node.set('family', selectedFamily);
+    }
+
     // set as current node and current new node
     this.set('currentNode', node);
     this.set('currentNewNode', node);

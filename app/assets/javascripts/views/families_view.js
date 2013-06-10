@@ -1,4 +1,5 @@
 App.FamiliesView = Ember.View.extend({
+
   didInsertElement: function() {
     $graphCanvas = $("#graph_canvas");
 
