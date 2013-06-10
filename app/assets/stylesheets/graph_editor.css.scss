@@ -98,19 +98,24 @@ svg#graph_canvas {
 
 #families {
   .family {
+    span.badge.actor { background-color: #4764cc; }
+    span.badge.relation { background-color: #c43535; }
     &:not(.enabled) {
-      background-color: gray;
-
-      &:hover {
-        background-color: darkgray;
+      background-color: transparent;
+      span.badge {
+        background-color: lightgray;
+      }
+      span.label {
+        background-color: lightgray;
+        font-style: italic;
       }
     }
 
     &.selected {
-      background-color: blue;
-
+      background-color: gray;
+      
       &:hover {
-        background-color: black;
+        background-color: #a0a0a0;
       }
     }
   }

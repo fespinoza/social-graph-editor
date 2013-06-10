@@ -11,8 +11,8 @@ App.FamilyView = Ember.View.extend({
       } else {
         $("#families .family").removeClass('selected');
         this.$().addClass('selected');
-        this.set('controller.selectedFamily', this.get('content'));
-        $("#family_instructions").addClass("hide");
+        this.get('controller').send('selectFamily', this.get('content'));
+        $("#family_instructions").fadeOut();
       }
     }
   },
@@ -21,17 +21,19 @@ App.FamilyView = Ember.View.extend({
     kind = this.get('content.kind');
     mode = this.get('controller.socialNetwork.currentMode');
     if (this.get('lastMode') != mode) { this.clearSelected(); }
-    if (kind === mode) {
+    if (kind === mode || mode === "Hand") {
       this.$().addClass('enabled')
+      this.$("span.label").css("background-color", this.get('content.color'));
     } else {
       this.$().removeClass('enabled');
+      this.$("span.label").css("background-color", "");
     }
     this.set('lastMode', mode);
   }.observes('controller.socialNetwork.currentMode'),
 
   clearSelected: function() {
     this.$().removeClass('selected');
-    this.set('controller.selectedFamily', null);
-    $("#family_instructions").removeClass("hide");
+    this.get('controller').send('selectFamily', null);
+    $("#family_instructions").fadeIn();
   },
 });
