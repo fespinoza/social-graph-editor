@@ -6,6 +6,10 @@
 ## TASKS
 
 * Multiple Families
+  * backend fix of multiple families [DONE]
+  * front-end of multiple families
+  * add chosen plugin to the family selector
+  * check everything works ok
 
 * Click Families [DONE]
   * set an uniq selected family [DONE]
