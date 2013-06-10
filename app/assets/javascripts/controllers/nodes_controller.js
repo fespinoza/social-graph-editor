@@ -34,6 +34,9 @@ App.NodesController = Ember.ArrayController.extend({
       // set null the family_id to fix issue
       this.set('currentNode', null);
       node.set('family_id', null);
+      node.get('roles').toArray().forEach(function(role){
+        role.deleteRecord();
+      });
       node.deleteRecord();
       this.get('store').commit();
     }
