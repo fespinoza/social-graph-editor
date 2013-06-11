@@ -8,8 +8,14 @@
 * Multiple Families
   * backend fix of multiple families [DONE]
   * front-end of multiple families
+    * use a multiple select [DONE]
+    * node/families when node deleted
+    * node/families when node saved [DONE]
+    * load famlies when the node is edited
+    * visually asign family
+    * creating a family with its color
   * add chosen plugin to the family selector
-  * check everything works ok
+
 
 * Click Families [DONE]
   * set an uniq selected family [DONE]

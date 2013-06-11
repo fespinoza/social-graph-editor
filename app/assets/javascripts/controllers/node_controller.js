@@ -1,10 +1,10 @@
 App.NodeController = Ember.ObjectController.extend({
+  selectedFamilies: [],
+
   save: function () {
-    // add family from the form ID
-    if (this.get('content.family_id')) {
-      family = App.Family.find(this.get('content.family_id'));
-      family.get('nodes').pushObject(this.get('content'));
-    }
+    // assign selected families into the node
+    this.get('content.families').pushObjects(this.get('selectedFamilies'));
+
     this.get('store').commit();
     $("#graph_canvas").trigger('nodeUpdate');
 

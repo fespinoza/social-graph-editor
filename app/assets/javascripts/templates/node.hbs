@@ -12,9 +12,9 @@
       {{view Ember.Select contentBinding="social_network.actorFamilies"
                           optionValuePath="content.id"
                           optionLabelPath="content.name"
-                          prompt="Select Family"
                           action="save"
-                          valueBinding="family_id"}}
+                          selectionBinding="selectedFamilies"
+                          multiple="true"}}
     </label>
   {{else}}
     <label>

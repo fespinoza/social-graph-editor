@@ -36,9 +36,7 @@ App.NodesController = Ember.ArrayController.extend({
               +" "+node.get('name')+"?";
     if (confirm(message)) {
       console.log("deleting an node");
-      // set null the family_id to fix issue
       this.set('currentNode', null);
-      node.set('family_id', null);
       node.get('roles').toArray().forEach(function(role){
         role.deleteRecord();
       });
