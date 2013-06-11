@@ -6,8 +6,13 @@ App.NodeView = Ember.View.extend({
       console.log("is new");
       this.$().find("input").focus();
     };
-   this.$("select").chosen({
-    placeholder: "Select Families",
-   });
+    //nodeView = this;
+    //$("#graph_canvas").on('nodeSelected', function() {
+      //nodeView.applyChosen();
+    //})
+  },
+
+  applyChosen: function() {
+    $("#family_selector select").chosen();
   },
 });

@@ -6,27 +6,25 @@
     {{view Ember.TextField valueBinding="name" action="save"}}
   </label>
 
-  {{#if isActor}}
-    <label>
+    <label id="family_selector">
       Families
-      {{view Ember.Select contentBinding="social_network.actorFamilies"
-                          optionValuePath="content.id"
-                          optionLabelPath="content.name"
-                          action="save"
-                          selectionBinding="families"
-                          multiple="true"}}
+      {{#if isActor}}
+          {{view Ember.Select contentBinding="social_network.actorFamilies"
+                              optionValuePath="content.id"
+                              optionLabelPath="content.name"
+                              action="save"
+                              selectionBinding="families"
+                              multiple="true"}}
+      {{else}}
+          {{view Ember.Select contentBinding="social_network.relationFamilies"
+                              optionValuePath="content.id"
+                              optionLabelPath="content.name"
+                              action="save"
+                              selectionBinding="families"
+                              multiple="true"}}
+      {{/if}}
+      <span class="help-block">You can select multiple familis holding the Ctrl key on windows or Command in mac while clicking the families</span>
     </label>
-  {{else}}
-    <label>
-      Families
-      {{view Ember.Select contentBinding="social_network.relationFamilies"
-                          optionValuePath="content.id"
-                          optionLabelPath="content.name"
-                          action="save"
-                          selectionBinding="families"
-                          multiple="true"}}
-    </label>
-  {{/if}}
 
 <form>
 

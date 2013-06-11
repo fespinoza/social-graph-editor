@@ -223,6 +223,7 @@ App.NodesView = Ember.View.extend({
       // remove current new node
       view.get('controller').send('clearCurrentNewNode');
       d3.select(this).classed("selected", true)
+      //view.$graphCanvas.trigger('nodeSelected');
     };
   },
 
