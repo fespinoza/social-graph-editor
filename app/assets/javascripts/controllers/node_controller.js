@@ -1,10 +1,5 @@
 App.NodeController = Ember.ObjectController.extend({
-  selectedFamilies: [],
-
   save: function () {
-    // assign selected families into the node
-    this.get('content.families').pushObjects(this.get('selectedFamilies'));
-
     this.get('store').commit();
     $("#graph_canvas").trigger('nodeUpdate');
 
