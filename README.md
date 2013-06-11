@@ -12,7 +12,7 @@
     * node/families when node deleted
     * node/families when node saved [DONE]
     * load famlies when the node is edited [DONE]
-    * visually asign family
+    * fix creating actors when selected [DONE]
     * creating a family with its color
   * add chosen plugin to the family selector
 
