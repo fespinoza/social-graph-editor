@@ -111,8 +111,9 @@ App.NodesView = Ember.View.extend({
       .attr('cx', function(d) { return d.get('cx'); })
       .attr('cy', function(d) { return d.get('cy'); })
       .attr('fill', function (d) {
-        if (d.get('family.color')) {
-          return d.get('family.color');
+        family = d.get('families').toArray()[0];
+        if (family) {
+          return family.get('color');
         }
       });
   },
@@ -127,8 +128,9 @@ App.NodesView = Ember.View.extend({
       .attr('x', function(d) { return d.get('x') - d.get('radius')/2; })
       .attr('y', function(d) { return d.get('y') + d.get('radius')/2; })
       .attr('fill', function (d) {
-        if (d.get('family.color')) {
-          return d.get('family.color');
+        family = d.get('families').toArray()[0];
+        if (family) {
+          return family.get('color');
         }
       });
   },
