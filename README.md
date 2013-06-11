@@ -13,8 +13,8 @@
     * node/families when node saved [DONE]
     * load famlies when the node is edited [DONE]
     * fix creating actors when selected [DONE]
-    * creating a family with its color
-  * add chosen plugin to the family selector
+    * display node with family colors
+  * add chosen plugin to the family selector [DONE]
 
 
 * Click Families [DONE]

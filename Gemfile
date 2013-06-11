@@ -5,6 +5,7 @@ gem 'ember-rails'
 gem 'ember-source', '1.0.0.rc5' # or the version you need
 gem 'handlebars-source', '1.0.0.rc4' # or the version you need
 gem 'jquery-rails'
+gem 'chosen-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

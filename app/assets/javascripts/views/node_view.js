@@ -6,5 +6,8 @@ App.NodeView = Ember.View.extend({
       console.log("is new");
       this.$().find("input").focus();
     };
+   this.$("select").chosen({
+    placeholder: "Select Families",
+   });
   },
 });

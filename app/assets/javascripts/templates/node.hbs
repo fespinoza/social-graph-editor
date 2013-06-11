@@ -8,7 +8,7 @@
 
   {{#if isActor}}
     <label>
-      Family
+      Families
       {{view Ember.Select contentBinding="social_network.actorFamilies"
                           optionValuePath="content.id"
                           optionLabelPath="content.name"
@@ -18,13 +18,13 @@
     </label>
   {{else}}
     <label>
-      Family
+      Families
       {{view Ember.Select contentBinding="social_network.relationFamilies"
                           optionValuePath="content.id"
                           optionLabelPath="content.name"
-                          prompt="Select Family"
                           action="save"
-                          valueBinding="family_id"}}
+                          selectionBinding="families"
+                          multiple="true"}}
     </label>
   {{/if}}
 
