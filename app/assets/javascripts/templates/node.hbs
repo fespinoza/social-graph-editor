@@ -13,14 +13,14 @@
                               optionValuePath="content.id"
                               optionLabelPath="content.name"
                               action="save"
-                              selectionBinding="families"
+                              selectionBinding="selectedFamilies"
                               multiple="true"}}
       {{else}}
           {{view Ember.Select contentBinding="social_network.relationFamilies"
                               optionValuePath="content.id"
                               optionLabelPath="content.name"
                               action="save"
-                              selectionBinding="families"
+                              selectionBinding="selectedFamilies"
                               multiple="true"}}
       {{/if}}
       <span class="help-block">You can select multiple familis holding the Ctrl key on windows or Command in mac while clicking the families</span>

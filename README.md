@@ -9,7 +9,7 @@
   * backend fix of multiple families [DONE]
   * front-end of multiple families
     * use a multiple select [DONE]
-    * node/families when node deleted
+    * node/families when node deleted [DONE]
     * node/families when node saved [DONE]
     * load famlies when the node is edited [DONE]
     * fix creating actors when selected [DONE]
