@@ -1,4 +1,7 @@
 App.FamiliesController = Ember.ArrayController.extend({
+  sortProperties: ['kind', 'name'],
+  sortAscending: true,
+
   new: function() {
     colors = d3.scale.category10();
     attributes = { color: colors(this.get('content.length')) };
