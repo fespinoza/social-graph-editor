@@ -49,7 +49,6 @@ App.NodesView = Ember.View.extend({
     this.actorText.enter().append("text")
       .attr("class", "actor")
       .attr("text-anchor", "middle")
-      .attr("data-selected", false)
       .call(this.draggableNode())
       .on('click', this.nodeClick())
       .on('mouseover', this.nodeHover());
@@ -77,7 +76,6 @@ App.NodesView = Ember.View.extend({
     this.relationText.enter().append("text")
       .attr("class", "relation")
       .attr("text-anchor", "middle")
-      .attr("data-selected", false)
       .call(this.draggableNode())
       .on('click', this.nodeClick())
       .on('mouseover', this.nodeHover());
@@ -215,14 +213,14 @@ App.NodesView = Ember.View.extend({
   nodeClick: function() {
     view = this;
     return function (d) {
-      d3.selectAll(".node.figure").classed("selected", false);
-      d3.event.stopPropagation();
       console.log("node clicked "+d.get('name'));
+      d3.selectAll(".node.figure").classed("selectedNode", false);
+      d3.event.stopPropagation();
       // set the controller current node to this node
       view.set('controller.currentNode', d);
       // remove current new node
       view.get('controller').send('clearCurrentNewNode');
-      d3.select(this).classed("selected", true)
+      d3.select(this).classed("selectedNode", true)
       //view.$graphCanvas.trigger('nodeSelected');
     };
   },

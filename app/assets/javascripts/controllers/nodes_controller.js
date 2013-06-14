@@ -8,7 +8,7 @@ App.NodesController = Ember.ArrayController.extend({
 
     // create node
     var node = App.Node.createRecord({
-      name: "New "+kind, kind: kind, x: x, y: y
+      name: "", kind: kind, x: x, y: y
     });
 
     selectedFamily = this.get('socialNetwork.selectedFamily');
