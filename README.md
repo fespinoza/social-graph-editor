@@ -5,6 +5,11 @@
 
 ## TASKS
 
+* BUGS
+  * remove family color when the family is deleted
+  * when node deleted another is automatically "selected"
+  * when enter saving family form it dismissed but the window still black
+
 * Multiple Families
   * backend fix of multiple families [DONE]
   * front-end of multiple families

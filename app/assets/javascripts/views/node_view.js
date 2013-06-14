@@ -3,7 +3,11 @@ App.NodeView = Ember.View.extend({
   classNames: ['node_view'],
 
   didInsertElement: function () {
-    this.$().find("input").focus();
+    this.$('input').focus();
+    this.$('#family_selector select').tooltip({
+      placement: 'right',
+      title: 'You can select multiple families holding the Ctrl key on windows or Command in mac while clicking the families',
+    })
   },
 
   focusInput: function() {
