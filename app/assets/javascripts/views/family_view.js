@@ -3,6 +3,10 @@ App.FamilyView = Ember.View.extend({
   classNames: ["item", "family", "enabled"],
   lastMode: null,
 
+  didInsertElement: function() {
+    this.$("span.label").css("background-color", this.get('content.color'));
+  },
+
   click: function() {
     console.log("clicked on family "+this.get('content.name'));
     if(this.$().hasClass('enabled')) {
