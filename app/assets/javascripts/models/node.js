@@ -1,11 +1,20 @@
 App.Node = DS.Model.extend({
+  // attributes
   name: DS.attr('string'),
   kind: DS.attr('string'),
   x: DS.attr('number'),
   y: DS.attr('number'),
+
+  // relationships
   social_network: DS.belongsTo('App.SocialNetwork'),
-  family: DS.belongsTo('App.Family'),
-  radius: 20,
+  families: DS.hasMany('App.Family'),
+  actor_roles: DS.hasMany('App.Role', { inverse: 'actor' }),
+  relation_roles: DS.hasMany('App.Role', { inverse: 'relation' }),
+
+  // computed attributes
+  radius: function(){
+    return 20;
+  }.property(),
   cx: function () {
     return this.get('x');
   }.property('x'),
@@ -18,10 +27,15 @@ App.Node = DS.Model.extend({
   text_y: function () {
     return this.get('y') + 3*this.get('radius');
   }.property('y'),
-  isEditing: function () {
-    return false; 
+  isActor: function() {
+    return this.get('kind') == "Actor"; 
   }.property(),
-  isSelected: function () {
-    return false;
-  }.property(),
+
+  roles: function() {
+    if (this.get('kind') === "Actor") {
+      return this.get('actor_roles');
+    } else {
+      return this.get('relation_roles');
+    }
+  }.property('actor_roles', 'relation_roles'),
 });

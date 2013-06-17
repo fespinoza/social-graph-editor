@@ -1,25 +1,17 @@
-<div class="fluid-row">
-  <div class="span12">
-    <ul class="breadcrumb">
-      <li><a href="/"><i class="icon-home"></i></a> <span class="divider">/</span></li>
-      <li>{{#linkTo "social_networks"}}Social Networks{{/linkTo}} <span class="divider">/</span></li>
-      <li class="active">{{name}}</li>
-      <li class="pull-right"><a href="/social_networks/{{unbound id}}.json" target="_blank">API View</a></li>
-    </ul>
-
-    <div id="toolbar" class="well well-small">
-      <a href="#" class="btn btn-small" id="add_relation">Add Relation</a>
-    </div>
-  </div>
-</div>
+{{partial "top_bar"}}
 
 <div class="fluid-row">
   <div class="span3">
-    {{render "actors" actors}}
-    {{render "relations" relations socialNetworkBinding="this"}}
+    <div class="well well-small">
+      {{render "families" families}}      
+    </div>
+
+    {{render "nodes" nodes}}
+
+    {{render "roles" roles}}
   </div>
   <div class="span9">
-    <svg id="graph_canvas" {{bindAttr data-social-network-id="id"}}>
+    <svg id="graph_canvas" data-social-network-id="{{unbound id}}">
     </svg>
   </div>
 </div>

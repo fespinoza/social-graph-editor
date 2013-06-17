@@ -1,15 +1,32 @@
 App.SocialNetworkView = Ember.View.extend({
   didInsertElement: function () {
+    var view = this;
     var canvas = d3.select("#graph_canvas");
-    var root = canvas.append("g").attr("class", "root");
-    var zoom = d3.behavior.zoom()
-      .on("zoom", function () {
-        root.attr(
-          "transform",
-          "translate("+d3.event.translate.join(',')+") scale("+d3.event.scale+")"
-        );
-      })
-    canvas.call(zoom);
+    this.root = canvas.append("g").attr("class", "root");
+    this.socialNetwork = this.get('controller.content');
+    this.persistChangesInterval = null;
+
+    // TODO: kind of reset the d3 coordinates when reloading the page
+    //       and when pressing the reset cooridnates button
+
+    //var zoom = d3.behavior.zoom()
+      //.on("zoom", function () {
+        //view.socialNetwork.set('scale', d3.event.scale);
+        //view.socialNetwork.set('translation_x', d3.event.translate[0]);
+        //view.socialNetwork.set('translation_y', d3.event.translate[1]);
+        //view.tick();
+
+        //// reset the timeout to persist the social network changes
+        //// TODO: find a better way to do this, it interferes with the
+        ////       creation of nodes
+        ////window.clearTimeout(view.persistChangesInterval);
+        ////view.persistChangesInterval = window.setTimeout(function () {
+          ////console.log("persisting SN changes");
+          ////view.socialNetwork.get('store').commit();
+        ////}, 1000);
+      //});
+    //canvas.call(zoom);
+    this.tick();
   },
 
   tick: function() {
@@ -27,5 +44,14 @@ App.SocialNetworkView = Ember.View.extend({
     this.socialNetwork.get('store').commit();
     this.tick();
   },
+
+  selectModeButton: function() {
+    buttonClass = "." + this.get('controller.currentMode').toLowerCase();
+    // fix the active button if the value was change inside the app
+    if(!$(".states "+buttonClass).hasClass("active")) {
+      $(".states .btn").removeClass("active");
+      $(".states "+buttonClass).addClass("active");
+    }
+  }.observes('controller.currentMode'),
 
 });

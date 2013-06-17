@@ -1,12 +1,54 @@
 svg#graph_canvas {
   width: 100%;
-  height: 600px;
+  height: 540px;
   border: 1px solid black;
+
+  background-color: #FFF;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+ 
+  &:not(.active):not(.ctrl) {
+    cursor: crosshair;
+  }
+
+  .node.figure.selectedNode {
+    stroke: blue;
+    stroke-width: 2;
+  }
+   
+  path.link {
+    fill: none;
+    stroke: #000;
+    stroke-width: 4px;
+    cursor: default;
+
+    &.selected { stroke-dasharray: 10,2; }
+    &.dragline { pointer-events: none; }
+    &.hidden { stroke-width: 0; }
+  }
+   
+  .node.figure {
+    cursor: pointer;
+  }
+   
+  text {
+    font: 12px sans-serif;
+    pointer-events: none;
+    fill: "#ffcc99";
+  }
+  
+  line.role.selected {
+    stroke-width: 4;
+    stroke: blue;
+  }
 }
 
-.current_object {
-  margin-bottom: 30px;
-
+#current_node,
+#current_role {
   h3 {
     margin-top: 0;
   }
@@ -39,4 +81,42 @@ svg#graph_canvas {
 
 #current_family {
   .colorPicker-picker { margin-top: 7px; }
+}
+
+#top-bar {
+  overflow: hidden;
+  .edition-buttons {
+    float: right;
+    div {
+      display: inline-block;
+    }
+    .states {
+      margin-right: 50px;
+    }
+  }
+}
+
+#families {
+  .family {
+    span.badge.actor { background-color: #4764cc; }
+    span.badge.relation { background-color: #c43535; }
+    &:not(.enabled) {
+      background-color: transparent;
+      span.badge {
+        background-color: lightgray;
+      }
+      span.label {
+        background-color: lightgray;
+        font-style: italic;
+      }
+    }
+
+    &.selected {
+      background-color: gray;
+      
+      &:hover {
+        background-color: #a0a0a0;
+      }
+    }
+  }
 }

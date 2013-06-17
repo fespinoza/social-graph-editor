@@ -1,7 +1,17 @@
 App.FamiliesController = Ember.ArrayController.extend({
+  sortProperties: ['kind', 'name'],
+  sortAscending: true,
+  colors: null,
+
   new: function() {
+    colors = this.get('colors');
+    attributes = { color: colors(this.get('content.length')) };
+    mode = this.get('socialNetwork.currentMode');
+    if (mode == "Actor" || mode == "Relation") {
+      attributes['kind'] = mode
+    }
     this.transaction = this.get('store').transaction();
-    this.set('currentFamily', this.transaction.createRecord(App.Family, {}));
+    this.set('currentFamily', this.transaction.createRecord(App.Family, attributes));
   },
 
   edit: function (family) {
@@ -32,5 +42,9 @@ App.FamiliesController = Ember.ArrayController.extend({
       this.get('store').commit();
       $("#graph_canvas").trigger('nodeUpdate');
     }
+  },
+
+  selectFamily: function(family) {
+    this.set('socialNetwork.selectedFamily', family);
   },
 });

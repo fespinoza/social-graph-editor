@@ -1,0 +1,17 @@
+{{#if family.isActorKind}}
+  <span class="badge actor">A</span>
+{{else}}
+  <span class="badge relation">R</span>
+{{/if}}
+<span class="label">
+  {{family.name}}
+</span>
+
+<div class="operations">
+  <a href="#current_family" {{action "edit" family}} title="edit" class="edit" data-toggle="modal">
+    <i class="icon-edit"></i>
+  </a>
+  <a href="#" {{action "delete" family}} title="delete" class="delete">
+    <i class="icon-trash"></i>
+  </a>
+</div>

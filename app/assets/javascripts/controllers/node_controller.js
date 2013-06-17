@@ -1,14 +1,23 @@
 App.NodeController = Ember.ObjectController.extend({
+  selectedFamilies: [],
+  lastContent: null,
+
   save: function () {
-    // add family from the form ID
-    family = App.Family.find(this.get('content.family_id'));
-    family.get('nodes').pushObject(this.get('content'));
-    this.set('isEditing', false);
     this.get('store').commit();
     $("#graph_canvas").trigger('nodeUpdate');
+
+    // go to Role mode if node was a Relation
+    if(this.get('kind') == "Relation") {
+      this.set("social_network.currentMode", "Role");
+    }
   },
 
-  toggleEditing: function () {
-    this.set('isEditing', !this.get('isEditing'));
-  },
+  setSelectedFamilies: function(){
+    content = this.get('content');
+    if (content != this.get('lastContent')) {
+      this.set('selectedFamilies', this.get('content.families'));
+      this.set('lastContent', content);
+    }
+  }.observes('content'),
+
 });

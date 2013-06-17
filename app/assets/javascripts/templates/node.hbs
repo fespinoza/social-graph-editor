@@ -1,52 +1,40 @@
-<h3>{{name}} details</h3>
-<ul>
-  <li>
-    <strong>ID:</strong>
-    <span>{{id}}</span>
-  </li>
-  <li>
-    <strong>Name:</strong>
-    {{#if isEditing}} 
-      <span>{{view Ember.TextField valueBinding="name" action="save"}}</span>
-    {{else}}
-      <span>{{name}}</span>
-    {{/if}}
-  </li>
-  <li>
-    <strong>Family:</strong>
-    {{#if isEditing}}
-      <!-- TODO: handle case when family is already set -->
-      {{view Ember.Select contentBinding="social_network.actorFamilies"
-                          optionValuePath="content.id"
-                          optionLabelPath="content.name"
-                          prompt="Select Family"
-                          valueBinding="family_id"}}
-    {{else}}
-      <span>{{family.name}}</span>
-    {{/if}}
-  </li>
-  <li>
-    <strong>Kind:</strong>
-    <span>{{kind}}</span>
-  </li>
-  <li>
-    <strong>X:</strong>
-    <span>{{x}}</span>
-  </li>
-  <li>
-    <strong>Y:</strong>
-    <span>{{y}}</span>
-  </li>
-</ul>
+<h3>Details for {{kind}} #{{id}}</h3>
+
+<form>
+  <label>
+    Name
+    {{view Ember.TextField valueBinding="name" action="save" placeholder="New Node"}}
+  </label>
+
+    <label id="family_selector">
+      Families
+      {{#if isActor}}
+          {{view Ember.Select contentBinding="social_network.actorFamilies"
+                              optionValuePath="content.id"
+                              optionLabelPath="content.name"
+                              action="save"
+                              selectionBinding="selectedFamilies"
+                              multiple="true"}}
+      {{else}}
+          {{view Ember.Select contentBinding="social_network.relationFamilies"
+                              optionValuePath="content.id"
+                              optionLabelPath="content.name"
+                              action="save"
+                              selectionBinding="selectedFamilies"
+                              multiple="true"}}
+      {{/if}}
+    </label>
+
+<form>
 
 <div class="operations">
   <div class="pull-right">
-    {{#if isEditing}}
-      <button class="btn" {{action "toggleEditing"}}>Cancel</button>
-      <button class="btn btn-primary" {{action "save"}}>Update</button>
+    {{#if isNew}}
+      <button class="btn btn-primary" {{action "save"}}>Create</button>
+      <button class="btn" {{action "cancel"}}>Cancel</button>
     {{else}}
+      <button class="btn btn-primary" {{action "save"}}>Update</button>
       <button class="btn btn-danger" {{action "delete" this}}>Delete</button>
-      <button class="btn" {{action "toggleEditing"}}>Edit</button>
     {{/if}}
   </div>
 </div>

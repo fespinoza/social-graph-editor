@@ -1,0 +1,21 @@
+<div id="current_role" class="well well-small">
+  {{#if currentRole}}
+    <h3>Details for Role #{{currentRole.id}}</h3>
+
+    <form>
+      <label>
+        Name
+        {{view Ember.TextField valueBinding="currentRole.name" action="save" placeholder="Role Name"}}
+      </label>
+    <form>
+
+    <div class="operations">
+      <div class="pull-right">
+        <button class="btn btn-primary" {{action "save"}}>Update</button>
+        <button class="btn btn-danger" {{action "delete" currentRole}}>Delete</button>
+      </div>
+    </div>
+  {{else}}
+    <h3>Select a role to display its details</h3>
+  {{/if}}
+</div>

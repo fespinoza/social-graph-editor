@@ -1,0 +1,49 @@
+{
+  "app/serializers/*_serializer.rb": {
+    "command": "serializer",
+    "affinity": "model",
+    "test": "spec/serializers/%s_spec.rb",
+    "related": "app/models/%s.rb",
+    "template": "class %SSerializer < ActiveModel::Serializer\nend"
+  },
+
+  "app/assets/javascripts/models/*.js": {
+    "command": "jmodel",
+    "alternate": "spec/javascripts/models/%s_spec.js",
+    "template": "App.%S = DS.Model.extend"
+  },  
+  
+  "app/assets/javascripts/controllers/*_controller.js": {
+    "command": "jcontroller",
+    "alternate": "spec/javascripts/controllers/%s_spec.js",
+    "related": "app/assets/javascript/models/%s.js",
+    "template": "App.%SController = Ember.ObjectController.extend"
+  },
+ 
+  "app/assets/javascripts/views/*_view.js": {
+    "command": "jview",
+    "alternate": "spec/javascripts/views/%s_spec.js",
+    "related": "app/assets/javascripts/templates/%s.hbs",
+    "template": "%SView = Ember.View.extend"
+  },
+ 
+  "app/assets/javascripts/router.js": {
+    "command": "jrouter"
+  },
+ 
+  "app/assets/javascripts/routes/*_route.js": {
+    "command": "jroute",
+    "alternate": "spec/javascripts/routes/%s_spec.js",
+    "template": "App.%SRoute = Ember.Route.extend"
+  },
+ 
+  "spec/javascripts/*_spec.js": {
+    "command": "jspec",
+    "alternate": "app/assets/javascripts/%s.js"
+  },
+ 
+  "app/assets/javascripts/templates/*.hbs": {
+    "command": "template",
+    "alternate": "app/assets/javascripts/views/%s.js"
+  }
+}
