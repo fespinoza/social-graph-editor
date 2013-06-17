@@ -41,9 +41,16 @@ svg#graph_canvas {
     fill: "#ffcc99";
   }
   
-  line.role.selected {
-    stroke-width: 4;
-    stroke: blue;
+  line.role {
+    stroke-width: 3;
+    stroke: black;
+    cursor: pointer;
+
+    &.selected {
+      stroke-width: 4;
+      stroke-dasharray: 10,2;
+      stroke: blue;
+    }
   }
 }
 

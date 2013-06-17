@@ -22,8 +22,6 @@ App.RolesView = Ember.View.extend({
     // enter
     this.roleLine.enter().append("line")
         .classed('role', true)
-        .attr("stroke", "black")
-        .attr("stroke-width", 2)
         .on('click', this.roleClick());
     this.roleText.enter().append("text")
         .classed('role', true)
