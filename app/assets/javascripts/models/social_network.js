@@ -15,7 +15,7 @@ App.SocialNetwork = DS.Model.extend({
     return this.get('families').toArray().filter(function (family) {
       return (family.get("kind") === "Actor");
     })
-  }.property("families"),
+  }.property("families.@each.kind", "families.@each.name"),
 
   relationFamilies: function() {
     return this.get('families').toArray().filter(function (family) {
