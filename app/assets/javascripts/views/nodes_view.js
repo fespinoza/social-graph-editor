@@ -61,7 +61,6 @@ App.NodesView = Ember.View.extend({
         dataCircle.push({node: node, family: null, index: 0 });
       }
     });
-    //console.log(dataCircle.length);
     // set the text element to handle
     this.actorText   = this.svg.selectAll("text.actor").data(data);
     this.actorCircle = this.svg.selectAll("circle.actor").data(dataCircle);
@@ -183,47 +182,50 @@ App.NodesView = Ember.View.extend({
     return d3.behavior.drag()
     .on('dragstart', function (d) {
       view.set('targetNode', null);
+      data = view.getData(d);
       // store initial position of the node
       if (view.get('socialNetwork.currentMode') == "Hand") {
-        d.__init__ = { x: d.node.get('x'), y: d.node.get('y') }
+        d.__init__ = { x: data.get('x'), y: data.get('y') }
       } else {
-        if (view.get('socialNetwork.currentMode') == "Role" && d.node.get('kind') == "Actor") {
+        if (view.get('socialNetwork.currentMode') == "Role" && data.get('kind') == "Actor") {
           // reposition drag line
           view.drag_line
             .style('marker-end', 'url(#end-arrow)')
             .classed('hidden', false)
-            .attr('d', 'M' + d.node.get('cx') + ',' + d.node.get('cy') + 'L' + d.node.get('cx') + ',' + d.node.get('cy'));
+            .attr('d', 'M' + data.get('cx') + ',' + data.get('cy') + 'L' + data.get('cx') + ',' + data.get('cy'));
         }
       }
     })
     .on('drag', function (d) {
+      data = view.getData(d);
       if (view.get('socialNetwork.currentMode') == "Hand") {
         // move the coordinates of the node
-        d.node.set('x', d.node.get('x') + d3.event.dx);  
-        d.node.set('y', d.node.get('y') + d3.event.dy);  
+        data.set('x', data.get('x') + d3.event.dx);  
+        data.set('y', data.get('y') + d3.event.dy);  
         view.tick();
       } else {
-        if (view.get('socialNetwork.currentMode') == "Role" && d.node.get('kind') == "Actor") {
+        if (view.get('socialNetwork.currentMode') == "Role" && data.get('kind') == "Actor") {
           // update drag line
-          view.drag_line.attr('d', 'M' + d.node.get('cx') + ',' + d.node.get('cy') + 'L' + d3.mouse(this)[0] + ',' + d3.mouse(this)[1]);
+          view.drag_line.attr('d', 'M' + data.get('cx') + ',' + data.get('cy') + 'L' + d3.mouse(this)[0] + ',' + d3.mouse(this)[1]);
         }
       }
 
     })
     .on('dragend', function (d) {
+      data = view.getData(d);
       if (view.get('socialNetwork.currentMode') == "Hand") {
         // store changes only if node was really translated
-        if (d.__init__.x != d.node.get('x') && d.__init__y != d.node.get('y')) {
+        if (d.__init__.x != data.get('x') && d.__init__y != data.get('y')) {
           // update position changes to the server
-          if(!d.node.get('isNew')) {
-            d.node.get('store').commit();
+          if(!data.get('isNew')) {
+            data.get('store').commit();
           };
         }
         delete d.__init__;
       } else {
-        if (view.get('socialNetwork.currentMode') == "Role" && d.node.get('kind') == "Actor") {
+        if (view.get('socialNetwork.currentMode') == "Role" && data.get('kind') == "Actor") {
           if (view.get('targetNode.kind') == "Relation") {
-            view.$graphCanvas.trigger('addRole', [d, view.get('targetNode')]);
+            view.$graphCanvas.trigger('addRole', [data, view.get('targetNode')]);
           } else {
             console.log("you can't create role between actors");
           }
@@ -237,11 +239,12 @@ App.NodesView = Ember.View.extend({
   nodeClick: function() {
     view = this;
     return function (d) {
-      console.log("node clicked "+d.node.get('name'));
+      data = view.getData(d);
+      console.log("node clicked "+data.get('name'));
       d3.selectAll(".node.figure").classed("selectedNode", false);
       d3.event.stopPropagation();
       // set the controller current node to this node
-      view.set('controller.currentNode', d.node);
+      view.set('controller.currentNode', data);
       // remove current new node
       view.get('controller').send('clearCurrentNewNode');
       d3.select(this).classed("selectedNode", true)
@@ -252,7 +255,18 @@ App.NodesView = Ember.View.extend({
   nodeHover: function() {
     view = this;
     return function(d) {
-      view.set('targetNode', d.node);
+      data = view.getData(d);
+      view.set('targetNode', data);
+    }
+  },
+
+  getData: function(d) {
+    try {
+      if(d.get('kind') == "Relation") {
+        return d;
+      }
+    } catch (e) {
+      return d.node;
     }
   },
 
