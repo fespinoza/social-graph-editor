@@ -6,21 +6,24 @@
 ## TASKS
 
 * BUGS
-  * remove family color when the family is deleted
   * when node deleted another is automatically "selected"
   * when enter saving family form it dismissed but the window still black
 
-* Multiple Families
+* Multiple Families [DONE]
   * backend fix of multiple families [DONE]
-  * front-end of multiple families
+  * front-end of multiple families [DONE]
     * use a multiple select [DONE]
     * node/families when node deleted [DONE]
     * node/families when node saved [DONE]
     * load famlies when the node is edited [DONE]
     * fix creating actors when selected [DONE]
     * display node with family colors
+      * update color when family is updated [DONE]
+      * remove color when family is deleted [DONE]
+      * add color when family is added to node [DONE]
+      * remove color when family is removed to node [DONE]
+      * display multiple colors for families [DONE]
   * add chosen plugin to the family selector [DONE]
-
 
 * Click Families [DONE]
   * set an uniq selected family [DONE]

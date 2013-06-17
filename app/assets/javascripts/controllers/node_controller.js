@@ -3,7 +3,6 @@ App.NodeController = Ember.ObjectController.extend({
   lastContent: null,
 
   save: function () {
-    this.get('content.families').pushObjects(this.get('selectedFamilies'));
     this.get('store').commit();
     $("#graph_canvas").trigger('nodeUpdate');
 
