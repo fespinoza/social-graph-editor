@@ -15,7 +15,7 @@ svg#graph_canvas {
     cursor: crosshair;
   }
 
-  .node.figure.selected {
+  .node.figure.selectedNode {
     stroke: blue;
     stroke-width: 2;
   }

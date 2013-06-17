@@ -3,30 +3,27 @@
 <form>
   <label>
     Name
-    {{view Ember.TextField valueBinding="name" action="save"}}
+    {{view Ember.TextField valueBinding="name" action="save" placeholder="New Node"}}
   </label>
 
-  {{#if isActor}}
-    <label>
-      Family
-      {{view Ember.Select contentBinding="social_network.actorFamilies"
-                          optionValuePath="content.id"
-                          optionLabelPath="content.name"
-                          prompt="Select Family"
-                          action="save"
-                          valueBinding="family_id"}}
+    <label id="family_selector">
+      Families
+      {{#if isActor}}
+          {{view Ember.Select contentBinding="social_network.actorFamilies"
+                              optionValuePath="content.id"
+                              optionLabelPath="content.name"
+                              action="save"
+                              selectionBinding="selectedFamilies"
+                              multiple="true"}}
+      {{else}}
+          {{view Ember.Select contentBinding="social_network.relationFamilies"
+                              optionValuePath="content.id"
+                              optionLabelPath="content.name"
+                              action="save"
+                              selectionBinding="selectedFamilies"
+                              multiple="true"}}
+      {{/if}}
     </label>
-  {{else}}
-    <label>
-      Family
-      {{view Ember.Select contentBinding="social_network.relationFamilies"
-                          optionValuePath="content.id"
-                          optionLabelPath="content.name"
-                          prompt="Select Family"
-                          action="save"
-                          valueBinding="family_id"}}
-    </label>
-  {{/if}}
 
 <form>
 

@@ -8,12 +8,12 @@ App.NodesController = Ember.ArrayController.extend({
 
     // create node
     var node = App.Node.createRecord({
-      name: "New "+kind, kind: kind, x: x, y: y
+      name: "", kind: kind, x: x, y: y
     });
 
     selectedFamily = this.get('socialNetwork.selectedFamily');
     if (selectedFamily != null) {
-      node.set('family', selectedFamily);
+      node.get('families').pushObject(selectedFamily);
     }
 
     // set as current node and current new node
@@ -36,9 +36,7 @@ App.NodesController = Ember.ArrayController.extend({
               +" "+node.get('name')+"?";
     if (confirm(message)) {
       console.log("deleting an node");
-      // set null the family_id to fix issue
       this.set('currentNode', null);
-      node.set('family_id', null);
       node.get('roles').toArray().forEach(function(role){
         role.deleteRecord();
       });

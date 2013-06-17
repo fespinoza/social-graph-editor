@@ -1,11 +1,11 @@
 class Node < ActiveRecord::Base
   belongs_to :social_network
-  belongs_to :family
 
   has_many :actor_roles, class_name: "Role", foreign_key: "actor_id"
   has_many :relation_roles, class_name: "Role", foreign_key: "relation_id"
+  has_and_belongs_to_many :families
 
-  attr_accessible :name, :x, :y, :social_network_id, :kind, :family_id
+  attr_accessible :name, :x, :y, :social_network_id, :kind, :family_ids, :actor_role_ids, :relation_role_ids
 
   def roles
     if is_actor?

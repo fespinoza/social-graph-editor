@@ -20,6 +20,7 @@
 //= require_self
 //= require ember_sge
 //= require d3.v3
+//= require chosen-jquery
 App = Ember.Application.create({
   LOG_TRANSITIONS: true,
 });

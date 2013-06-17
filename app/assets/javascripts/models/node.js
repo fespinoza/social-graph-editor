@@ -7,7 +7,7 @@ App.Node = DS.Model.extend({
 
   // relationships
   social_network: DS.belongsTo('App.SocialNetwork'),
-  family: DS.belongsTo('App.Family'),
+  families: DS.hasMany('App.Family'),
   actor_roles: DS.hasMany('App.Role', { inverse: 'actor' }),
   relation_roles: DS.hasMany('App.Role', { inverse: 'relation' }),
 
@@ -27,9 +27,6 @@ App.Node = DS.Model.extend({
   text_y: function () {
     return this.get('y') + 3*this.get('radius');
   }.property('y'),
-  family_id: function() {
-    return this.get('family.id'); 
-  }.property('family.id'),
   isActor: function() {
     return this.get('kind') == "Actor"; 
   }.property(),

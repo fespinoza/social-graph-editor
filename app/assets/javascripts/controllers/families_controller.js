@@ -1,6 +1,10 @@
 App.FamiliesController = Ember.ArrayController.extend({
+  sortProperties: ['kind', 'name'],
+  sortAscending: true,
+  colors: null,
+
   new: function() {
-    colors = d3.scale.category10();
+    colors = this.get('colors');
     attributes = { color: colors(this.get('content.length')) };
     mode = this.get('socialNetwork.currentMode');
     if (mode == "Actor" || mode == "Relation") {

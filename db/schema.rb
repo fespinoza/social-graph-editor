@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130607141025) do
+ActiveRecord::Schema.define(:version => 20130610210334) do
 
   create_table "families", :force => true do |t|
     t.string   "name"
@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(:version => 20130607141025) do
     t.datetime "updated_at",        :null => false
   end
 
+  create_table "families_nodes", :force => true do |t|
+    t.integer "node_id"
+    t.integer "family_id"
+  end
+
   create_table "nodes", :force => true do |t|
     t.string   "name"
     t.integer  "x"
@@ -30,10 +35,8 @@ ActiveRecord::Schema.define(:version => 20130607141025) do
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.string   "kind"
-    t.integer  "family_id"
   end
 
-  add_index "nodes", ["family_id"], :name => "index_nodes_on_family_id"
   add_index "nodes", ["social_network_id"], :name => "index_nodes_on_social_network_id"
 
   create_table "roles", :force => true do |t|

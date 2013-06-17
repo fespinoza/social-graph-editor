@@ -1,4 +1,5 @@
 App.RolesView = Ember.View.extend({
+
   didInsertElement: function() {
     $graphCanvas = $("#graph_canvas");
     this.socialNetwork = App.SocialNetwork.find($graphCanvas.data('social-network-id'));
@@ -10,6 +11,7 @@ App.RolesView = Ember.View.extend({
       roleView.get('controller').send('add', actor, relation);
     });
     this.renderSVG();
+    this.$('input').focus();
   },
 
   renderSVG: function() {

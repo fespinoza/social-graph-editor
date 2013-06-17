@@ -1,10 +1,8 @@
 App.NodeController = Ember.ObjectController.extend({
+  selectedFamilies: [],
+  lastContent: null,
+
   save: function () {
-    // add family from the form ID
-    if (this.get('content.family_id')) {
-      family = App.Family.find(this.get('content.family_id'));
-      family.get('nodes').pushObject(this.get('content'));
-    }
     this.get('store').commit();
     $("#graph_canvas").trigger('nodeUpdate');
 
@@ -13,4 +11,13 @@ App.NodeController = Ember.ObjectController.extend({
       this.set("social_network.currentMode", "Role");
     }
   },
+
+  setSelectedFamilies: function(){
+    content = this.get('content');
+    if (content != this.get('lastContent')) {
+      this.set('selectedFamilies', this.get('content.families'));
+      this.set('lastContent', content);
+    }
+  }.observes('content'),
+
 });
