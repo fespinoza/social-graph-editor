@@ -11,4 +11,39 @@ class SocialNetwork < ActiveRecord::Base
   has_many :nodes, dependent: :destroy
   has_many :families, dependent: :destroy
   has_many :roles, dependent: :destroy
+
+  include RDF::Enumerable
+  def each
+    sn = {
+      family: RDF::URI("http://dcc.uchile.cl/vocab#family"),
+      actor: RDF::URI("http://dcc.uchile.cl/vocab#actor"),
+      relation: RDF::URI("http://dcc.uchile.cl/vocab#relation"),
+    }
+
+    yield RDF::Statement.new(self.uri, RDF::FOAF.name, self.name)
+
+    self.nodes.each do |node|
+      yield RDF::Statement.new(node.uri, RDF::FOAF.name, node.name)
+      yield RDF::Statement.new(node.uri, RDF.type, sn[node.kind.downcase.to_sym])
+
+      node.families.each do |family|
+        yield RDF::Statement.new(node.uri, sn[:family], family.uri)
+      end
+    end
+
+    self.roles.each do |role|
+      yield RDF::Statement.new(role.actor.uri, role.uri, role.relation.uri)
+      yield RDF::Statement.new(role.uri, RDF::FOAF.name, role.name)
+    end
+
+    self.families.each do |family|
+      yield RDF::Statement.new(family.uri, RDF::FOAF.name, family.name)
+      yield RDF::Statement.new(family.uri, RDF.type, sn[family.kind.downcase.to_sym])
+    end
+
+  end
+
+  def uri
+    @uri ||= RDF::URI("http://dcc.uchile.cl/#{id}")
+  end
 end

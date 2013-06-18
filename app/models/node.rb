@@ -31,4 +31,8 @@ class Node < ActiveRecord::Base
   def is_relation?
     kind == "Relation"
   end
+
+  def uri
+    @uri ||= RDF::URI("http://dcc.uchile.cl/#{social_network.id}/nodes/#{self.id}")
+  end
 end

@@ -3,4 +3,8 @@ class Role < ActiveRecord::Base
   belongs_to :relation, class_name: "Node", foreign_key: "relation_id", conditions: "kind = 'Relation'"
   belongs_to :social_network
   attr_accessible :name, :actor_id, :relation_id, :social_network_id
+
+  def uri
+    @uri ||= RDF::URI("http://dcc.uchile.cl/#{social_network.id}/roles/#{self.id}")
+  end
 end
