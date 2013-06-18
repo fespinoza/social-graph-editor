@@ -40,10 +40,13 @@ class SocialNetwork < ActiveRecord::Base
       yield RDF::Statement.new(family.uri, RDF::FOAF.name, family.name)
       yield RDF::Statement.new(family.uri, RDF.type, sn[family.kind.downcase.to_sym])
     end
-
   end
 
   def uri
     @uri ||= RDF::URI("http://dcc.uchile.cl/#{id}")
+  end
+
+  def to_rdf
+    self.dump(:ntriples)
   end
 end

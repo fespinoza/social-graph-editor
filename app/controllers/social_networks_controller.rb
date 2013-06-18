@@ -1,5 +1,5 @@
 class SocialNetworksController < ApplicationController
-  respond_to :json
+  respond_to :json, :rdf
 
   def index
     authenticate
@@ -7,7 +7,11 @@ class SocialNetworksController < ApplicationController
   end
 
   def show
-    respond_with social_networks.find(params[:id])
+    social_network = SocialNetwork.find(params[:id])
+    respond_to do |format|
+      format.json { render json: social_network }
+      format.rdf { render text: social_network.to_rdf }
+    end
   end
 
   def create
