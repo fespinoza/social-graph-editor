@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130610210334) do
+ActiveRecord::Schema.define(:version => 20130620211651) do
+
+  create_table "attributes", :force => true do |t|
+    t.integer  "node_id"
+    t.string   "key"
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "attributes", ["node_id"], :name => "index_attributes_on_node_id"
 
   create_table "families", :force => true do |t|
     t.string   "name"
@@ -26,6 +36,16 @@ ActiveRecord::Schema.define(:version => 20130610210334) do
     t.integer "node_id"
     t.integer "family_id"
   end
+
+  create_table "node_attributes", :force => true do |t|
+    t.integer  "node_id"
+    t.string   "key"
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "node_attributes", ["node_id"], :name => "index_node_attributes_on_node_id"
 
   create_table "nodes", :force => true do |t|
     t.string   "name"
