@@ -18,13 +18,14 @@ class SocialNetwork < ActiveRecord::Base
       family: RDF::URI("http://dcc.uchile.cl/vocab#family"),
       actor: RDF::URI("http://dcc.uchile.cl/vocab#actor"),
       relation: RDF::URI("http://dcc.uchile.cl/vocab#relation"),
+      kind: RDF::URI("http://dcc.uchile.cl/vocab#kind"),
     }
 
     yield RDF::Statement.new(self.uri, RDF::FOAF.name, self.name)
 
     self.nodes.each do |node|
       yield RDF::Statement.new(node.uri, RDF::FOAF.name, node.name)
-      yield RDF::Statement.new(node.uri, RDF.type, sn[node.kind.downcase.to_sym])
+      yield RDF::Statement.new(node.uri, sn[:kind], sn[node.kind.downcase.to_sym])
 
       node.families.each do |family|
         yield RDF::Statement.new(node.uri, sn[:family], family.uri)
@@ -38,7 +39,7 @@ class SocialNetwork < ActiveRecord::Base
 
     self.families.each do |family|
       yield RDF::Statement.new(family.uri, RDF::FOAF.name, family.name)
-      yield RDF::Statement.new(family.uri, RDF.type, sn[family.kind.downcase.to_sym])
+      yield RDF::Statement.new(family.uri, sn[:kind], sn[family.kind.downcase.to_sym])
     end
   end
 
