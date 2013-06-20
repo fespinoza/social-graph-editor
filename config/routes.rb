@@ -3,5 +3,6 @@ EmberSge::Application.routes.draw do
   resources :nodes
   resources :families
   resources :roles
+  resources :node_attributes
   root to: "application#index"
 end

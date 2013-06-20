@@ -1,4 +1,5 @@
 DS.RESTAdapter.configure("plurals", { family: "families" });
+DS.RESTAdapter.configure("plurals", { node_attribute: "node_attributes" });
 App.Store = DS.Store.extend({
   adapter: DS.RESTAdapter.extend({
     serializer: DS.RESTSerializer.extend({
