@@ -2,7 +2,8 @@ class NodeAttributesController < ApplicationController
   respond_to :json
 
   def index
-    respond_with NodeAttribute.find(params[:ids])
+    nodes = NodeAttribute.find(params[:ids]) rescue NodeAttribute.all
+    respond_with nodes
   end
 
   def show
