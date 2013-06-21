@@ -10,6 +10,7 @@ App.Node = DS.Model.extend({
   families: DS.hasMany('App.Family'),
   actor_roles: DS.hasMany('App.Role', { inverse: 'actor' }),
   relation_roles: DS.hasMany('App.Role', { inverse: 'relation' }),
+  node_attributes: DS.hasMany('App.NodeAttribute'),
 
   // computed attributes
   radius: function(){
