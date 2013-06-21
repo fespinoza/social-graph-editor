@@ -37,8 +37,14 @@ App.NodesController = Ember.ArrayController.extend({
     if (confirm(message)) {
       console.log("deleting an node");
       this.set('currentNode', null);
+      node.get('families').toArray().forEach(function(family){
+        family.get('nodes').removeObject(node);
+      });
       node.get('roles').toArray().forEach(function(role){
         role.deleteRecord();
+      });
+      node.get('node_attributes').toArray().forEach(function(attribute){
+        attribute.deleteRecord();
       });
       node.deleteRecord();
       this.get('store').commit();
