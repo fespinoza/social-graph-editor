@@ -1,6 +1,6 @@
 <h3>Details for {{kind}} #{{id}}</h3>
 
-<form>
+<form id="node_form" {{bindAttr data-node-id="id"}}>
   <label>
     Name
     {{view Ember.TextField valueBinding="name" action="save" placeholder="New Node"}}
@@ -25,6 +25,11 @@
       {{/if}}
     </label>
 
+    {{#if isNew}}
+      <p><em>after saved you can add attributes to this node</em></p>
+    {{else}}
+      {{render "node_attributes" node_attributes}}
+    {{/if}}
 <form>
 
 <div class="operations">

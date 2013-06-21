@@ -1,0 +1,17 @@
+<a {{action "add"}} role="button" class="btn btn-small pull-right">
+  <i class="icon-plus-sign"></i> Add
+</a>
+
+<h4>Attributes</h4>
+
+{{#each node_attribute in controller}}
+  <div class="field">
+    {{view Ember.TextField valueBinding="node_attribute.key" action="save" placeholder="Key" class="input-small"}}
+    {{view Ember.TextField valueBinding="node_attribute.value" action="save" placeholder="Value" class="input-small"}}
+    <a href="#" {{action "delete" node_attribute}} title="delete" class="delete">
+      <i class="icon-trash"></i>
+    </a>
+  </div>
+{{else}}
+  <p>No attributes</p>
+{{/each}}
