@@ -25,7 +25,11 @@
       {{/if}}
     </label>
 
-    {{render "node_attributes" node_attributes}}
+    {{#if isNew}}
+      <p><em>after saved you can add attributes to this node</em></p>
+    {{else}}
+      {{render "node_attributes" node_attributes}}
+    {{/if}}
 <form>
 
 <div class="operations">
