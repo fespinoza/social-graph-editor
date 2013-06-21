@@ -199,6 +199,7 @@ App.NodesView = Ember.View.extend({
     .on('drag', function (d) {
       data = view.getData(d);
       if (view.get('socialNetwork.currentMode') == "Hand") {
+        // TODO: check a bug here
         // move the coordinates of the node
         data.set('x', data.get('x') + d3.event.dx);  
         data.set('y', data.get('y') + d3.event.dy);  
@@ -248,7 +249,7 @@ App.NodesView = Ember.View.extend({
       // remove current new node
       view.get('controller').send('clearCurrentNewNode');
       d3.select(this).classed("selectedNode", true)
-      //view.$graphCanvas.trigger('nodeSelected');
+      view.$graphCanvas.trigger('nodeSelected', [data.get('id')]);
     };
   },
 
