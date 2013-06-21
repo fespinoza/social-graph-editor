@@ -5,4 +5,9 @@ App.NodeAttributesController = Ember.ArrayController.extend({
     node.get('node_attributes').pushObject(attribute);
     this.get('store').commit();
   },
+
+  delete: function(attribute) {
+    attribute.deleteRecord();
+    this.get('store').commit();
+  },
 });
