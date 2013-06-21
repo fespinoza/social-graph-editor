@@ -4,9 +4,9 @@ class Node < ActiveRecord::Base
   has_many :actor_roles, class_name: "Role", foreign_key: "actor_id"
   has_many :relation_roles, class_name: "Role", foreign_key: "relation_id"
   has_and_belongs_to_many :families
-  has_many :node_attributes, dependent: :destroy
+  has_many :node_attributes
 
-  attr_accessible :name, :x, :y, :social_network_id, :kind, :family_ids, :actor_role_ids, :relation_role_ids
+  attr_accessible :name, :x, :y, :social_network_id, :kind, :family_ids, :actor_role_ids, :relation_role_ids, :node_attribute_ids
 
   def roles
     if is_actor?
