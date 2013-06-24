@@ -19,6 +19,7 @@ group :development do
   gem 'better_errors'       # awesome errors page
   gem 'binding_of_caller'   # for better errors live console work
   gem 'meta_request'        # to enable the chrome rails panel
+  gem 'quiet_assets'
 end
 
 group :development, :test do
