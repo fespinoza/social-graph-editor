@@ -1,4 +1,7 @@
 App.Router.map(function() {
+  this.resource("users", function () {
+    this.route("new");
+  }),
   this.resource("social_networks", function () {
     this.route("new");
     this.route("edit", { path: '/:social_network_id/edit' });
@@ -37,5 +40,21 @@ App.SocialNetworksEditRoute = Ember.Route.extend({
 App.SocialNetworkRoute = Ember.Route.extend({
   model: function(params) {
     return App.SocialNetwork.find(params.social_network_id);
+  }
+});
+
+App.UsersNewRoute = Ember.Route.extend({
+  model: function() {
+    // Because we are maintaining a transaction locally in the controller for editing,
+    // the new record needs to be created in the controller.
+    return null;
+  },
+
+  setupController: function(controller) {
+    controller.startEditing();
+  },
+
+  deactivate: function() {
+    this.controllerFor('users.new').stopEditing();
   }
 });
