@@ -4,10 +4,4 @@
   <div class="alert alert-error">{{errorMessage}}</div>
 {{/if}}
 
-<form class="form-inline" {{action "login" on="submit"}}>
-  {{input valueBinding="email" type="email" placeholder="Email" id="userEmail"}}
-  {{input valueBinding="password" type="password" placeholder="Password" id="userPassword"}}
-  {{input class="btn" type="submit" value="Login"}}
-</form>
-
-<a href="#" {{action "cancel"}}>Cancel</a>
+{{partial "users/login_form"}}
