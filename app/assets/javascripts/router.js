@@ -1,6 +1,7 @@
 App.Router.map(function() {
   this.resource("users", function () {
     this.route("new");
+    this.route("login");
   }),
   this.resource("social_networks", function () {
     this.route("new");
