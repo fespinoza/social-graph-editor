@@ -6,10 +6,14 @@ class User < ActiveRecord::Base
   before_create :encript_password
   before_create :generate_access_token
 
+  def self.encript(password)
+    Digest::SHA2.hexdigest("EMBERAPPSGE123" + password)
+  end
+
   private
 
   def encript_password
-    self.password = Digest::SHA2.hexdigest("EMBERAPPSGE123" + self.password)
+    self.password = User.encript(self.password)
   end
 
   def generate_access_token
