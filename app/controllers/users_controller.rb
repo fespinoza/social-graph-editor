@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_filter :authenticate
   respond_to :json
 
   def login
