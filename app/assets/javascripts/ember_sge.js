@@ -15,3 +15,42 @@ window.printNamesFor = function(object, relationName) {
     console.log(relation.get('name'));
   });
 }
+
+App.AuthManager = Ember.Object.extend({
+  init: function() {
+    this._super();
+    var token     = localStorage.token;
+    var accountId = localStorage.accountId;
+    if (App.Store && !Ember.isEmpty(token) && !Ember.isEmpty(accountId)) {
+      this.authenticate(token, accountId);
+    }
+  },
+ 
+  isAuthenticated: function() {
+    return !Ember.isEmpty(this.get('session.token')) 
+            && !Ember.isEmpty(this.get('session.user'));
+  },
+ 
+  authenticate: function(token, accountId) {
+    console.log("authenticate!");
+    var user = App.User.find(accountId);
+    this.set('session', Ember.Object.create({
+      token: token,
+      user:  user
+    }));
+  },
+ 
+  reset: function() {
+    this.set('session', null);
+  },
+ 
+  sessionObserver: function() {
+    if (Ember.isEmpty(this.get('session'))) {
+      delete localStorage.token;
+      delete localStorage.accountId;
+    } else {
+      localStorage.token = this.get('session.token');
+      localStorage.accountId = this.get('session.user.id');
+    }
+  }.observes('session'),
+});
