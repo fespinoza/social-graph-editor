@@ -8,11 +8,6 @@ App.UsersLoginController = Ember.Controller.extend({
       errorMessage: null,
     });
   },
-
-  token: localStorage.token,
-  tokenChanged: function() {
-    localStorage.token = this.get('token');
-  }.observes('token'),
   
   login: function() {
     var self = this;
@@ -20,7 +15,7 @@ App.UsersLoginController = Ember.Controller.extend({
     data = { user: this.getProperties('email', 'password') };
     $.post('/users/login.json', data).then(function(response) {
       console.log(response);
-      self.set('token', response.user.token);
+      App.Auth.authenticate(response.user.token, response.user.id);
       self.transitionToRoute('social_networks.index');
     });
   },

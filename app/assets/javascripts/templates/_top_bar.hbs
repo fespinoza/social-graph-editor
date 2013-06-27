@@ -2,6 +2,9 @@
   <div class="span12">
     <div id="top-bar" class="well well-small">
       {{#linkTo "social_networks"}}Social Networks{{/linkTo}}
+
+      <div class="separator"></div>
+      Hello {{App.Auth.session.user.email}}
       <a href="#" {{action "logout"}}>Log Out</a>
 
       <!--TODO: show this buttons only when the social network show page is rendered-->
