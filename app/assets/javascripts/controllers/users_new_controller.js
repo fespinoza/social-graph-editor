@@ -34,11 +34,11 @@ App.UsersNewController = Ember.ObjectController.extend({
     // an id before we can transition to its route (which depends on its id)
     if (this.get('content.id')) {
       // TODO: sucess message
-      // TODO: login 
       console.log(this.get('token'));
+      App.Auth.authenticate(this.get('token'), this.get('id'));
       this.transitionToRoute('social_networks.index');
     }
-  }.observes('content.id'),
+  }.observes('content.token'),
 
   cancel: function() {
     this.stopEditing();

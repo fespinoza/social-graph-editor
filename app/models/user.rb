@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :password, :token
+  attr_accessible :email, :password, :token, :social_network_ids
 
   validates :email, uniqueness: true
 
@@ -14,6 +14,16 @@ class User < ActiveRecord::Base
 
   def self.encript(password)
     Digest::SHA2.hexdigest("EMBERAPPSGE123" + password)
+  end
+
+  def to_json
+    {
+      user: {
+        token: self.token,
+        email: self.email,
+        id: self.id,
+      }
+    }.to_json
   end
 
   private

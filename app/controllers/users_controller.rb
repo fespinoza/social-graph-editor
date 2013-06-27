@@ -12,6 +12,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    respond_with User.create(params[:user]) 
+    user = User.create(params[:user])
+    respond_with user do |format|
+      format.json { render json: user.to_json }
+    end
   end
 end

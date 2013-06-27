@@ -5,5 +5,5 @@ App.User = DS.Model.extend({
   token: DS.attr('string'),
 
   // relations
-  user: DS.hasMany('App.SocialNetwork'),
+  social_networks: DS.hasMany('App.SocialNetwork'),
 });
