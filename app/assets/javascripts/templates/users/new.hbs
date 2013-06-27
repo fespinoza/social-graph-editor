@@ -1,0 +1,37 @@
+<h2>New User</h2>
+
+{{#if errorMessage}}
+  <div class="alert alert-error">{{errorMessage}}</div>
+{{/if}}
+
+<form class="form-horizontal" {{action "register" on="submit"}}>
+
+  <div class="control-group">
+    <label class="control-label" for="userEmail">Email</label>
+    <div class="controls">
+      {{input valueBinding="email" type="email" placeholder="Email" id="userEmail"}}
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="userPassword">Password</label>
+    <div class="controls">
+      {{input valueBinding="password" type="password" placeholder="Password" id="userPassword"}}
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="userPasswordConfirmation">Password Confirmation</label>
+    <div class="controls">
+      {{input valueBinding="password_confirmation" type="password" placeholder="Confirm Password" id="userPasswordConfirmation"}}
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      {{input class="btn" type="submit" value="Register"}}
+    </div>
+  </div>
+</form>
+
+<a href="#" {{action "cancel"}}>Cancel</a>

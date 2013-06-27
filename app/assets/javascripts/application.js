@@ -23,4 +23,7 @@
 //= require chosen-jquery
 App = Ember.Application.create({
   LOG_TRANSITIONS: true,
+  ready: function () {
+    App.Auth = App.AuthManager.create();
+  }
 });

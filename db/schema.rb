@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130620211651) do
+ActiveRecord::Schema.define(:version => 20130626195421) do
 
   create_table "families", :force => true do |t|
     t.string   "name"
@@ -69,6 +69,17 @@ ActiveRecord::Schema.define(:version => 20130620211651) do
     t.float    "scale",         :default => 1.0
     t.float    "translation_x", :default => 0.0
     t.float    "translation_y", :default => 0.0
+    t.integer  "user_id"
+  end
+
+  add_index "social_networks", ["user_id"], :name => "index_social_networks_on_user_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "password"
+    t.string   "token"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
 end
