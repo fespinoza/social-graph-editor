@@ -33,6 +33,6 @@ class Node < ActiveRecord::Base
   end
 
   def uri
-    @uri ||= RDF::URI("http://dcc.uchile.cl/#{social_network.id}/nodes/#{self.id}")
+    @uri ||= RDF::URI("#{social_network.uri}/node/#{self.id}")
   end
 end

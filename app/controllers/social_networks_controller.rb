@@ -7,7 +7,7 @@ class SocialNetworksController < ApplicationController
   end
 
   def show
-    social_network = SocialNetwork.find(params[:id])
+    social_network = social_networks.find(params[:id])
     respond_with social_network do |format|
       format.rdf { render text: social_network.to_rdf }
     end

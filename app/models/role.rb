@@ -5,6 +5,6 @@ class Role < ActiveRecord::Base
   attr_accessible :name, :actor_id, :relation_id, :social_network_id
 
   def uri
-    @uri ||= RDF::URI("http://dcc.uchile.cl/#{social_network.id}/roles/#{self.id}")
+    @uri ||= RDF::URI("#{social_network.uri}/roles/#{self.id}")
   end
 end

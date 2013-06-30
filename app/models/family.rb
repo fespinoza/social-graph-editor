@@ -4,6 +4,6 @@ class Family < ActiveRecord::Base
   attr_accessible :color, :kind, :name, :social_network_id, :node_ids
 
   def uri
-    @uri ||= RDF::URI("http://dcc.uchile.cl/#{social_network.id}/families/#{self.id}")
+    @uri ||= RDF::URI("#{social_network.uri}/families/#{self.id}")
   end
 end
