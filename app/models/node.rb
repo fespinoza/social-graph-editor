@@ -31,4 +31,8 @@ class Node < ActiveRecord::Base
   def is_relation?
     kind == "Relation"
   end
+
+  def uri(base = social_network.prefix)
+    @uri ||= social_network.uri(base) + "/nodes/#{id}"
+  end
 end

@@ -1,5 +1,5 @@
 class SocialNetworksController < ApplicationController
-  respond_to :json
+  respond_to :json, :rdf
 
   def index
     authenticate
@@ -7,7 +7,10 @@ class SocialNetworksController < ApplicationController
   end
 
   def show
-    respond_with social_networks.find(params[:id])
+    social_network = social_networks.find(params[:id])
+    respond_with social_network do |format|
+      format.rdf { render text: SocialNetworkRDFSerializer.new(social_network).to_rdf }
+    end
   end
 
   def create
@@ -20,6 +23,11 @@ class SocialNetworksController < ApplicationController
 
   def destroy
     respond_with social_networks.destroy(params[:id])
+  end
+
+  def vocabulary
+    @social_network = social_networks.find(params[:id])
+    respond_with @social_network
   end
 
   private

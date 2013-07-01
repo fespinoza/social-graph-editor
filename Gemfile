@@ -7,6 +7,10 @@ gem 'handlebars-source', '1.0.0.rc4' # or the version you need
 gem 'jquery-rails'
 gem 'chosen-rails'
 
+# RDF stuff
+gem 'rdf'
+gem 'rdf-n3'
+
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
