@@ -25,6 +25,11 @@ class SocialNetworksController < ApplicationController
     respond_with social_networks.destroy(params[:id])
   end
 
+  def vocabulary
+    @social_network = social_networks.find(params[:id])
+    respond_with @social_network
+  end
+
   private
 
   def social_networks

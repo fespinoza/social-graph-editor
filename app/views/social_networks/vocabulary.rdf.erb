@@ -1,0 +1,20 @@
+@prefix   sn: <<%= @social_network.vocabulary %>>.
+@prefix  rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+# Clases
+sn:family rdf:type rdfs:Class .
+sn:node rdf:type rdfs:Class .
+sn:role rdf:type rdfs:Class .
+
+# Properties
+sn:belongsToFamily rdf:type rdf:Property;
+  rdfs:domain sn:node;
+  rdfs:range sn:family .
+
+# Literals
+sn:kind rdf:type rdfs:Literal .
+
+<% @social_network.node_attributes.each do |attribute| %>
+<%= "sn:attribute#{attribute.key.titleize} rdf:type rdfs:Literal ." %>
+<% end %>

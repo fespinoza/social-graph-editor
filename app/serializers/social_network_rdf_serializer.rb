@@ -16,7 +16,7 @@ class SocialNetworkRDFSerializer
         node_uri = node.uri(base)
         writer << RDF::Statement.new(node_uri, prefix(:rdf, :type), sn(:node))
         writer << RDF::Statement.new(node_uri, prefix(:foaf, :name), node.name)
-        writer << RDF::Statement.new(node_uri, sn(:kind), sn(node.kind.downcase))
+        writer << RDF::Statement.new(node_uri, sn(:kind), node.kind)
 
         node.families.each do |family|
           writer << RDF::Statement.new(node_uri, sn(:belongsToFamily), family.uri(base))
@@ -39,7 +39,7 @@ class SocialNetworkRDFSerializer
         family_uri = family.uri(base)
         writer << RDF::Statement.new(family_uri, prefix(:rdf, :type), sn(:family))
         writer << RDF::Statement.new(family_uri, prefix(:foaf, :name), family.name)
-        writer << RDF::Statement.new(family_uri, sn(:kind), sn(family.kind.downcase))
+        writer << RDF::Statement.new(family_uri, sn(:kind), family.kind)
       end
     end
   end
