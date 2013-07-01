@@ -202,6 +202,7 @@ DEPENDENCIES
   pry-rails
   quiet_assets
   rails (= 3.2.13)
+  rdf
   rdf-n3
   rspec-rails
   sass-rails (~> 3.2.3)

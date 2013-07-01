@@ -3,7 +3,7 @@ class Family < ActiveRecord::Base
   has_and_belongs_to_many :nodes
   attr_accessible :color, :kind, :name, :social_network_id, :node_ids
 
-  def uri
-    @uri ||= RDF::URI("#{social_network.uri}/families/#{self.id}")
+  def uri(base = social_network.prefix)
+    @uri ||= social_network.uri(base) + "/families/#{id}"
   end
 end

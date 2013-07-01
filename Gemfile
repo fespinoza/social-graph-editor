@@ -8,6 +8,7 @@ gem 'jquery-rails'
 gem 'chosen-rails'
 
 # RDF stuff
+gem 'rdf'
 gem 'rdf-n3'
 
 group :assets do

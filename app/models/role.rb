@@ -4,7 +4,7 @@ class Role < ActiveRecord::Base
   belongs_to :social_network
   attr_accessible :name, :actor_id, :relation_id, :social_network_id
 
-  def uri
-    @uri ||= RDF::URI("#{social_network.uri}/roles/#{self.id}")
+  def uri(base = social_network.prefix)
+    @uri ||= social_network.uri(base) + "/roles/#{id}"
   end
 end

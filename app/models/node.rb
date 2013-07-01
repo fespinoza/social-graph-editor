@@ -32,7 +32,7 @@ class Node < ActiveRecord::Base
     kind == "Relation"
   end
 
-  def uri
-    @uri ||= RDF::URI("#{social_network.uri}/node/#{self.id}")
+  def uri(base = social_network.prefix)
+    @uri ||= social_network.uri(base) + "/nodes/#{id}"
   end
 end
