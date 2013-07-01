@@ -15,6 +15,11 @@ sn:belongsToFamily rdf:type rdf:Property;
 # Literals
 sn:kind rdf:type rdfs:Literal .
 
+sn:positionX rdf:type rdfs:Literal .
+sn:positionY rdf:type rdfs:Literal .
+
+sn:color rdf:type rdfs:Literal .
+
 <% @social_network.node_attributes.each do |attribute| %>
 <%= "sn:attribute#{attribute.key.titleize} rdf:type rdfs:Literal ." %>
 <% end %>

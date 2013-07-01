@@ -3,8 +3,9 @@ require "rdf/n3"
 
 class SocialNetworkRDFSerializer
   
-  def initialize(social_network)
+  def initialize(social_network, include_visual_data = false)
     @social_network = social_network
+    @include_visual_data = include_visual_data
   end
 
   def to_rdf
@@ -17,6 +18,11 @@ class SocialNetworkRDFSerializer
         writer << RDF::Statement.new(node_uri, prefix(:rdf, :type), sn(:node))
         writer << RDF::Statement.new(node_uri, prefix(:foaf, :name), node.name)
         writer << RDF::Statement.new(node_uri, sn(:kind), node.kind)
+
+        if visual_data?
+          writer << RDF::Statement.new(node_uri, sn(:positionX), node.x)
+          writer << RDF::Statement.new(node_uri, sn(:positionY), node.y)
+        end
 
         node.families.each do |family|
           writer << RDF::Statement.new(node_uri, sn(:belongsToFamily), family.uri(base))
@@ -40,8 +46,16 @@ class SocialNetworkRDFSerializer
         writer << RDF::Statement.new(family_uri, prefix(:rdf, :type), sn(:family))
         writer << RDF::Statement.new(family_uri, prefix(:foaf, :name), family.name)
         writer << RDF::Statement.new(family_uri, sn(:kind), family.kind)
+
+        if visual_data?
+          writer << RDF::Statement.new(family_uri, sn(:color), family.color)
+        end
       end
     end
+  end
+
+  def visual_data?
+    @include_visual_data
   end
 
   def sn(content)

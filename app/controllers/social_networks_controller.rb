@@ -9,7 +9,10 @@ class SocialNetworksController < ApplicationController
   def show
     social_network = social_networks.find(params[:id])
     respond_with social_network do |format|
-      format.rdf { render text: SocialNetworkRDFSerializer.new(social_network).to_rdf }
+      format.rdf do
+        serializer = SocialNetworkRDFSerializer.new(social_network, params[:visual_data])
+        render text: serializer.to_rdf
+      end
     end
   end
 
