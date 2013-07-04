@@ -12,9 +12,12 @@ class SocialNetworkRDFSerializer
     base = options[:base_uri]
     RDF::Writer.for(:n3).buffer(options) do |writer|
 
-      # TODO: add SN description here
       writer << RDF::Statement.new(@social_network.uri(base), prefix(:rdf, :type), sn(:socialNetwork))
       writer << RDF::Statement.new(@social_network.uri(base), sn(:name), @social_network.name)
+      # TODO: remove this line when update the DB 
+      if @social_network.description
+        writer << RDF::Statement.new(@social_network.uri(base), prefix(:dc, :description), @social_network.description)
+      end
 
       @social_network.nodes.each do |node|
         node_uri = node.uri(base)
@@ -32,7 +35,7 @@ class SocialNetworkRDFSerializer
         end
 
         node.node_attributes.each do |attribute|
-          key = prefix(:sn, "attribute#{attribute.key.titleize}")
+          key = prefix(:sn, "attribute#{attribute.key.titleize.gsub(/\s+/, '')}")
           writer << RDF::Statement.new(node_uri, key, attribute.value)
         end
       end
@@ -77,6 +80,7 @@ class SocialNetworkRDFSerializer
         rdf: RDF.to_uri,
         rdfs: RDF::RDFS.to_uri,
         sn: RDF::URI("#{@social_network.vocabulary}#"),
+        dc: RDF::DC.to_uri,
       }
     }
   end
