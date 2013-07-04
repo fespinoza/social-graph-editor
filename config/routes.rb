@@ -4,6 +4,7 @@ EmberSge::Application.routes.draw do
   end
   resources :social_networks do
     get :vocabulary, on: :member
+    post :import, on: :collection
   end
   resources :nodes
   resources :families
