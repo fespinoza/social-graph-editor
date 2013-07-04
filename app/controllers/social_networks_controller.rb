@@ -33,6 +33,12 @@ class SocialNetworksController < ApplicationController
     respond_with @social_network
   end
 
+  def import
+    deserializer = SocialNetworkRDFDeserializer.new(current_user, params[:content])
+    social_network = deserializer.deserialize!
+    respond_with social_network
+  end
+
   private
 
   def social_networks
