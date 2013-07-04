@@ -1,11 +1,26 @@
-<h1>New Social Network</h1>
+<h2>New Social Network</h2>
 
-<div class="field">
-  <strong>Name</strong>
-  {{view Ember.TextField valueBinding="name" action="save"}}
-</div>
+<form class="form-horizontal" {{action "save" on="submit"}}>
 
-<div class="operations well">
-  <button class="btn" {{action "cancel"}}>Cancel</button>
-  <button class="btn btn-primary" {{action "save"}}>Create</button>
-</div>
+  <div class="control-group">
+    <label class="control-label" for="name">Name</label>
+    <div class="controls">
+      {{input valueBinding="name" id="name"}}
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="description">Description</label>
+    <div class="controls">
+      {{textarea valueBinding="description" id="description"}}
+    </div>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+  </div>
+</form>
+
+<a href="#" {{action "cancel"}}>Cancel</a>

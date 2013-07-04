@@ -1,0 +1,24 @@
+<h2>Import Social Network From File</h2>
+
+{{#if errorMessage}}
+  <p class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{errorMessage}}
+  </p>
+{{/if}}
+
+<form class="form-horizontal" {{action "save" on="submit"}}>
+  <div class="control-group">
+    <label class="control-label" for="file">RDF/N3 File</label>
+    <div class="controls">
+      {{input valueBinding="file" id="file" type="file"}}
+    </div>
+    <span class="help-block">Upload a valid RDF/N3 social network file previously exported with this application.</span>
+  </div>
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">Import</button>
+    </div>
+  </div>
+</form>
