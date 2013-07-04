@@ -6,7 +6,8 @@ class SocialNetwork < ActiveRecord::Base
                   :node_ids,
                   :family_ids,
                   :role_ids,
-                  :user_id
+                  :user_id,
+                  :description
   belongs_to :user
   has_many :nodes, dependent: :destroy
   has_many :node_attributes, through: :nodes

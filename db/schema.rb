@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130626195421) do
+ActiveRecord::Schema.define(:version => 20130703194313) do
 
   create_table "families", :force => true do |t|
     t.string   "name"
@@ -70,9 +70,27 @@ ActiveRecord::Schema.define(:version => 20130626195421) do
     t.float    "translation_x", :default => 0.0
     t.float    "translation_y", :default => 0.0
     t.integer  "user_id"
+    t.string   "description"
   end
 
   add_index "social_networks", ["user_id"], :name => "index_social_networks_on_user_id"
+
+  create_table "sqlite_sp_functions", :id => false, :force => true do |t|
+    t.text "name"
+    t.text "text"
+  end
+
+  create_table "sqlite_vs_links_names", :id => false, :force => true do |t|
+    t.text "name"
+    t.text "alias"
+  end
+
+  create_table "sqlite_vs_properties", :id => false, :force => true do |t|
+    t.text "parentType"
+    t.text "parentName"
+    t.text "propertyName"
+    t.text "propertyValue"
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email"
