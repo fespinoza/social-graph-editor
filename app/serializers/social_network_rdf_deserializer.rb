@@ -1,27 +1,31 @@
 class SocialNetworkRDFDeserializer
   def initialize(user, data)
-    # TODO: solve how data is firstly gotten
     @data = data
-    @graph = RDF::Graph.load("exportacion_visual.n3", format: :n3)
     @user = user
+    initialize_graph
+  end
+
+  def initialize_graph
+    @graph = RDF::Graph.new
+    RDF::N3::Reader.new(@data).each do |statement|
+      @graph << statement
+    end
   end
 
   def deserialize!
-    begin
-      # TODO: solve how to get the vocabulary
-      @sn = RDF::Vocabulary.new("http://sn.dcc.uchile.cl/social_networks/8/vocabulary#")
-      deserialize_social_network
-      deserialize_families
-      deserialize_nodes
-      deserialize_node_families
-      deserialize_roles
-      deserialize_attributes
-      true
-    rescue Exception => e
-      puts "ERROOOOOR>>"
-      puts e.message
-      puts e.backtrace
-    end
+    extract_vocabulary
+    deserialize_social_network
+    deserialize_families
+    deserialize_nodes
+    deserialize_node_families
+    deserialize_roles
+    deserialize_attributes
+    @social_network
+  end
+
+  def extract_vocabulary
+    md = @data.match(/@prefix\s+sn:\s+\<(?<vocabulary>.*)\>/)
+    @sn = RDF::Vocabulary.new(md[:vocabulary])
   end
 
   def deserialize_social_network
