@@ -1,11 +1,6 @@
 <h2>Import Social Network From File</h2>
 
-{{#if errorMessage}}
-  <p class="alert alert-error">
-    <button type="button" class="close" data-dismiss="alert">&times;</button>
-    {{errorMessage}}
-  </p>
-{{/if}}
+{{partial "error_message"}}
 
 <form class="form-horizontal" {{action "save" on="submit"}}>
   <div class="control-group">
