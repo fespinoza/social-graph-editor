@@ -1,6 +1,7 @@
 svg#graph_canvas {
   width: 100%;
-  height: 540px;
+  min-height: 78%;
+  height: 78%;           /*min-height hack*/
   border: 1px solid black;
 
   background-color: #FFF;

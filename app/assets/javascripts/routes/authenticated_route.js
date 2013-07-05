@@ -10,7 +10,7 @@ App.AuthenticatedRoute = Ember.Route.extend({
   },
 
   redirectToLogin: function(transition) {
-    this.transitionToRoute('user');
+    this.transitionTo('user');
   },
 
   events: {
