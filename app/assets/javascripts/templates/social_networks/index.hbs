@@ -1,10 +1,21 @@
 <div class="pull-right">
-  {{#linkTo "social_networks.new" class="btn btn-large"}}
-    <i class="icon-plus-sign"></i>
-    Add Social Network
-  {{/linkTo}}
-  {{#linkTo "social_networks.import" class="btn btn-large"}}
-    <i class="icon-plus-sign"></i>
-    Import From File
-  {{/linkTo}}
+
+  <div class="btn-group">
+    <a class="btn btn-large dropdown-toggle" data-toggle="dropdown" href="#">
+      <span>
+        <i class="icon-plus-sign"></i>
+        Create Social Network
+      </span>
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li>
+        {{#linkTo "social_networks.new"}}New Social Network{{/linkTo}}
+      </li>
+      <li>
+        {{#linkTo "social_networks.import"}}Import From File{{/linkTo}}
+      </li>
+    </ul>
+  </div>
+
 </div>
