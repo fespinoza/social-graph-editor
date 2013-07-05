@@ -3,14 +3,14 @@ App.SocialNetworkController = Ember.ObjectController.extend({
     this.set('content.currentMode', newMode);
   },
 
-  export: function(visual_data, filename) {
+  export: function(visual_data, filename, url) {
     var self = this;
     if (!filename) { filename = this.get('name') + ".n3"; }
+    if (!url) { url = "/social_networks/" + this.get('id') + ".rdf"; }
     data = { 
       token: App.Auth.get('session.token'),
       visual_data: visual_data,
     };
-    url = "/social_networks/" + this.get('id') + ".rdf";
     $.get(url, data).then(function(response) {
       console.log(response);
       var a = document.createElement('a');
@@ -25,5 +25,11 @@ App.SocialNetworkController = Ember.ObjectController.extend({
 
   exportVisual: function() {
     this.export(1, this.get('name') + "_visual.n3");
+  },
+
+  exportVocabulary: function() {
+    url = "/social_networks/" + this.get('id') + "/vocabulary.rdf";
+    filename = this.get('name') + "_vocabulary.n3";
+    this.export(null, filename, url);
   },
 });

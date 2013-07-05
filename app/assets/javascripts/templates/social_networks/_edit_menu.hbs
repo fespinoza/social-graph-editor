@@ -1,12 +1,29 @@
 <div class="fluid-row">
   <div class="span12">
     <div id="top-bar" class="well well-small">
-      <a href="#" {{action "export"}} class="btn" title="Export Social Network as RDF File">
-        <i class="icon icon-download"></i>
-      </a>
-      <a href="#" {{action "exportVisual"}} class="btn" title="Export Social Network as RDF File with Visual Data">
-        <i class="icon icon-download-alt"></i>
-      </a>
+
+      <div class="btn-group">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          <span>
+            <i class="icon icon-download-alt"></i>
+            Export in RDF/N3
+          </span>
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a href="#" {{action "export"}}>Structure</a>
+          </li>
+          <li>
+            <a href="#" {{action "exportVisual"}}>Structure + Visual Data</a>
+          </li>
+          <li class="divider"></li>
+          <li>
+            <a href="#" {{action "exportVocabulary"}}>Vocabulary</a>
+          </li>
+        </ul>
+      </div>
+      
 
       <div class="edition-buttons">
         <div class="states">
