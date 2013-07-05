@@ -1,8 +1,5 @@
 App.Router.map(function() {
-  this.resource("users", function () {
-    this.route("new");
-    this.route("login");
-  }),
+  this.resource("user");
   this.resource("social_networks", function () {
     this.route("new");
     this.route("edit", { path: '/:social_network_id/edit' });

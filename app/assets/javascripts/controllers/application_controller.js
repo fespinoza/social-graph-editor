@@ -25,6 +25,6 @@ App.ApplicationController = Ember.Controller.extend({
 
   logout: function() {
     App.Auth.reset();
-    this.transitionToRoute('users');
+    this.transitionToRoute('user');
   },
 });

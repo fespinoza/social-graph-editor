@@ -1,4 +1,4 @@
-App.UsersLoginRoute = Ember.Route.extend({
+App.UserRoute = Ember.Route.extend({
   model: function() {
     // Because we are maintaining a transaction locally in the controller for editing,
     // the new record needs to be created in the controller.
@@ -6,10 +6,10 @@ App.UsersLoginRoute = Ember.Route.extend({
   },
 
   setupController: function(controller) {
-    controller.reset();
+    controller.startEditing();
   },
 
   deactivate: function() {
-    this.controllerFor('users.login').reset();
+    this.controllerFor('user').stopEditing();
   }
 });

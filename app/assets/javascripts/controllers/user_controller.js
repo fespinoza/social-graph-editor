@@ -1,4 +1,4 @@
-App.UsersNewController = Ember.ObjectController.extend({
+App.UserController = Ember.ObjectController.extend({
   errorMessage: null,
 
   startEditing: function() {
@@ -44,5 +44,4 @@ App.UsersNewController = Ember.ObjectController.extend({
     this.stopEditing();
     this.transitionToRoute('users.index');
   },
-
-});
+})
