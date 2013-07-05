@@ -1,47 +1,30 @@
-<div class="fluid-row">
-  <div class="span12">
-    <div id="top-bar" class="well well-small">
-      {{#linkTo "social_networks"}}Social Networks{{/linkTo}}
+<div class="navbar">
+  <div class="navbar-inner">
+    {{#linkTo "index" class="brand"}}Social Graph Editor{{/linkTo}}
 
-      <div class="separator"></div>
-      Hello {{App.Auth.session.user.email}}
-      <a href="#" {{action "logout"}}>Log Out</a>
+    <ul class="nav">
+      <li>
+        {{#linkTo "social_networks.index"}}Social Networks{{/linkTo}}
+      </li>
+    </ul>
 
-      <a href="#" {{action "export"}} class="btn" title="Export Social Network as RDF File">
-        <i class="icon icon-download"></i>
-      </a>
-      <a href="#" {{action "exportVisual"}} class="btn" title="Export Social Network as RDF File with Visual Data">
-        <i class="icon icon-download-alt"></i>
-      </a>
-
-      <div class="edition-buttons">
-        <div class="states">
-          <span>Select Edition Mode:</span>
-          <div class="btn-group" data-toggle="buttons-radio">
-            <button type="button" class="btn hand active" title="Edition Mode" {{action "changeMode" "Hand"}}>
-              <i class="icon-hand-up"></i>
-            </button>
-            <button type="button" class="btn actor" title="Add Actor" {{action "changeMode" "Actor"}}>
-              <i class="icon-plus-sign"></i>
-            </button>
-            <button type="button" class="btn relation" title="Add Relation" {{action "changeMode" "Relation"}}>
-              <i class="icon-stop"></i>
-            </button>
-            <button type="button" class="btn role" title="Add Roles" {{action "changeMode" "Role"}}>
-              <i class="icon-arrow-right"></i>
-            </button>
-          </div>
-        </div>
-
-        <div class="zoom-buttons">
-          <div class="btn-group">
-            <button type="button" class="btn" title="Zoom In"><i class="icon-zoom-in"></i></button>
-            <button type="button" class="btn" title="Reset Zoom"><i class="icon-screenshot"></i></button>
-            <button type="button" class="btn" title="Zoom Out"><i class="icon-zoom-out"></i></button>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    {{#if App.Auth.isAuthenticated}}
+      <ul class="nav pull-right">
+        <li>
+          <span class="navbar-text">
+            {{App.Auth.session.user.email}}
+          </span>
+        </li>
+        <li>
+          <a href="#" {{action "logout"}}>Log Out</a>
+        </li>
+      </ul>
+    {{else}}
+      <form class="navbar-form pull-right" {{action "login" on="submit"}}>
+        {{input valueBinding="email" type="email" placeholder="Email" id="userEmail"}}
+        {{input valueBinding="password" type="password" placeholder="Password" id="userPassword"}}
+        {{input class="btn" type="submit" value="Login"}}
+      </form>
+    {{/if}}
   </div>
 </div>
