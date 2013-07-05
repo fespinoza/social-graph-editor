@@ -1,4 +1,4 @@
-App.UsersLoginController = Ember.Controller.extend({
+App.ApplicationController = Ember.Controller.extend({
   errorMessage: null,
 
   reset: function() {
@@ -8,7 +8,7 @@ App.UsersLoginController = Ember.Controller.extend({
       errorMessage: null,
     });
   },
-  
+
   login: function() {
     var self = this;
     this.set('errorMessage', null);
@@ -16,7 +16,15 @@ App.UsersLoginController = Ember.Controller.extend({
     $.post('/users/login.json', data).then(function(response) {
       console.log(response);
       App.Auth.authenticate(response.user.token, response.user.id);
+      self.reset();
       self.transitionToRoute('social_networks.index');
+    }, function (event) {
+      self.set('errorMessage', 'Email or Password invalid.');
     });
+  },
+
+  logout: function() {
+    App.Auth.reset();
+    this.transitionToRoute('users');
   },
 });

@@ -29,7 +29,7 @@ App.AuthManager = Ember.Object.extend({
   isAuthenticated: function() {
     return !Ember.isEmpty(this.get('session.token')) 
             && !Ember.isEmpty(this.get('session.user'));
-  },
+  }.property('session.token', 'session.user'),
  
   authenticate: function(token, accountId) {
     console.log("authenticate!");
