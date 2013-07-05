@@ -9,14 +9,17 @@ App.UserController = Ember.ObjectController.extend({
   },
 
   register: function() {
-    if (this.get('password') == this.get('password_confirmation')) {
+    validParams = this.get('email') != null &&
+                  this.get('password') != null &&
+                  this.get('password') == this.get('password_confirmation');
+    if (validParams) {
       //commit and then clear the local transaction
       this.transaction.commit();
       this.transaction = null;
       this.set('errorMessage', null);
       // TODO: show email duplication error
     } else {
-      this.set('errorMessage', 'Password and Password Confirmation must be equal');
+      this.set('errorMessage', 'Email and Password must be presetent and Password and Password Confirmation must be equal');
     }
   },
 
