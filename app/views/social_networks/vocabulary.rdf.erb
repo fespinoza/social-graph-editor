@@ -43,7 +43,7 @@ sn:color a rdfs:Property ;
   rdfs:range rdfs:Literal .
 
 <% @social_network.node_attributes.each do |attribute| %>
-  <%= "sn:attribute#{attribute.key.titleize.gsub(/\s+/, '')} a rdfs:Property ;" %>
+<%= "sn:attribute#{attribute.key.titleize.gsub(/\s+/, '')} a rdfs:Property ;" %>
   rdfs:domain sn:node ;
   rdfs:range rdfs:Literal .
 <% end %>
