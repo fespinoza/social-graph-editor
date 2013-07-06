@@ -12,5 +12,6 @@
  *= require bootstrap
  *= require colorPicker
  *= require chosen
+ *= require loading_modal
  *= require_tree .
  */
