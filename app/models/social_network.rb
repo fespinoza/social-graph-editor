@@ -18,13 +18,13 @@ class SocialNetwork < ActiveRecord::Base
     @uri ||= RDF::URI("#{base}/social_networks/#{id}")
   end
 
-  # this is SO ugly :(
+  # TODO: fix this is SO ugly :(
   def vocabulary
     url_helpers = Rails.application.routes.url_helpers
     if Rails.env.development?
       url_helpers.vocabulary_social_network_url(self, host: 'sn.dcc.uchile.cl')
     else
-      url_helpers.vocabulary_social_network_url(self)
+      url_helpers.vocabulary_social_network_url(self, host: 'social-graph-editor.heroku.com')
     end
   end
 

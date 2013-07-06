@@ -15,6 +15,7 @@ App.NodesView = Ember.View.extend({
   },
 
   renderSVG: function () {
+    // TODO: fix this ready to render thing
     if (this.get('readyToRender')) {
       console.log("insert svg content");
       this.svg = d3.select("#graph_canvas .root");
