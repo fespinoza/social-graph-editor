@@ -1,11 +1,3 @@
 <h1>Edit Social Network</h1>
 
-<div class="field">
-  <strong>Name</strong>
-  {{view Ember.TextField valueBinding="name" action="save"}}
-</div>
-
-<div class="operations well">
-  <button class="btn" {{action "cancel"}}>Cancel</button>
-  <button class="btn btn-primary" {{action "save"}}>Update Social Network</button>
-</div>
+{{partial "social_networks/form"}}

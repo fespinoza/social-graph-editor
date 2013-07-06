@@ -1,26 +1,3 @@
 <h2>New Social Network</h2>
 
-<form class="form-horizontal" {{action "save" on="submit"}}>
-
-  <div class="control-group">
-    <label class="control-label" for="name">Name</label>
-    <div class="controls">
-      {{input valueBinding="name" id="name"}}
-    </div>
-  </div>
-
-  <div class="control-group">
-    <label class="control-label" for="description">Description</label>
-    <div class="controls">
-      {{textarea valueBinding="description" id="description" rows="10"}}
-    </div>
-  </div>
-
-  <div class="control-group">
-    <div class="controls">
-      <button type="submit" class="btn btn-primary">Create</button>
-    </div>
-  </div>
-</form>
-
-<a href="#" {{action "cancel"}}>Cancel</a>
+{{partial "social_networks/form"}}

@@ -1,5 +1,10 @@
 App.SocialNetworksEditRoute = App.AuthenticatedRoute.extend({
-  model: function(params) {
-    return App.SocialNetwork.find(params.social_network_id);
-  }
+  setupController: function(controller, model) {
+    controller.set('content', model);
+    controller.startEditing();
+  },
+
+  deactivate: function() {
+    this.controllerFor('social_networks.edit').stopEditing(); 
+  },
 });
