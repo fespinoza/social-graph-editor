@@ -1,7 +1,10 @@
+require "fruchterman_reingold"
+
 class SocialNetworkRDFDeserializer
   def initialize(user, data)
     @data = data
     @user = user
+    @fix_position = false
     initialize_graph
   end
 
@@ -20,6 +23,7 @@ class SocialNetworkRDFDeserializer
     deserialize_node_families
     deserialize_roles
     deserialize_attributes
+    apply_layout if @fix_position
     @social_network
   end
 
@@ -68,8 +72,8 @@ class SocialNetworkRDFDeserializer
     result = query.execute(@graph).filter do |result|
       result.type == @sn.actor || result.type == @sn.relation
     end
-    range_x = (40..50*result.length)
-    range_y = (40..40*result.length)
+    range_x = (20..50*result.length)
+    range_y = (20..50*result.length)
     result.each do |result|
       params = {}
       params[:name] = result.name.value
@@ -77,11 +81,13 @@ class SocialNetworkRDFDeserializer
       params[:x] = begin
                      result.x.value 
                    rescue NoMethodError
+                     @fix_position = true
                      rand(range_x)
                    end
       params[:y] = begin
                      result.y.value 
                    rescue NoMethodError
+                     @fix_position = true
                      rand(range_y)
                    end
       @nodes[result.node.to_s] = @social_network.nodes.create!(params)
@@ -139,6 +145,37 @@ class SocialNetworkRDFDeserializer
       end
     end
     @statements
+  end
+
+  def apply_layout
+    nodes = {}
+    @social_network.nodes.each do |node|
+      position = FruchtermanReingold::Coordinates.new(node.x, node.y)
+      disposition = FruchtermanReingold::Coordinates.new(0, 0)
+      nodes[node.id] = FruchtermanReingold::Node.new(position, disposition)
+    end
+
+    edges = {}
+    @social_network.roles.each do |role|
+      begining = nodes[role.actor.id]
+      end_node = nodes[role.relation.id]
+      edges[role.id] = FruchtermanReingold::Edge.new(begining, end_node)
+    end
+
+    g = FruchtermanReingold::Graph.new
+    g.nodes = nodes.values
+    g.edges = edges.values
+
+    g.draw
+
+    min_x = g.nodes.min_by { |node| node.position.x }.position.x
+    min_y = g.nodes.min_by { |node| node.position.y }.position.y
+
+    @social_network.nodes.each_with_index do |node, index|
+      node.x = g.nodes[index].position.x - min_x + 40
+      node.y = g.nodes[index].position.y - min_y + 40
+      node.save
+    end
   end
 
   private
