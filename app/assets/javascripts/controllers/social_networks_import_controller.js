@@ -20,4 +20,11 @@ App.SocialNetworksImportController = Ember.Controller.extend({
       self.set('errorMessage', "It wasn't imported because a incorrect file format or RDF/N3 file invalid");
     });
   },
+
+  cancel: function() {
+    this.set('file', null);
+    this.set('fileContents', null);
+    this.set('errorMessage', null);
+    this.transitionToRoute('social_networks.index');
+  },
 });

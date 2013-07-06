@@ -6,9 +6,9 @@
   <div class="control-group">
     <label class="control-label" for="file">RDF/N3 File</label>
     <div class="controls">
-      {{input valueBinding="file" id="file" type="file"}}
+      {{input valueBinding="file" id="file" type="file" title="Choose File"}}
+      <span class="help-block">Upload a valid RDF/N3 social network file previously exported with this application.</span>
     </div>
-    <span class="help-block">Upload a valid RDF/N3 social network file previously exported with this application.</span>
   </div>
 
   <div class="control-group">
@@ -17,3 +17,5 @@
     </div>
   </div>
 </form>
+
+<a href="#" {{action "cancel"}}>Cancel</a>

@@ -21,6 +21,7 @@
 //= require ember_sge
 //= require d3.v3
 //= require chosen-jquery
+//= require bootstrap-filestyle
 App = Ember.Application.create({
   LOG_TRANSITIONS: true,
   ready: function () {

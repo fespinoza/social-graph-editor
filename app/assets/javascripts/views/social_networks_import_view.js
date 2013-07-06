@@ -16,6 +16,7 @@ App.SocialNetworksImportView = Ember.View.extend({
         }
         reader.readAsText(input.files[0]);
       }
-    })
+    });
+    this.$("input[type='file']").filestyle();
   },
 })
