@@ -35,6 +35,7 @@ class SocialNetworkRDFSerializer
         end
 
         node.node_attributes.each do |attribute|
+          # TODO: eliminar acentos
           key = prefix(:sn, "attribute#{attribute.key.titleize.gsub(/\s+/, '')}")
           writer << RDF::Statement.new(node_uri, key, attribute.value)
         end

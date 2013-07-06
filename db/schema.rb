@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(:version => 20130703194313) do
     t.float    "translation_x", :default => 0.0
     t.float    "translation_y", :default => 0.0
     t.integer  "user_id"
-    t.string   "description"
+    t.string   "description",   :default => ""
   end
 
   add_index "social_networks", ["user_id"], :name => "index_social_networks_on_user_id"
