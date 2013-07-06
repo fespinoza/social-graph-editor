@@ -14,10 +14,7 @@ class SocialNetworkRDFSerializer
 
       writer << RDF::Statement.new(@social_network.uri(base), prefix(:rdf, :type), sn(:socialNetwork))
       writer << RDF::Statement.new(@social_network.uri(base), sn(:name), @social_network.name)
-      # TODO: remove this line when update the DB 
-      if @social_network.description
-        writer << RDF::Statement.new(@social_network.uri(base), prefix(:dc, :description), @social_network.description)
-      end
+      writer << RDF::Statement.new(@social_network.uri(base), prefix(:dc, :description), @social_network.description)
 
       @social_network.nodes.each do |node|
         node_uri = node.uri(base)
