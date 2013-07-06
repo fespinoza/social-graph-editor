@@ -6,6 +6,7 @@ gem 'ember-source', '1.0.0.rc6' # or the version you need
 gem 'handlebars-source', '1.0.0.rc4' # or the version you need
 gem 'jquery-rails'
 gem 'chosen-rails'
+gem 'pg'
 
 # RDF stuff
 gem 'rdf'
@@ -27,7 +28,6 @@ group :development do
 end
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'capybara-webkit'
@@ -35,6 +35,3 @@ group :development, :test do
   gem 'pry-rails'                 # awesome replacement of irb
 end
 
-group :production do
-  gem 'pg'
-end
