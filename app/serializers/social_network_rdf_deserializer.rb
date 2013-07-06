@@ -37,41 +37,54 @@ class SocialNetworkRDFDeserializer
   end
 
   def deserialize_families
-    query = RDF::Query.new({
-      family: {
-        RDF.type  => @sn.family,
-        @sn.name => :name,
-        @sn.kind => :kind,
-        @sn.color => :color,
-      }
-    })
+    query = RDF::Query.new do |q|
+      q.pattern [:family, RDF.type, @sn.family]
+      q.pattern [:family, @sn.name, :name]
+      q.pattern [:family, @sn.kind, :kind]
+      q.pattern [:family, @sn.color, :color], optional: true
+    end
     @families ||= {}
     query.execute(@graph).each do |result|
-      @families[result.family.to_s] = @social_network.families.create({ 
-        name: result.name.value,
-        kind: result.kind.value,
-        color: result.color.value
-      })
+      params = {}
+      params[:name] = result.name.value
+      params[:kind] = result.kind.value
+      params[:color] = begin
+                         result.color.value
+                       rescue NoMethodError
+                         assign_color
+                       end
+      @families[result.family.to_s] = @social_network.families.create!(params)
     end
   end
 
   def deserialize_nodes
-    query = RDF::Query.new({
-      node: {
-        RDF.type  => :type,
-        @sn.name => :name,
-        @sn.positionX => :x,
-        @sn.positionY => :y,
-      }
-    })
+    query = RDF::Query.new do |q|
+      q.pattern [:node, RDF.type, :type]
+      q.pattern [:node, @sn.name, :name]
+      q.pattern [:node, @sn.positionX, :x], optional: true
+      q.pattern [:node, @sn.positionY, :y], optional: true
+    end
     @nodes ||= {}
-    query.execute(@graph).each do |result|
-      @nodes[result.node.to_s] = @social_network.nodes.create({ 
-        name: result.name.value,
-        x: result.x.value,
-        y: result.y.value,
-        kind: result.type.to_s.match(/#(.*)/)[1].titleize
-      })
+    result = query.execute(@graph).filter do |result|
+      result.type == @sn.actor || result.type == @sn.relation
+    end
+    range_x = (40..50*result.length)
+    range_y = (40..40*result.length)
+    result.each do |result|
+      params = {}
+      params[:name] = result.name.value
+      params[:kind] = result.type.to_s.match(/#(.*)/)[1].titleize
+      params[:x] = begin
+                     result.x.value 
+                   rescue NoMethodError
+                     rand(range_x)
+                   end
+      params[:y] = begin
+                     result.y.value 
+                   rescue NoMethodError
+                     rand(range_y)
+                   end
+      @nodes[result.node.to_s] = @social_network.nodes.create!(params)
     end
   end
 
@@ -111,7 +124,7 @@ class SocialNetworkRDFDeserializer
     solutions.each do |solution|
       predicate = vocabulary_element_from_uri(solution.predicate)
       key = predicate.match(/attribute(.*)/)[1]
-      @nodes[solution.node.to_s].node_attributes.create({
+      @nodes[solution.node.to_s].node_attributes.create!({
         key: key,
         value: solution.literal.value,
       })
@@ -132,5 +145,15 @@ class SocialNetworkRDFDeserializer
 
   def vocabulary_element_from_uri(uri)
     uri.to_s.match(/.*#(?<element>.*)$/)[:element]
+  end
+
+  def assign_color
+    @colors ||= [ "#5254a3", "#6b6ecf", "#9c9ede", "#637939", "#8ca252",
+                  "#b5cf6b", "#cedb9c", "#8c6d31", "#bd9e39", "#e7ba52",
+                  "#e7cb94", "#843c39", "#ad494a", "#d6616b", "#e7969c",
+                  "#7b4173", "#a55194", "#ce6dbd", "#de9ed6", "#ff7f0e",
+                  "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2",
+                  "#7f7f7f", "#bcbd22", "#17becf" ]
+    @colors.sample
   end
 end

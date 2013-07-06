@@ -1,0 +1,59 @@
+@base <http://sn.dcc.uchile.cl/2013/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sn: <http://sn.dcc.uchile.cl/social_networks/8/vocabulary#> .
+
+</social_networks/8> a sn:socialNetwork;
+   sn:name "Memorias" .
+
+</social_networks/8/nodes/55> a sn:actor;
+   sn:belongsToFamily </social_networks/8/families/19>;
+   sn:kind "Actor";
+   sn:name "Claudio Gutiérrez";
+   sn:participatesAs </social_networks/8/roles/40>;
+   sn:positionX 117;
+   sn:positionY 136 .
+
+</social_networks/8/nodes/56> a sn:actor;
+   sn:attributeEdad "24";
+   sn:belongsToFamily </social_networks/8/families/20>,
+     </social_networks/8/families/23>;
+   sn:kind "Actor";
+   sn:name "Felipe Espinoza";
+   sn:participatesAs </social_networks/8/roles/41>;
+   sn:positionX 377;
+   sn:positionY 31 .
+
+</social_networks/8/families/19> a sn:family;
+   sn:color "#1f77b4";
+   sn:kind "Actor";
+   sn:name "Académico" .
+
+</social_networks/8/families/20> a sn:family;
+   sn:color "#ff7f0e";
+   sn:kind "Actor";
+   sn:name "Estudiante" .
+
+</social_networks/8/families/21> a sn:family;
+   sn:color "#ff0000";
+   sn:kind "Relation";
+   sn:name "projectoDeMemoria" .
+
+</social_networks/8/families/23> a sn:family;
+   sn:color "#339966";
+   sn:kind "Actor";
+   sn:name "Memorista" .
+
+</social_networks/8/roles/40> a sn:role;
+   sn:inRelation </social_networks/8/nodes/57>;
+   sn:name "Profesor Guía" .
+
+</social_networks/8/roles/41> a sn:role;
+   sn:inRelation </social_networks/8/nodes/57>;
+   sn:name "Estudiante" .
+
+</social_networks/8/nodes/57> a sn:relation;
+   sn:belongsToFamily </social_networks/8/families/21>;
+   sn:kind "Relation";
+   sn:name "Social Graph Editor";
+   sn:positionX 171;
+   sn:positionY 27 .

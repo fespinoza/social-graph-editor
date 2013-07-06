@@ -1,0 +1,49 @@
+@base <http://sn.dcc.uchile.cl/2013/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sn: <http://sn.dcc.uchile.cl/social_networks/1/vocabulary#> .
+
+</social_networks/1> a sn:socialNetwork;
+   sn:name "Memorias" .
+
+</social_networks/1/nodes/1> a sn:actor;
+   sn:belongsToFamily </social_networks/1/families/1>;
+   sn:kind "Actor";
+   sn:name "Claudio Gutiérrez";
+   sn:participatesAs </social_networks/1/roles/1> .
+
+</social_networks/1/nodes/2> a sn:actor;
+   sn:attributeEdad "24";
+   sn:belongsToFamily </social_networks/1/families/2>,
+     </social_networks/1/families/4>;
+   sn:kind "Actor";
+   sn:name "Felipe Espinoza";
+   sn:participatesAs </social_networks/1/roles/2> .
+
+</social_networks/1/families/1> a sn:family;
+   sn:kind "Actor";
+   sn:name "Académico" .
+
+</social_networks/1/families/2> a sn:family;
+   sn:kind "Actor";
+   sn:name "Estudiante" .
+
+</social_networks/1/families/3> a sn:family;
+   sn:kind "Relation";
+   sn:name "projectoDeMemoria" .
+
+</social_networks/1/families/4> a sn:family;
+   sn:kind "Actor";
+   sn:name "Memorista" .
+
+</social_networks/1/roles/1> a sn:role;
+   sn:inRelation </social_networks/1/nodes/3>;
+   sn:name "Profesor Guía" .
+
+</social_networks/1/roles/2> a sn:role;
+   sn:inRelation </social_networks/1/nodes/3>;
+   sn:name "Estudiante" .
+
+</social_networks/1/nodes/3> a sn:relation;
+   sn:belongsToFamily </social_networks/1/families/3>;
+   sn:kind "Relation";
+   sn:name "Social Graph Editor" .
