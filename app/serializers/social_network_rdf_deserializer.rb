@@ -29,17 +29,23 @@ class SocialNetworkRDFDeserializer
 
   def extract_vocabulary
     md = @data.match(/@prefix\s+sn:\s+\<(?<vocabulary>.*)\>/)
+    puts md[:vocabulary]
     @sn = RDF::Vocabulary.new(md[:vocabulary])
   end
 
   def deserialize_social_network
     query = RDF::Query.new({
-      social_network: { RDF.type  => @sn.socialNetwork, @sn.name => :name, }
+      social_network: { 
+        RDF.type => @sn.socialNetwork,
+        @sn.name => :name,
+        @sn.description => :description
+      }
     })
     result = query.execute(@graph).first
     puts result
     name = result.name.value rescue "New Social Network"
-    @social_network = @user.social_networks.create!({ name: name })
+    description = result.description.value rescue ""
+    @social_network = @user.social_networks.create!({ name: name, description: description})
   end
 
   def deserialize_families
