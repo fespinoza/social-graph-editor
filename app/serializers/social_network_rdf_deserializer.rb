@@ -30,6 +30,7 @@ class SocialNetworkRDFDeserializer
   def extract_vocabulary
     md = @data.match(/@prefix\s+sn:\s+\<(?<vocabulary>.*)\>/)
     puts md[:vocabulary]
+    #binding.pry
     @sn = RDF::Vocabulary.new(md[:vocabulary])
   end
 
@@ -38,13 +39,14 @@ class SocialNetworkRDFDeserializer
       social_network: { 
         RDF.type => @sn.socialNetwork,
         @sn.name => :name,
-        @sn.description => :description
+        RDF::DC.description => :description
       }
     })
     result = query.execute(@graph).first
     puts result
     name = result.name.value rescue "New Social Network"
     description = result.description.value rescue ""
+    #binding.pry
     @social_network = @user.social_networks.create!({ name: name, description: description})
   end
 
@@ -189,7 +191,11 @@ class SocialNetworkRDFDeserializer
   private
 
   def vocabulary_element_from_uri(uri)
-    uri.to_s.match(/.*#(?<element>.*)$/)[:element]
+    if uri.to_s.match(/purl.org/)
+      uri.to_s.match(/.*\/(?<element>.*)$/)[:element]
+    else
+      uri.to_s.match(/.*#(?<element>.*)$/)[:element]
+    end
   end
 
   def assign_color
