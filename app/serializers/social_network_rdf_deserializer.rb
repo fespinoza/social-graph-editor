@@ -37,7 +37,9 @@ class SocialNetworkRDFDeserializer
       social_network: { RDF.type  => @sn.socialNetwork, @sn.name => :name, }
     })
     result = query.execute(@graph).first
-    @social_network = @user.social_networks.create!({ name: result.name.value })
+    puts result
+    name = result.name.value rescue "New Social Network"
+    @social_network = @user.social_networks.create!({ name: name })
   end
 
   def deserialize_families
