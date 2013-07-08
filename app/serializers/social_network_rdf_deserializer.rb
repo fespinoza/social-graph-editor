@@ -47,7 +47,12 @@ class SocialNetworkRDFDeserializer
     name = result.name.value rescue "New Social Network"
     description = result.description.value rescue ""
     #binding.pry
-    @social_network = @user.social_networks.create!({ name: name, description: description})
+    puts "= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = "
+    puts query
+    puts @graph
+    puts result
+    puts @social_network = @user.social_networks.create!({ name: name, description: description})
+    puts "= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = "
   end
 
   def deserialize_families
