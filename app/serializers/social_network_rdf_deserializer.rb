@@ -43,15 +43,14 @@ class SocialNetworkRDFDeserializer
       }
     })
     result = query.execute(@graph).first
-    puts result
     name = result.name.value rescue "New Social Network"
     description = result.description.value rescue ""
-    #binding.pry
     puts "= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = "
-    puts query
-    puts @graph
-    puts result
-    puts @social_network = @user.social_networks.create!({ name: name, description: description})
+    puts query.inspect
+    puts @graph.inspect
+    puts result.inspect
+    @social_network = @user.social_networks.create!({ name: name, description: description})
+    puts @social_network.inspect
     puts "= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = "
   end
 
