@@ -46,6 +46,9 @@ class SocialNetworkRDFDeserializer
     name = result.name.value rescue "New Social Network"
     description = result.description.value rescue ""
     puts "= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = "
+    puts @data
+    puts "= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = "
+    puts @user.inspect
     puts query.inspect
     puts @graph.inspect
     puts result.inspect
