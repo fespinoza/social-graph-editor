@@ -11,6 +11,7 @@ sn:actor a rdfs:Class ;
   rdfs:subClassOf sn:node .
 sn:relation a rdfs:Class ;
   rdfs:subClassOf sn:node .
+sn:attribute a rdf:Class ;
 
 # Properties
 sn:name a rdf:Property ;
@@ -19,6 +20,10 @@ sn:name a rdf:Property ;
 sn:belongsToFamily a rdf:Property;
   rdfs:domain sn:node;
   rdfs:range sn:family .
+
+sn:hasAttribute a rdfs:Property ;
+  rdfs:domain sn:node ;
+  rdfs:range sn:attribute .
 
 sn:participatesAs a rdf:Property ;
   rdfs:domain sn:actor ;
@@ -42,8 +47,10 @@ sn:color a rdfs:Property ;
   rdfs:domain sn:family ;
   rdfs:range rdfs:Literal .
 
-<% @social_network.node_attributes.each do |attribute| %>
-<%= "sn:attribute#{I18n.transliterate(attribute.key.titleize.gsub(/\s+/, ''))} a rdfs:Property ;" %>
-  rdfs:domain sn:node ;
+sn:key a rdfs:Property ;
+  rdfs:domain sn:attribute ;
   rdfs:range rdfs:Literal .
-<% end %>
+  
+sn:value a rdfs:Property ;
+  rdfs:domain sn:attribute ;
+  rdfs:range rdfs:Literal .
