@@ -30,7 +30,6 @@ class SocialNetworkRDFDeserializer
   def extract_vocabulary
     md = @data.match(/@prefix\s+sn:\s+\<(?<vocabulary>.*)\>/)
     puts md[:vocabulary]
-    #binding.pry
     @sn = RDF::Vocabulary.new(md[:vocabulary])
   end
 
@@ -137,19 +136,20 @@ class SocialNetworkRDFDeserializer
   end
 
   def deserialize_attributes
-    query = RDF::Query.new({ node: { RDF.type => :type, :predicate => :literal } })
-    solutions = query.execute(@graph)
-    solutions.filter! do |solution|
-      kind = vocabulary_element_from_uri(solution.type).titleize
-      predicateElement = vocabulary_element_from_uri(solution.predicate)
-      (kind == "Actor" || kind == "Relation") && predicateElement.match(/attribute/)
-    end
-    solutions.each do |solution|
-      predicate = vocabulary_element_from_uri(solution.predicate)
-      key = predicate.match(/attribute(.*)/)[1]
-      @nodes[solution.node.to_s].node_attributes.create!({
-        key: key,
-        value: solution.literal.value,
+    q1 = RDF::Query.new({ node: { RDF.type => :type, @sn.hasAttribute => :attribute_uri } })
+    q2 = RDF::Query.new({ attribute: { RDF.type => @sn.attribute, @sn.key => :key, @sn.value => :literal }})
+
+    nodes_solutions = q1.execute(@graph)
+    attrs_solutions = q2.execute(@graph)
+
+    attrs_solutions.each do |attr_solution|
+      node_solution = nodes_solutions.to_a.select do |node_solution|
+        node_solution.attribute_uri.to_s == attr_solution.attribute.to_s
+      end.first
+      node = @nodes[node_solution.node.to_s]
+      node.node_attributes.create!({
+        key: attr_solution.key.value,
+        value: attr_solution.literal.value,
       })
     end
   end
@@ -196,14 +196,6 @@ class SocialNetworkRDFDeserializer
   end
 
   private
-
-  def vocabulary_element_from_uri(uri)
-    if uri.to_s.match(/purl.org/)
-      uri.to_s.match(/.*\/(?<element>.*)$/)[:element]
-    else
-      uri.to_s.match(/.*#(?<element>.*)$/)[:element]
-    end
-  end
 
   def assign_color
     @colors ||= [ "#5254a3", "#6b6ecf", "#9c9ede", "#637939", "#8ca252",

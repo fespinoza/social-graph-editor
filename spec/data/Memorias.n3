@@ -1,49 +1,60 @@
 @base <http://sn.dcc.uchile.cl/2013/> .
+@prefix dc: <http://purl.org/dc/terms/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix sn: <http://sn.dcc.uchile.cl/social_networks/1/vocabulary#> .
+@prefix sn: <http://sn.dcc.uchile.cl/social_networks/39/vocabulary#> .
 
-</social_networks/1> a sn:socialNetwork;
+</social_networks/39> a sn:socialNetwork;
+   dc:description "";
    sn:name "Memorias" .
 
-</social_networks/1/nodes/1> a sn:actor;
-   sn:belongsToFamily </social_networks/1/families/1>;
+</social_networks/39/nodes/952> a sn:actor;
+   sn:belongsToFamily </social_networks/39/families/299>;
    sn:kind "Actor";
    sn:name "Claudio Gutiérrez";
-   sn:participatesAs </social_networks/1/roles/1> .
+   sn:participatesAs </social_networks/39/roles/915> .
 
-</social_networks/1/nodes/2> a sn:actor;
-   sn:attributeEdad "24";
-   sn:belongsToFamily </social_networks/1/families/2>,
-     </social_networks/1/families/4>;
+</social_networks/39/nodes/953> a sn:actor;
+   sn:belongsToFamily </social_networks/39/families/300>,
+     </social_networks/39/families/302>;
+   sn:hasAttribute </social_networks/39/attributes/126>,
+     </social_networks/39/attributes/127>;
    sn:kind "Actor";
    sn:name "Felipe Espinoza";
-   sn:participatesAs </social_networks/1/roles/2> .
+   sn:participatesAs </social_networks/39/roles/916> .
 
-</social_networks/1/families/1> a sn:family;
+</social_networks/39/attributes/126> a sn:attribute;
+   sn:key "Edad";
+   sn:value "24" .
+
+</social_networks/39/attributes/127> a sn:attribute;
+   sn:key "Nación";
+   sn:value "Chile" .
+
+</social_networks/39/families/299> a sn:family;
    sn:kind "Actor";
    sn:name "Académico" .
 
-</social_networks/1/families/2> a sn:family;
+</social_networks/39/families/300> a sn:family;
    sn:kind "Actor";
    sn:name "Estudiante" .
 
-</social_networks/1/families/3> a sn:family;
+</social_networks/39/families/301> a sn:family;
    sn:kind "Relation";
    sn:name "projectoDeMemoria" .
 
-</social_networks/1/families/4> a sn:family;
+</social_networks/39/families/302> a sn:family;
    sn:kind "Actor";
    sn:name "Memorista" .
 
-</social_networks/1/roles/1> a sn:role;
-   sn:inRelation </social_networks/1/nodes/3>;
+</social_networks/39/roles/915> a sn:role;
+   sn:inRelation </social_networks/39/nodes/954>;
    sn:name "Profesor Guía" .
 
-</social_networks/1/roles/2> a sn:role;
-   sn:inRelation </social_networks/1/nodes/3>;
+</social_networks/39/roles/916> a sn:role;
+   sn:inRelation </social_networks/39/nodes/954>;
    sn:name "Estudiante" .
 
-</social_networks/1/nodes/3> a sn:relation;
-   sn:belongsToFamily </social_networks/1/families/3>;
+</social_networks/39/nodes/954> a sn:relation;
+   sn:belongsToFamily </social_networks/39/families/301>;
    sn:kind "Relation";
    sn:name "Social Graph Editor" .
