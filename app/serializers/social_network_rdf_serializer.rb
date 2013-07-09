@@ -32,9 +32,12 @@ class SocialNetworkRDFSerializer
         end
 
         node.node_attributes.each do |attribute|
-          sanitized_value = I18n.transliterate(attribute.key.titleize.gsub(/\s+/, ''))
-          key = prefix(:sn, "attribute#{sanitized_value}")
-          writer << RDF::Statement.new(node_uri, key, attribute.value)
+          attribute_uri = attribute.uri(base)
+          writer << RDF::Statement.new(node_uri, sn(:hasAttribute), attribute_uri)
+
+          writer << RDF::Statement.new(attribute_uri, prefix(:rdf, :type), sn(:attribute))
+          writer << RDF::Statement.new(attribute_uri, sn(:key), attribute.key)
+          writer << RDF::Statement.new(attribute_uri, sn(:value), attribute.value)
         end
       end
 
