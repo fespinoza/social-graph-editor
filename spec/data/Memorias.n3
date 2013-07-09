@@ -1,60 +1,60 @@
-@base <http://sn.dcc.uchile.cl/2013/> .
+@base <http://sn.dcc.uchile.cl/> .
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix sn: <http://sn.dcc.uchile.cl/social_networks/39/vocabulary#> .
+@prefix sn: <http://sn.dcc.uchile.cl/2013/v1/vocabulary#> .
 
-</social_networks/39> a sn:socialNetwork;
+</social_networks/39> a <2013/v1/vocabulary#socialNetwork>;
    dc:description "";
-   sn:name "Memorias" .
+   <2013/v1/vocabulary#name> "Memorias" .
 
-</social_networks/39/nodes/952> a sn:actor;
-   sn:belongsToFamily </social_networks/39/families/299>;
-   sn:kind "Actor";
-   sn:name "Claudio Gutiérrez";
-   sn:participatesAs </social_networks/39/roles/915> .
+</social_networks/39/nodes/952> a <2013/v1/vocabulary#actor>;
+   <2013/v1/vocabulary#belongsToFamily> </social_networks/39/families/299>;
+   <2013/v1/vocabulary#kind> "Actor";
+   <2013/v1/vocabulary#name> "Claudio Gutiérrez";
+   <2013/v1/vocabulary#participatesAs> </social_networks/39/roles/915> .
 
-</social_networks/39/nodes/953> a sn:actor;
-   sn:belongsToFamily </social_networks/39/families/300>,
+</social_networks/39/nodes/953> a <2013/v1/vocabulary#actor>;
+   <2013/v1/vocabulary#belongsToFamily> </social_networks/39/families/300>,
      </social_networks/39/families/302>;
-   sn:hasAttribute </social_networks/39/attributes/126>,
+   <2013/v1/vocabulary#hasAttribute> </social_networks/39/attributes/126>,
      </social_networks/39/attributes/127>;
-   sn:kind "Actor";
-   sn:name "Felipe Espinoza";
-   sn:participatesAs </social_networks/39/roles/916> .
+   <2013/v1/vocabulary#kind> "Actor";
+   <2013/v1/vocabulary#name> "Felipe Espinoza";
+   <2013/v1/vocabulary#participatesAs> </social_networks/39/roles/916> .
 
-</social_networks/39/attributes/126> a sn:attribute;
-   sn:key "Edad";
-   sn:value "24" .
+</social_networks/39/attributes/126> a <2013/v1/vocabulary#attribute>;
+   <2013/v1/vocabulary#key> "Edad";
+   <2013/v1/vocabulary#value> "24" .
 
-</social_networks/39/attributes/127> a sn:attribute;
-   sn:key "Nación";
-   sn:value "Chile" .
+</social_networks/39/attributes/127> a <2013/v1/vocabulary#attribute>;
+   <2013/v1/vocabulary#key> "Nación";
+   <2013/v1/vocabulary#value> "Chile" .
 
-</social_networks/39/families/299> a sn:family;
-   sn:kind "Actor";
-   sn:name "Académico" .
+</social_networks/39/families/299> a <2013/v1/vocabulary#family>;
+   <2013/v1/vocabulary#kind> "Actor";
+   <2013/v1/vocabulary#name> "Académico" .
 
-</social_networks/39/families/300> a sn:family;
-   sn:kind "Actor";
-   sn:name "Estudiante" .
+</social_networks/39/families/300> a <2013/v1/vocabulary#family>;
+   <2013/v1/vocabulary#kind> "Actor";
+   <2013/v1/vocabulary#name> "Estudiante" .
 
-</social_networks/39/families/301> a sn:family;
-   sn:kind "Relation";
-   sn:name "projectoDeMemoria" .
+</social_networks/39/families/301> a <2013/v1/vocabulary#family>;
+   <2013/v1/vocabulary#kind> "Relation";
+   <2013/v1/vocabulary#name> "projectoDeMemoria" .
 
-</social_networks/39/families/302> a sn:family;
-   sn:kind "Actor";
-   sn:name "Memorista" .
+</social_networks/39/families/302> a <2013/v1/vocabulary#family>;
+   <2013/v1/vocabulary#kind> "Actor";
+   <2013/v1/vocabulary#name> "Memorista" .
 
-</social_networks/39/roles/915> a sn:role;
-   sn:inRelation </social_networks/39/nodes/954>;
-   sn:name "Profesor Guía" .
+</social_networks/39/roles/915> a <2013/v1/vocabulary#role>;
+   <2013/v1/vocabulary#inRelation> </social_networks/39/nodes/954>;
+   <2013/v1/vocabulary#name> "Profesor Guía" .
 
-</social_networks/39/roles/916> a sn:role;
-   sn:inRelation </social_networks/39/nodes/954>;
-   sn:name "Estudiante" .
+</social_networks/39/roles/916> a <2013/v1/vocabulary#role>;
+   <2013/v1/vocabulary#inRelation> </social_networks/39/nodes/954>;
+   <2013/v1/vocabulary#name> "Estudiante" .
 
-</social_networks/39/nodes/954> a sn:relation;
-   sn:belongsToFamily </social_networks/39/families/301>;
-   sn:kind "Relation";
-   sn:name "Social Graph Editor" .
+</social_networks/39/nodes/954> a <2013/v1/vocabulary#relation>;
+   <2013/v1/vocabulary#belongsToFamily> </social_networks/39/families/301>;
+   <2013/v1/vocabulary#kind> "Relation";
+   <2013/v1/vocabulary#name> "Social Graph Editor" .

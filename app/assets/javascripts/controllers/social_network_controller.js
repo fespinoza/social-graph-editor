@@ -28,9 +28,9 @@ App.SocialNetworkController = Ember.ObjectController.extend({
   },
 
   exportVocabulary: function() {
-    url = "/social_networks/" + this.get('id') + "/vocabulary.rdf";
+    url = "/2013/v1/vocabulary.rdf";
     // TODO: check file name with spaces
-    filename = this.get('name') + "_vocabulary.n3";
+    filename = "Vocabulary.n3";
     this.export(null, filename, url);
   },
 });

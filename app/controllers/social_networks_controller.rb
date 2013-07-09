@@ -1,5 +1,6 @@
 class SocialNetworksController < ApplicationController
   respond_to :json, :rdf
+  skip_before_filter :authenticate, only: :vocabulary
 
   def index
     authenticate
@@ -29,8 +30,6 @@ class SocialNetworksController < ApplicationController
   end
 
   def vocabulary
-    @social_network = social_networks.find(params[:id])
-    respond_with @social_network
   end
 
   def import

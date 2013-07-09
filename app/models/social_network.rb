@@ -19,12 +19,12 @@ class SocialNetwork < ActiveRecord::Base
   end
 
   # TODO: fix this is SO ugly :(
-  def vocabulary
+  def self.vocabulary
     url_helpers = Rails.application.routes.url_helpers
-    if Rails.env.development?
-      url_helpers.vocabulary_social_network_url(self, host: 'sn.dcc.uchile.cl')
+    if Rails.env.production?
+      url_helpers.vocabulary_url(host: 'social-graph-editor.heroku.com')
     else
-      url_helpers.vocabulary_social_network_url(self, host: 'social-graph-editor.heroku.com')
+      url_helpers.vocabulary_url(host: 'sn.dcc.uchile.cl')
     end
   end
 

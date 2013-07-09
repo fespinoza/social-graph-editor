@@ -76,11 +76,11 @@ class SocialNetworkRDFSerializer
 
   def options
     @options ||= {
-      base_uri: RDF::URI("http://sn.dcc.uchile.cl/2013/"),
+      base_uri: RDF::URI("http://sn.dcc.uchile.cl/"),
       prefixes: {
         rdf: RDF.to_uri,
         rdfs: RDF::RDFS.to_uri,
-        sn: RDF::URI("#{@social_network.vocabulary}#"),
+        sn: RDF::URI("#{SocialNetwork.vocabulary}#"),
         dc: RDF::DC.to_uri,
       }
     }

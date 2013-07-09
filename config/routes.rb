@@ -3,12 +3,12 @@ EmberSge::Application.routes.draw do
     post :login, on: :collection
   end
   resources :social_networks do
-    get :vocabulary, on: :member
     post :import, on: :collection
   end
   resources :nodes
   resources :families
   resources :roles
   resources :node_attributes
+  get '2013/v1/vocabulary', to: "social_networks#vocabulary", as: :vocabulary, defaults: { format: :rdf }
   root to: "application#index"
 end
