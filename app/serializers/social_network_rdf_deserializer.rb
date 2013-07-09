@@ -29,7 +29,6 @@ class SocialNetworkRDFDeserializer
 
   def extract_vocabulary
     md = @data.match(/@prefix\s+sn:\s+\<(?<vocabulary>.*)\>/)
-    puts md[:vocabulary]
     @sn = RDF::Vocabulary.new(md[:vocabulary])
   end
 
