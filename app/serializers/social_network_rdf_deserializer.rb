@@ -42,18 +42,9 @@ class SocialNetworkRDFDeserializer
       }
     })
     result = query.execute(@graph).first
-    name = result.name.value rescue "New Social Network"
-    description = result.description.value rescue ""
-    puts "= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = "
-    puts @data
-    puts "= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = "
-    puts @user.inspect
-    puts query.inspect
-    puts @graph.inspect
-    puts result.inspect
+    name = result.name.value
+    description = result.description.value
     @social_network = @user.social_networks.create!({ name: name, description: description})
-    puts @social_network.inspect
-    puts "= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = "
   end
 
   def deserialize_families
