@@ -12,7 +12,7 @@ I have provided a vagrant box with chef recipes to speed up the setup for develo
     vagrant up
     vagrant ssh
     cd /sge
-    ruby global 2.0.0-p247
+    ruby global 1.9.3-p327
     bundle install
     rbenv rehash
     rake db:create; rake db:migrate
@@ -35,3 +35,8 @@ cap chef:solo
 cap deploy:setup
 cap deploy:cold
 ```
+
+## Notes
+
+* the RDF-N3 gem fail with ruby 2.0 specifically in the RDF::N3::Reader that
+  returns nil

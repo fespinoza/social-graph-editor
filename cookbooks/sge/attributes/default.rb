@@ -1,2 +1,2 @@
 default['user']            = 'ubuntu'
-default['ruby']['version'] = '2.0.0-p247'
+default['ruby']['version'] = '1.9.3-p327'
