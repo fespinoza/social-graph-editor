@@ -1,0 +1,19 @@
+[alias]
+    ci = commit
+    co = checkout
+    st = status
+    br = branch
+    df = diff
+
+[apply]
+    whitespace = strip
+
+[diff]
+    color = auto
+    rename = copy
+
+[pager]
+    color = true
+
+[status]
+    color = auto
