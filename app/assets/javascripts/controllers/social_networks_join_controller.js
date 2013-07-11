@@ -36,7 +36,6 @@ App.SocialNetworksJoinController = Ember.Controller.extend({
         self.set('importedSocialNetwork', socialNetwork);
         self.set('file', null);
         self.set('fileContents', null);
-        self.set('successMessage', "Social Network imported successfully");
         self.set('currentStep', self.get('currentStep') + 1);
         $("body").removeClass("loading");
       },
@@ -47,11 +46,14 @@ App.SocialNetworksJoinController = Ember.Controller.extend({
         $("body").removeClass("loading");
       }
     );
+  },
 
   equivalences: function() {
+    console.log("calculando equivalencias");
     result = [];
     families = this.get('importedSocialNetwork.families');
-    if (families) {
+    isLoaded = this.get('importedSocialNetwork.isLoaded');
+    if (families && isLoaded) {
       families.forEach(function(family, index){
         object = Ember.Object.create({
           family: family,
@@ -63,9 +65,11 @@ App.SocialNetworksJoinController = Ember.Controller.extend({
         sortProperties: ['family.kind', 'family.name'],
         content: result,
       });
+    } else {
+      console.log("no habian familias");
+      return result;
     }
-    return result 
-  }.property('importedSocialNetwork'),
+  }.property('importedSocialNetwork.isLoaded','importedSocialNetwork.families'),
 
   join: function() {
     debugger; 
