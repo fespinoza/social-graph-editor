@@ -46,15 +46,16 @@ describe SocialNetworkRDFDeserializer do
       social_network = SocialNetwork.last
       expect(social_network.nodes.count).to eq(3)
     end
-     it "creates 2 node attributes" do
-       node = Node.where({name: "Felipe Espinoza"}).first
-       expect(node.node_attributes.count).to eq(2)
-     end
 
-     it "correct assign keys and values to node attributes" do
-       attr = NodeAttribute.where({ key: "Edad" }).first
-       expect(attr.value).to eq("24")
-     end
+    it "creates 2 node attributes" do
+      node = Node.where({name: "Felipe Espinoza"}).first
+      expect(node.node_attributes.count).to eq(2)
+    end
+
+    it "correct assign keys and values to node attributes" do
+      attr = NodeAttribute.where({ key: "Edad" }).first
+      expect(attr.value).to eq("24")
+    end
 
     it "assings positions to the nodes" do
       expect(Node.last.x).not_to be_nil

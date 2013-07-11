@@ -1,70 +1,70 @@
 @base <http://sn.dcc.uchile.cl/> .
 @prefix dc: <http://purl.org/dc/terms/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix sn: <http://sn.dcc.uchile.cl/2013/v1/vocabulary#> .
+@prefix sn: <http://sn2.dcc.uchile.cl/2013/v1/vocabulary#> .
 
-</social_networks/39> a <2013/v1/vocabulary#socialNetwork>;
+</social_networks/1> a sn:socialNetwork;
    dc:description "";
-   <2013/v1/vocabulary#name> "Memorias" .
+   sn:name "Memorias" .
 
-</social_networks/39/nodes/952> a <2013/v1/vocabulary#actor>;
-   <2013/v1/vocabulary#belongsToFamily> </social_networks/39/families/299>;
-   <2013/v1/vocabulary#kind> "Actor";
-   <2013/v1/vocabulary#name> "Claudio Gutiérrez";
-   <2013/v1/vocabulary#participatesAs> </social_networks/39/roles/915>;
-   <2013/v1/vocabulary#positionX> 117;
-   <2013/v1/vocabulary#positionY> 136 .
+</social_networks/1/nodes/1> a sn:actor;
+   sn:belongsToFamily </social_networks/1/families/1>;
+   sn:kind "Actor";
+   sn:name "Claudio Gutiérrez";
+   sn:participatesAs </social_networks/1/roles/1>;
+   sn:positionX 117;
+   sn:positionY 136 .
 
-</social_networks/39/nodes/953> a <2013/v1/vocabulary#actor>;
-   <2013/v1/vocabulary#belongsToFamily> </social_networks/39/families/300>,
-     </social_networks/39/families/302>;
-   <2013/v1/vocabulary#hasAttribute> </social_networks/39/attributes/126>,
-     </social_networks/39/attributes/127>;
-   <2013/v1/vocabulary#kind> "Actor";
-   <2013/v1/vocabulary#name> "Felipe Espinoza";
-   <2013/v1/vocabulary#participatesAs> </social_networks/39/roles/916>;
-   <2013/v1/vocabulary#positionX> 377;
-   <2013/v1/vocabulary#positionY> 31 .
+</social_networks/1/nodes/2> a sn:actor;
+   sn:belongsToFamily </social_networks/1/families/2>,
+     </social_networks/1/families/4>;
+   sn:hasAttribute </social_networks/1/attributes/9>,
+     </social_networks/1/attributes/8>;
+   sn:kind "Actor";
+   sn:name "Felipe Espinoza";
+   sn:participatesAs </social_networks/1/roles/2>;
+   sn:positionX 377;
+   sn:positionY 31 .
 
-</social_networks/39/attributes/126> a <2013/v1/vocabulary#attribute>;
-   <2013/v1/vocabulary#key> "Edad";
-   <2013/v1/vocabulary#value> "24" .
+</social_networks/1/attributes/8> a sn:attribute;
+   sn:key "Edad";
+   sn:value "24" .
 
-</social_networks/39/attributes/127> a <2013/v1/vocabulary#attribute>;
-   <2013/v1/vocabulary#key> "Nación";
-   <2013/v1/vocabulary#value> "Chile" .
+</social_networks/1/attributes/9> a sn:attribute;
+   sn:key "Nación";
+   sn:value "Chile" .
 
-</social_networks/39/families/299> a <2013/v1/vocabulary#family>;
-   <2013/v1/vocabulary#color> "#1f77b4";
-   <2013/v1/vocabulary#kind> "Actor";
-   <2013/v1/vocabulary#name> "Académico" .
+</social_networks/1/families/1> a sn:family;
+   sn:color "#1f77b4";
+   sn:kind "Actor";
+   sn:name "Académico" .
 
-</social_networks/39/families/300> a <2013/v1/vocabulary#family>;
-   <2013/v1/vocabulary#color> "#ff7f0e";
-   <2013/v1/vocabulary#kind> "Actor";
-   <2013/v1/vocabulary#name> "Estudiante" .
+</social_networks/1/families/2> a sn:family;
+   sn:color "#ff7f0e";
+   sn:kind "Actor";
+   sn:name "Estudiante" .
 
-</social_networks/39/families/301> a <2013/v1/vocabulary#family>;
-   <2013/v1/vocabulary#color> "#ff0000";
-   <2013/v1/vocabulary#kind> "Relation";
-   <2013/v1/vocabulary#name> "projectoDeMemoria" .
+</social_networks/1/families/3> a sn:family;
+   sn:color "#ff0000";
+   sn:kind "Relation";
+   sn:name "projectoDeMemoria" .
 
-</social_networks/39/families/302> a <2013/v1/vocabulary#family>;
-   <2013/v1/vocabulary#color> "#339966";
-   <2013/v1/vocabulary#kind> "Actor";
-   <2013/v1/vocabulary#name> "Memorista" .
+</social_networks/1/families/4> a sn:family;
+   sn:color "#339966";
+   sn:kind "Actor";
+   sn:name "Memorista" .
 
-</social_networks/39/roles/915> a <2013/v1/vocabulary#role>;
-   <2013/v1/vocabulary#inRelation> </social_networks/39/nodes/954>;
-   <2013/v1/vocabulary#name> "Profesor Guía" .
+</social_networks/1/roles/1> a sn:role;
+   sn:inRelation </social_networks/1/nodes/3>;
+   sn:name "Profesor Guía" .
 
-</social_networks/39/roles/916> a <2013/v1/vocabulary#role>;
-   <2013/v1/vocabulary#inRelation> </social_networks/39/nodes/954>;
-   <2013/v1/vocabulary#name> "Estudiante" .
+</social_networks/1/roles/2> a sn:role;
+   sn:inRelation </social_networks/1/nodes/3>;
+   sn:name "Estudiante" .
 
-</social_networks/39/nodes/954> a <2013/v1/vocabulary#relation>;
-   <2013/v1/vocabulary#belongsToFamily> </social_networks/39/families/301>;
-   <2013/v1/vocabulary#kind> "Relation";
-   <2013/v1/vocabulary#name> "Social Graph Editor";
-   <2013/v1/vocabulary#positionX> 171;
-   <2013/v1/vocabulary#positionY> 27 .
+</social_networks/1/nodes/3> a sn:relation;
+   sn:belongsToFamily </social_networks/1/families/3>;
+   sn:kind "Relation";
+   sn:name "Social Graph Editor";
+   sn:positionX 171;
+   sn:positionY 27 .
