@@ -1,7 +1,10 @@
 App.SocialNetworksEditController = Ember.ObjectController.extend({
+  successMessage: null,
+
   startEditing: function() {
     this.transaction = this.get('store').transaction();
     this.transaction.add(this.get('content'));
+    this.set('successMessage', null);
   },
 
   stopEditing: function() {
@@ -9,6 +12,7 @@ App.SocialNetworksEditController = Ember.ObjectController.extend({
       this.transaction.rollback();
       this.transaction = null;
     }
+    this.set('successMessage', null);
   },
 
   cancel: function() {
@@ -18,6 +22,7 @@ App.SocialNetworksEditController = Ember.ObjectController.extend({
 
   save: function () {
     this.transaction.commit();
+    this.set('successMessage', "Social Network successfully updated");
     this.transitionToRoute('social_networks.index');
   },
 });

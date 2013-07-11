@@ -24,7 +24,7 @@ class SocialNetwork < ActiveRecord::Base
     if Rails.env.production?
       url_helpers.vocabulary_url(host: 'social-graph-editor.heroku.com')
     else
-      url_helpers.vocabulary_url(host: 'sn.dcc.uchile.cl')
+      url_helpers.vocabulary_url(host: 'sn2.dcc.uchile.cl')
     end
   end
 
