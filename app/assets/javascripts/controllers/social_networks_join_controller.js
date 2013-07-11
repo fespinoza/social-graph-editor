@@ -2,9 +2,9 @@ App.SocialNetworksJoinController = Ember.Controller.extend({
   needs: ['social_networks'],
   currentStep: 1,
   originalSocialNetwork: null,
+  importedSocialNetwork: null,
   errorMessage: null,
   successMessage: null,
-  importedSocialNetwork: null,
   file: null,
   fileContents: null,
 
@@ -47,6 +47,28 @@ App.SocialNetworksJoinController = Ember.Controller.extend({
         $("body").removeClass("loading");
       }
     );
+
+  equivalences: function() {
+    result = [];
+    families = this.get('importedSocialNetwork.families');
+    if (families) {
+      families.forEach(function(family, index){
+        object = Ember.Object.create({
+          family: family,
+          eq: null,
+        });
+        result.push(object);
+      });
+      return Ember.ArrayProxy.createWithMixins(Ember.SortableMixin, {
+        sortProperties: ['family.kind', 'family.name'],
+        content: result,
+      });
+    }
+    return result 
+  }.property('importedSocialNetwork'),
+
+  join: function() {
+    debugger; 
   },
 
   isFirstStep: function() {
