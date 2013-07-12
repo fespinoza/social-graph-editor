@@ -1,7 +1,7 @@
 App.SocialNetwork = DS.Model.extend({
   // attributes
   name: DS.attr('string'),
-  description: DS.attr('string'),
+  description: DS.attr('string', { defaultValue: "" }),
   scale: DS.attr('number', { defaultValue: 1 }),
   translation_x: DS.attr('number', { defaultValue: 0 }),
   translation_y: DS.attr('number', { defaultValue: 0 }),
