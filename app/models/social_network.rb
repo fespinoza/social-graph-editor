@@ -32,4 +32,32 @@ class SocialNetwork < ActiveRecord::Base
     "http://sn.dcc.uchile.cl/2013"
   end
 
+  def join!(imported, equivalences)
+    equivalences.each_pair do |imported_family_id, original_family_id|
+      imported_family = Family.find(imported_family_id)
+      if original_family_id
+        original_family = Family.find(original_family_id)
+        imported_family.nodes.each do |node|
+          unless node.families.include?(original_family)
+            node.families << original_family 
+            node.save!
+          end
+        end
+        imported_family.destroy
+      else
+        imported_family.update_attribute(:social_network, self)
+      end
+    end
+
+    imported.nodes.each do |node|
+      node.update_attribute(:social_network, self)
+    end
+
+    imported.roles.each do |role|
+      role.update_attribute(:social_network, self)
+    end
+
+    imported.reload.destroy
+  end
+
 end
