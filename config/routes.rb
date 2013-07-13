@@ -4,6 +4,7 @@ EmberSge::Application.routes.draw do
   end
   resources :social_networks do
     post :import, on: :collection
+    post :join, on: :collection
   end
   resources :nodes
   resources :families
