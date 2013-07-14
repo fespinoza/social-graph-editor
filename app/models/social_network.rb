@@ -35,7 +35,9 @@ class SocialNetwork < ActiveRecord::Base
   def join!(imported, equivalences)
     equivalences.each_pair do |imported_family_id, original_family_id|
       imported_family = Family.find(imported_family_id)
-      if original_family_id
+      if original_family_id.nil? or original_family_id.empty?
+        imported_family.update_attribute(:social_network, self)
+      else
         original_family = Family.find(original_family_id)
         imported_family.nodes.each do |node|
           unless node.families.include?(original_family)
@@ -44,8 +46,6 @@ class SocialNetwork < ActiveRecord::Base
           end
         end
         imported_family.destroy
-      else
-        imported_family.update_attribute(:social_network, self)
       end
     end
 

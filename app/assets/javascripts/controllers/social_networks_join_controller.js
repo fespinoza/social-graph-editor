@@ -72,7 +72,28 @@ App.SocialNetworksJoinController = Ember.Controller.extend({
   }.property('importedSocialNetwork.isLoaded','importedSocialNetwork.families'),
 
   join: function() {
-    debugger; 
+    var self = this;
+    data = { 
+      original_id: this.get('originalSocialNetwork.id'),
+      imported_id: this.get('importedSocialNetwork.id'),
+      equivalences: this.serializedEquivalences(),
+      token: App.Auth.get('session.token'),
+    };
+    $("body").addClass("loading");
+    $.post('/social_networks/join.json', data).then(
+      function(response) {
+        $("body").removeClass("loading");
+        console.log(response);
+        self.reset();
+        socialNetwork = App.SocialNetwork.find(response.social_network.id);
+        self.transitionToRoute('social_network.index', socialNetwork);
+      },
+      function(event) {
+        $("body").removeClass("loading");
+        self.reset();
+        self.set('errorMessage', "Social Network join failed.");
+      }
+    );
   },
 
   isFirstStep: function() {
@@ -82,6 +103,14 @@ App.SocialNetworksJoinController = Ember.Controller.extend({
   cancel: function() {
     this.reset();
     this.transitionToRoute('social_networks.index');
+  },
+
+  serializedEquivalences: function() {
+    result = {}
+    this.get('equivalences').toArray().forEach(function(equivalence){
+      result[equivalence.get('family.id')] = equivalence.get('eq.id');
+    });
+    return result;
   },
 
 });
