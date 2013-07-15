@@ -55,7 +55,6 @@ App.NodesView = Ember.View.extend({
       });
       if (families.length > 0) {
         families.map(function(family, index) {
-          //console.log([node.get('name'), family.get('name'), index]);
           dataCircle.push({node: node, family: family, index: index });
         });
       } else {
@@ -236,6 +235,75 @@ App.NodesView = Ember.View.extend({
       view.drag_line.classed('hidden', true)
       view.set('targetNode', null);
     });
+  },
+
+  joinNodes: function() {
+    view = this;
+    return d3.behavior.drag()
+    .on('dragstart', function (d) {
+      data = view.getData(d);
+      view.set('targetNode', null);
+      d.__init__ = { x: data.get('x'), y: data.get('y') }
+    })
+    .on('drag', function (d) {
+      data = view.getData(d);
+      data.set('x', data.get('x') + d3.event.dx);  
+      data.set('y', data.get('y') + d3.event.dy);  
+      view.tick();
+    })
+    .on('dragend', function (d) {
+      data = view.getData(d);
+      dropNode = view.getDropNode(data);
+      console.log(dropNode);
+      if (dropNode &&
+          dropNode.get('kind') == data.get('kind') &&
+          confirm("Are you sure to join these nodes?")) {
+        console.log("do join between node "+data.get('id') + " and " + dropNode.get('id'));
+      } else {
+        console.log("reset node position");
+        // return the node to its original position
+        data.set('x', d.__init__.x);
+        data.set('y', d.__init__.y);
+      }
+
+      view.tick();
+      delete d.__init__;
+      view.set('targetNode', null);
+    });
+  },
+
+  // because hover event does not trigger when dragging an element
+  //
+  // this method will return a node if its area intercepts with the area of the
+  // given node
+  //
+  // in this case because they are two circles, if the mid point between 2 centers
+  // is in the area of the two circles, it means that the 2 circles are overlaping
+  getDropNode: function(node) {
+    view = this;
+    result = null;
+    nodeCenter = node.getProperties('cx', 'cy');
+    this.get('controller.content').toArray().forEach(function(n){
+      if (node.get('id') != n.get('id')) {
+        nCenter = n.getProperties('cx', 'cy');
+        // calculate the medium point between the two nodes  
+        midPoint = {
+          cx: ((nCenter.cx + nodeCenter.cx) / 2),
+          cy: ((nCenter.cy + nodeCenter.cy) / 2),
+        }
+        // check if the midpoint belongs to the node area
+        belongsToNodeArea = view.nodeDistance(midPoint, nodeCenter) < node.get('radius');
+        belongsToNArea    = view.nodeDistance(midPoint, nCenter) < n.get('radius');
+        if (belongsToNodeArea && belongsToNArea) {
+          result = n;
+        }
+      }
+    });
+    return result;
+  },
+
+  nodeDistance: function(a, b) {  
+    return Math.sqrt(Math.pow((b.cx - a.cx), 2) + Math.pow(b.cy - a.cy, 2));
   },
 
   nodeClick: function() {
