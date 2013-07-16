@@ -259,13 +259,13 @@ App.NodesView = Ember.View.extend({
           dropNode.get('kind') == data.get('kind') &&
           confirm("Are you sure to join these nodes?")) {
         console.log("do join between node "+data.get('id') + " and " + dropNode.get('id'));
+        view.controller.send('join', data, dropNode);
       } else {
-        console.log("reset node position");
         // return the node to its original position
+        console.log("reset node position");
         data.set('x', d.__init__.x);
         data.set('y', d.__init__.y);
       }
-
       view.tick();
       delete d.__init__;
       view.set('targetNode', null);

@@ -62,4 +62,35 @@ App.NodesController = Ember.ArrayController.extend({
       this.set('currentNewNode', null);
     }
   },
+
+  join: function(nodeA, nodeB) {
+    var transaction    = this.get('store').transaction(),
+        nodeAAtributes = nodeA.get('node_attributes').toArray(),
+        nodeARoles     = nodeA.get('roles').toArray(),
+        nodeAFamilies  = nodeA.get('families').toArray();
+
+    transaction.add(nodeA);
+    transaction.add(nodeB);
+
+    nodeA.deleteRecord();
+
+    nodeAAtributes.forEach(function(attribute){
+      transaction.add(attribute);
+      attribute.set('node', nodeB);
+    });
+
+    // TODO: handle relation case
+    nodeARoles.forEach(function(role){
+      transaction.add(role);
+      role.set('actor', nodeB);
+    });
+
+    nodeAFamilies.forEach(function(family){
+      transaction.add(family);
+      family.get('nodes').removeObject(nodeA).pushObject(nodeB);
+    });
+
+    transaction.commit();
+  },
+
 });
