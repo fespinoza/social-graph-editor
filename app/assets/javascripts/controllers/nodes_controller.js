@@ -82,7 +82,7 @@ App.NodesController = Ember.ArrayController.extend({
     // TODO: handle relation case
     nodeARoles.forEach(function(role){
       transaction.add(role);
-      role.set('actor', nodeB);
+      role.set(nodeA.get('kind').toLowerCase(), nodeB);
     });
 
     nodeAFamilies.forEach(function(family){
