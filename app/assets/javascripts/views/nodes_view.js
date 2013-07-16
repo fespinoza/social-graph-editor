@@ -182,39 +182,42 @@ App.NodesView = Ember.View.extend({
     return d3.behavior.drag()
     .on('dragstart', function (d) {
       view.set('targetNode', null);
-      data = view.getData(d);
-      // store initial position of the node
-      if (view.get('socialNetwork.currentMode') == "Hand") {
+      var currentMode = view.get('socialNetwork.currentMode'),
+          data = view.getData(d);
+      if (currentMode == "Hand" || currentMode == "Join") {
+        // store initial position of the node
         d.__init__ = { x: data.get('x'), y: data.get('y') }
-      } else {
-        if (view.get('socialNetwork.currentMode') == "Role" && data.get('kind') == "Actor") {
-          // reposition drag line
-          view.drag_line
-            .style('marker-end', 'url(#end-arrow)')
-            .classed('hidden', false)
-            .attr('d', 'M' + data.get('cx') + ',' + data.get('cy') + 'L' + data.get('cx') + ',' + data.get('cy'));
-        }
+      }
+
+      if (currentMode == "Role" && data.get('kind') == "Actor") {
+        // reposition drag line
+        view.drag_line
+          .style('marker-end', 'url(#end-arrow)')
+          .classed('hidden', false)
+          .attr('d', 'M' + data.get('cx') + ',' + data.get('cy') + 'L' + data.get('cx') + ',' + data.get('cy'));
       }
     })
     .on('drag', function (d) {
-      data = view.getData(d);
-      if (view.get('socialNetwork.currentMode') == "Hand") {
+      var currentMode = view.get('socialNetwork.currentMode'),
+          data = view.getData(d);
+      if (currentMode == "Hand" || currentMode == "Join") {
         // TODO: check a bug here
         // move the coordinates of the node
         data.set('x', data.get('x') + d3.event.dx);  
         data.set('y', data.get('y') + d3.event.dy);  
         view.tick();
-      } else {
-        if (view.get('socialNetwork.currentMode') == "Role" && data.get('kind') == "Actor") {
-          // update drag line
-          view.drag_line.attr('d', 'M' + data.get('cx') + ',' + data.get('cy') + 'L' + d3.mouse(this)[0] + ',' + d3.mouse(this)[1]);
-        }
       }
 
+      if (currentMode == "Role" && data.get('kind') == "Actor") {
+        // update drag line
+        view.drag_line.attr('d', 'M' + data.get('cx') + ',' + data.get('cy') + 'L'
+                            + d3.mouse(this)[0] + ',' + d3.mouse(this)[1]);
+      }
     })
     .on('dragend', function (d) {
-      data = view.getData(d);
-      if (view.get('socialNetwork.currentMode') == "Hand") {
+      var currentMode = view.get('socialNetwork.currentMode'),
+          data = view.getData(d);
+      if (currentMode == "Hand") {
         // store changes only if node was really translated
         if (d.__init__.x != data.get('x') && d.__init__y != data.get('y')) {
           // update position changes to the server
@@ -223,51 +226,35 @@ App.NodesView = Ember.View.extend({
           };
         }
         delete d.__init__;
-      } else {
-        if (view.get('socialNetwork.currentMode') == "Role" && data.get('kind') == "Actor") {
-          if (view.get('targetNode.kind') == "Relation") {
-            view.$graphCanvas.trigger('addRole', [data, view.get('targetNode')]);
-          } else {
-            console.log("you can't create role between actors");
-          }
+      }
+
+      if (currentMode == "Role" && data.get('kind') == "Actor") {
+        if (view.get('targetNode.kind') == "Relation") {
+          view.$graphCanvas.trigger('addRole', [data, view.get('targetNode')]);
+        } else {
+          console.log("you can't create role between actors");
         }
       }
-      view.drag_line.classed('hidden', true)
-      view.set('targetNode', null);
-    });
-  },
 
-  joinNodes: function() {
-    view = this;
-    return d3.behavior.drag()
-    .on('dragstart', function (d) {
-      data = view.getData(d);
-      view.set('targetNode', null);
-      d.__init__ = { x: data.get('x'), y: data.get('y') }
-    })
-    .on('drag', function (d) {
-      data = view.getData(d);
-      data.set('x', data.get('x') + d3.event.dx);  
-      data.set('y', data.get('y') + d3.event.dy);  
-      view.tick();
-    })
-    .on('dragend', function (d) {
-      data = view.getData(d);
-      dropNode = view.getDropNode(data);
-      console.log(dropNode);
-      if (dropNode &&
-          dropNode.get('kind') == data.get('kind') &&
-          confirm("Are you sure to join these nodes?")) {
-        console.log("do join between node "+data.get('id') + " and " + dropNode.get('id'));
-        view.controller.send('join', data, dropNode);
-      } else {
-        // return the node to its original position
-        console.log("reset node position");
-        data.set('x', d.__init__.x);
-        data.set('y', d.__init__.y);
+      if (currentMode == "Join") {
+        dropNode = view.getDropNode(data);
+        console.log(dropNode);
+        if (dropNode &&
+            dropNode.get('kind') == data.get('kind') &&
+            confirm("Are you sure to join these nodes?")) {
+          console.log("do join between node "+data.get('id') + " and " + dropNode.get('id'));
+          view.controller.send('join', data, dropNode);
+        } else {
+          // return the node to its original position
+          console.log("reset node position");
+          data.set('x', d.__init__.x);
+          data.set('y', d.__init__.y);
+        }
+        view.tick();
+        delete d.__init__;
       }
-      view.tick();
-      delete d.__init__;
+
+      view.drag_line.classed('hidden', true)
       view.set('targetNode', null);
     });
   },
