@@ -2,20 +2,22 @@
   <div class="span4">
      <div id="social_networks" class="well items_list"> 
       {{#each social_network in controller}}
-        <div class="item">
-          {{#linkTo "social_network" social_network}}
-            {{ social_network.name }}
-          {{/linkTo}}
-
-          <div class="operations">
-            {{#linkTo "social_networks.edit" social_network class="edit"}}
-              <i class="icon-edit"></i>
+        {{#if social_network.isNotTemporal}}
+          <div class="item">
+            {{#linkTo "social_network" social_network}}
+              {{ social_network.name }}
             {{/linkTo}}
-            <a href="#" {{action "delete" social_network}} class="delete">
-              <i class="icon-trash"></i>
-            </a>
+
+            <div class="operations">
+              {{#linkTo "social_networks.edit" social_network class="edit"}}
+                <i class="icon-edit"></i>
+              {{/linkTo}}
+              <a href="#" {{action "delete" social_network}} class="delete">
+                <i class="icon-trash"></i>
+              </a>
+            </div>
           </div>
-        </div>
+        {{/if}}
       {{else}}
         <h4>Start by creating a Social Network</h4>
       {{/each}}

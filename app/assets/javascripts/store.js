@@ -14,7 +14,9 @@ App.AuthenticatedRESTAdapter = DS.RESTAdapter.extend({
 
       manyArray = record.get(name);
       manyArray.forEach(function (record) {
-        serializedHasMany.push(record.get('id'));
+        if (!record.get('isDeleted')) {
+          serializedHasMany.push(record.get('id'));
+        }
       }, this);
 
       hash[this.singularize(name) + '_ids'] = serializedHasMany;

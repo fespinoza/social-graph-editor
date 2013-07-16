@@ -1,0 +1,11 @@
+<h2>Join Two Social Networks</h2>
+
+{{partial "messages"}}
+
+{{#if isFirstStep}}
+  {{partial "social_networks/join_step_1"}}
+{{else}}
+  {{partial "social_networks/join_step_2"}}
+{{/if}}
+
+<a href="#" {{action "cancel"}}>Cancel</a>

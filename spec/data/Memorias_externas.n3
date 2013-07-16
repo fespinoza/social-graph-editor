@@ -1,0 +1,110 @@
+@base <http://sn.dcc.uchile.cl/> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix sn: <http://sn2.dcc.uchile.cl/2013/v1/vocabulary#> .
+
+</social_networks/5> a sn:socialNetwork;
+   dc:description "Esta es una red para ejemplificar la unión de redes Sociales por medio de esta aplicación.";
+   sn:name "Memorias Externa" .
+
+</social_networks/5/nodes/41> a sn:actor;
+   sn:belongsToFamily </social_networks/5/families/23>,
+     </social_networks/5/families/27>;
+   sn:hasAttribute </social_networks/5/attributes/12>;
+   sn:kind "Actor";
+   sn:name "Claudio Gutierrez";
+   sn:participatesAs </social_networks/5/roles/40> .
+
+</social_networks/5/nodes/42> a sn:actor;
+   sn:belongsToFamily </social_networks/5/families/23>,
+     </social_networks/5/families/27>;
+   sn:kind "Actor";
+   sn:name "Johan Fabry";
+   sn:participatesAs </social_networks/5/roles/41> .
+
+</social_networks/5/nodes/44> a sn:actor;
+   sn:belongsToFamily </social_networks/5/families/26>;
+   sn:kind "Actor";
+   sn:name "Camilo Garrido";
+   sn:participatesAs </social_networks/5/roles/39>,
+     </social_networks/5/roles/37> .
+
+</social_networks/5/nodes/45> a sn:actor;
+   sn:belongsToFamily </social_networks/5/families/26>;
+   sn:kind "Actor";
+   sn:name "Miguel Campusano";
+   sn:participatesAs </social_networks/5/roles/42>,
+     </social_networks/5/roles/38> .
+
+</social_networks/5/nodes/49> a sn:actor;
+   sn:belongsToFamily </social_networks/5/families/23>;
+   sn:hasAttribute </social_networks/5/attributes/13>;
+   sn:kind "Actor";
+   sn:name "Agustín Villena" .
+
+</social_networks/5/attributes/12> a sn:attribute;
+   sn:key "Edad";
+   sn:value "45" .
+
+</social_networks/5/attributes/13> a sn:attribute;
+   sn:key "Tipo de Jornada";
+   sn:value "Parcial" .
+
+</social_networks/5/families/25> a sn:family;
+   sn:kind "Relation";
+   sn:name "amigoDe" .
+
+</social_networks/5/roles/37> a sn:role;
+   sn:inRelation </social_networks/5/nodes/46>;
+   sn:name "" .
+
+</social_networks/5/roles/38> a sn:role;
+   sn:inRelation </social_networks/5/nodes/46>;
+   sn:name "" .
+
+</social_networks/5/roles/39> a sn:role;
+   sn:inRelation </social_networks/5/nodes/47>;
+   sn:name "" .
+
+</social_networks/5/roles/40> a sn:role;
+   sn:inRelation </social_networks/5/nodes/47>;
+   sn:name "guía" .
+
+</social_networks/5/roles/41> a sn:role;
+   sn:inRelation </social_networks/5/nodes/48>;
+   sn:name "" .
+
+</social_networks/5/roles/42> a sn:role;
+   sn:inRelation </social_networks/5/nodes/48>;
+   sn:name "" .
+
+</social_networks/5/families/26> a sn:family;
+   sn:kind "Actor";
+   sn:name "alumnoDCC" .
+
+</social_networks/5/families/27> a sn:family;
+   sn:kind "Actor";
+   sn:name "profesorDCC" .
+
+</social_networks/5/families/28> a sn:family;
+   sn:kind "Relation";
+   sn:name "memoria" .
+
+</social_networks/5/nodes/46> a sn:relation;
+   sn:belongsToFamily </social_networks/5/families/25>;
+   sn:kind "Relation";
+   sn:name "" .
+
+</social_networks/5/nodes/47> a sn:relation;
+   sn:belongsToFamily </social_networks/5/families/28>;
+   sn:kind "Relation";
+   sn:name "Parser RDF" .
+
+</social_networks/5/nodes/48> a sn:relation;
+   sn:belongsToFamily </social_networks/5/families/28>;
+   sn:kind "Relation";
+   sn:name "Casper" .
+
+</social_networks/5/families/23> a sn:family;
+   sn:kind "Actor";
+   sn:name "profesorGuía" .

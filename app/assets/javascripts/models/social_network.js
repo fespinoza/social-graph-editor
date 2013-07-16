@@ -36,4 +36,12 @@ App.SocialNetwork = DS.Model.extend({
     return null;
   }.property(),
 
+  temporal: function() {
+    return false; 
+  }.property(),
+
+  isNotTemporal: function() {
+    return !this.get('temporal');
+  }.property('temporal'),
+
 });

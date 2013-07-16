@@ -38,6 +38,13 @@ class SocialNetworksController < ApplicationController
     respond_with social_network
   end
 
+  def join
+    original = current_user.social_networks.find(params[:original_id])
+    imported = current_user.social_networks.find(params[:imported_id])
+    original.join!(imported, params[:equivalences])
+    respond_with original
+  end
+
   private
 
   def social_networks
