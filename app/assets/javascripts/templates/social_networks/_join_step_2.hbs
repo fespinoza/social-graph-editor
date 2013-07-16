@@ -1,0 +1,50 @@
+<h3>Step 2. Define Family Equivalences</h3>
+
+<p>Define which families of the imported social network are equivalent to the original social network families in order to produce a beter union of the social networks</p>
+
+<form class="form-horizontal" {{action "join" on="submit"}}>
+
+  <table class="table table-hover" id="equivalences">
+    <thead>
+      <tr>
+        <th>Imported Family</th>
+        <th>Original Family Equivalence</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each equivalence in equivalences}}
+        <tr>
+          <td>
+            {{#if equivalence.family.isActorKind}}
+              <span class="badge actor">A</span>
+            {{else}}
+              <span class="badge relation">R</span>
+            {{/if}}
+            {{equivalence.family.name}}
+          </td>
+          <td>
+            {{#if equivalence.family.isActorKind}}
+              {{view Ember.Select contentBinding="originalSocialNetwork.actorFamilies"
+                                  prompt="(none)"
+                                  selectionBinding="equivalence.eq"
+                                  optionValuePath="content.id"
+                                  optionLabelPath="content.name"}}
+            {{else}}
+              {{view Ember.Select contentBinding="originalSocialNetwork.relationFamilies"
+                                  prompt="(none)"
+                                  selectionBinding="equivalence.eq"
+                                  optionValuePath="content.id"
+                                  optionLabelPath="content.name"}}
+            {{/if}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">Finish Join!</button>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,33 @@
+<h3>Step 1. Select Social Networks</h3>
+
+<form class="form-horizontal" {{action "next" on="submit"}}>
+
+  <h4>Select one of your Social Networks</h4>
+  <div class="control-group">
+    <label class="control-label" for="originalSocialNetwork">Original Social Network</label>
+    <div class="controls">
+      {{view Ember.Select contentBinding="controllers.social_networks.content"
+                          prompt="Please select a Social Network"
+                          elementId="originalSocialNetwork"
+                          selectionBinding="originalSocialNetwork"
+                          optionValuePath="content.id"
+                          optionLabelPath="content.name"}}
+    </div>  
+  </div>
+
+  <h4>Import an external Social Network to Join</h4>
+  <div class="control-group">
+    <label class="control-label" for="file">External RDF/N3 File</label>
+    <div class="controls">
+      {{input valueBinding="file" id="file" type="file" title="Choose File"}}
+      <span class="help-block">Upload a valid RDF/N3 social network file previously exported with this application.</span>
+    </div>
+  </div>
+
+
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn btn-primary">Next</button>
+    </div>
+  </div>
+</form>

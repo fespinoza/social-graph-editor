@@ -106,8 +106,6 @@ svg#graph_canvas {
 
 #families {
   .family {
-    span.badge.actor { background-color: #4764cc; }
-    span.badge.relation { background-color: #c43535; }
     &:not(.enabled) {
       background-color: transparent;
       span.badge {
@@ -127,4 +125,9 @@ svg#graph_canvas {
       }
     }
   }
+}
+
+#equivalences, #families .family {
+  span.badge.actor { background-color: #4764cc; }
+  span.badge.relation { background-color: #c43535; }
 }

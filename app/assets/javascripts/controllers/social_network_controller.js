@@ -24,12 +24,12 @@ App.SocialNetworkController = Ember.ObjectController.extend({
   },
 
   exportVisual: function() {
+    // TODO: check file name with spaces
     this.export(1, this.get('name') + "_visual.n3");
   },
 
   exportVocabulary: function() {
     url = "/2013/v1/vocabulary.rdf";
-    // TODO: check file name with spaces
     filename = "Vocabulary.n3";
     this.export(null, filename, url);
   },
