@@ -23,6 +23,12 @@ App.NodesController = Ember.ArrayController.extend({
     // add node to the nodes lists
     this.get('content').pushObject(node);
 
+    // save inmediatly only if kind is relation
+    if (kind == "Relation") {
+      this.get('store').commit();
+      this.set("socialNetwork.currentMode", "Role");
+    }
+
     // unlink from current new node if node was saved
     controller = this;
     node.on('didCreate', function () {
