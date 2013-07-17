@@ -1,0 +1,8 @@
+.DS_Store
+cookbooks
+db
+log
+spec
+tags
+tmp
+vendor
