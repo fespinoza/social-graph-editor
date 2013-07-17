@@ -2,6 +2,19 @@
   <div class="span12">
     <div id="top-bar" class="well well-small">
 
+      <div id="social_network_info">
+        <h4 class="title">{{name}}</h4>
+
+        <div class="operations">
+          {{#linkTo "social_networks.edit" this class="edit"}}
+          <i class="icon-edit"></i>
+          {{/linkTo}}
+          <a href="#" {{action "delete"}} class="delete">
+            <i class="icon-trash"></i>
+          </a>
+        </div>
+      </div>
+
       <div class="btn-group">
         <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
           <span>

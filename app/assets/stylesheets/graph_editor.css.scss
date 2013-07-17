@@ -131,3 +131,21 @@ svg#graph_canvas {
   span.badge.actor { background-color: #4764cc; }
   span.badge.relation { background-color: #c43535; }
 }
+
+#social_network_info {
+  display: inline-block;
+  .title {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    line-height: 7px;
+  }
+  .operations {
+    display: inline-block;
+    margin: 0 20px 0 10px;
+    padding: 0;
+    a {
+      text-decoration: none;
+    }
+  }
+}
