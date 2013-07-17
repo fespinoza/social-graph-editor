@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Social-graph-editor by fespinoza</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Social-graph-editor</h1>
+        <p>An emberJS app with Rails Backend that uses SVG to render and edit social networks as graph</p>
+
+        <p class="view"><a href="https://github.com/fespinoza/social-graph-editor">View the Project on GitHub <small>fespinoza/social-graph-editor</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/fespinoza/social-graph-editor/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/fespinoza/social-graph-editor/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/fespinoza/social-graph-editor">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="social-graph-editor" class="anchor" href="#social-graph-editor"><span class="octicon octicon-link"></span></a>Social Graph Editor</h1>
+
+<p>This it is my thesis project as Computer Science Engineer at the University of Chile. It is an open source project, so feel free to use, extend and learn from this code.</p>
+
+<p>It is a social network graphs modeling tool to assits researchers that uses the study of social networks in their
+respective disciplines and allows them generate this data with a nice interfaces and export it in RDF/N3 format.</p>
+
+<p>Also it has the capability of join social network data from two different users, giving users of this
+application a way of interacting with each other and complement their information.</p>
+
+<p>The application is currently running on <a href="http://social-graph-editor.herokuapp.com">http://social-graph-editor.herokuapp.com</a> and this is a video explaining how
+the app works</p>
+
+
+
+<h2>
+<a name="development" class="anchor" href="#development"><span class="octicon octicon-link"></span></a>Development</h2>
+
+<h3>
+<a name="installation-for-the-development-environment" class="anchor" href="#installation-for-the-development-environment"><span class="octicon octicon-link"></span></a>Installation for the Development Environment</h3>
+
+<p>I have provided a vagrant box with chef recipes to speed up the setup for development, so, 
+first you need to install chef in your machine which can be found on <a href="http://vagrantup.com">the official vagrant site</a>,
+so the first time you use vagrant and install this project you have to use the following terminal
+commands from the vagrant directory of this project</p>
+
+<pre><code>vagrant up
+vagrant ssh
+cd /sge
+ruby global 1.9.3-p327
+bundle install
+rbenv rehash
+rake db:create; rake db:migrate
+</code></pre>
+
+<p>After that you can run the server with the command</p>
+
+<pre><code>rails s
+</code></pre>
+
+<p>Which will run the rails server, so you can access the app through the url <code>http://localhost:3000</code></p>
+
+<p>Now on, every time you want to launch the development enviroment just execute the following commands from
+the project's vagrant directory:</p>
+
+<pre><code>vagrant up
+vagrant ssh
+cd /sge
+rails s
+</code></pre>
+
+<h2>
+<a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>Notes</h2>
+
+<ul>
+<li>the RDF-N3 gem fail with ruby 2.0 specifically in the RDF::N3::Reader that
+returns nil</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/fespinoza">fespinoza</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
