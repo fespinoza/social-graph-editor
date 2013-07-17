@@ -1,4 +1,8 @@
-<h3>Details for {{kind}} #{{id}}</h3>
+{{#if isNew}}
+  <h3>New {{kind}}</h3>
+{{else}}
+  <h3>{{kind}} #{{id}} details</h3>
+{{/if}}
 
 <form id="node_form" {{bindAttr data-node-id="id"}}>
   <label>
