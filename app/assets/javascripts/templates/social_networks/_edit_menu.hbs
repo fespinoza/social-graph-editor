@@ -6,12 +6,9 @@
         <h4 class="title">{{name}}</h4>
 
         <div class="operations">
-          {{#linkTo "social_networks.edit" this class="edit"}}
-          <i class="icon-edit"></i>
+          {{#linkTo "social_networks.edit" this class="edit" title="Edit Social Network Details"}}
+            <i class="icon-edit"></i>
           {{/linkTo}}
-          <a href="#" {{action "delete"}} class="delete">
-            <i class="icon-trash"></i>
-          </a>
         </div>
       </div>
 

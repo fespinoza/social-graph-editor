@@ -28,6 +28,7 @@ App.SocialNetworkView = Ember.View.extend({
     //canvas.call(zoom);
     this.tick();
     this.$('.states .btn').tooltip();
+    this.$('.operations .edit').tooltip();
   },
 
   tick: function() {

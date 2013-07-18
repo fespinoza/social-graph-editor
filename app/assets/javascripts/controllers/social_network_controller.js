@@ -33,14 +33,4 @@ App.SocialNetworkController = Ember.ObjectController.extend({
     filename = "Vocabulary.n3";
     this.export(null, filename, url);
   },
-
-  delete: function () {
-    var transaction = this.get('store').transaction(),
-        socialNetwork = this.get('content');
-    if (confirm("Are you sure to delete the social network "+socialNetwork.get('name')+", all it's data will be deleted")) {
-      transaction.add(socialNetwork);
-      socialNetwork.deleteRecord();
-      transaction.commit();
-    }
-  },
 });
