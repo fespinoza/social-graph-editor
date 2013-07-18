@@ -34,7 +34,7 @@ After that you can run the server with the command
 
     rails s
     
-Which will run the rails server, so you can access the app through the url `http://localhost:3000`
+Which will run the rails server, so you can access the app through the url `http://33.33.33.10:3000`
 
 Now on, every time you want to launch the development enviroment just execute the following commands from
 the project's vagrant directory:
