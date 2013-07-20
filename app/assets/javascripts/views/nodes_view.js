@@ -167,11 +167,14 @@ App.NodesView = Ember.View.extend({
 
         kind = view.get('socialNetwork.currentMode');
 
-        // TODO: manage the scaling case in position when adding new actor
+        scale = view.get('socialNetwork.scale');
+        verticalOffset = 40*scale;
+
         var coords = {
-          x: (event.pageX - offset.left),
-          y: (event.pageY - offset.top - 20),
+          x: (event.pageX - offset.left)/scale,
+          y: (event.pageY - offset.top - verticalOffset)/scale,
         }
+
         view.controller.send('add', kind, coords.x, coords.y);
       };
     }
