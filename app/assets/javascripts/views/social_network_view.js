@@ -35,10 +35,12 @@ App.SocialNetworkView = Ember.View.extend({
 
     // zoom buttons calls
     this.$('.zoom-buttons .zoom-in').on('click', function() {
-      view.zoomTo(socialNetwork.get('scale') + 0.2);
+      scale = Math.min(socialNetwork.get('scale') + 0.2, 2);
+      view.zoomTo(scale);
     });
     this.$('.zoom-buttons .zoom-out').on('click', function() {
-      view.zoomTo(socialNetwork.get('scale') - 0.2);
+      scale = Math.max(socialNetwork.get('scale') - 0.2, 0.4);
+      view.zoomTo(scale);
     });
     this.$('.zoom-buttons .zoom-reset').on('click', function() { view.zoomTo(1); });
   },
