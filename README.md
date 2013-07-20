@@ -8,6 +8,8 @@ respective disciplines and allows them generate this data with a nice interfaces
 Also it has the capability of join social network data from two different users, giving users of this
 application a way of interacting with each other and complement their information.
 
+I have a full report of the motivation, analysis and all aspects of this work including a user manual in my [thesis report](https://github.com/fespinoza/memoria).
+
 The application is currently running on http://social-graph-editor.herokuapp.com and this is a video explaining how
 the app works
 
