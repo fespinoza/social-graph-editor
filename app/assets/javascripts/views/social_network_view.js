@@ -3,7 +3,7 @@ App.SocialNetworkView = Ember.View.extend({
     var view = this;
     var canvas = d3.select("#graph_canvas");
     this.root = canvas.append("g").attr("class", "root");
-    this.socialNetwork = this.get('controller.content');
+    var socialNetwork = this.socialNetwork = this.get('controller.content');
     this.persistChangesInterval = null;
 
     // TODO: kind of reset the d3 coordinates when reloading the page
@@ -27,9 +27,33 @@ App.SocialNetworkView = Ember.View.extend({
       //});
     //canvas.call(zoom);
     this.tick();
+
+    // tooltip definitions
     this.$('.states .btn').tooltip();
     this.$('.operations .edit').tooltip();
+    this.$('.zoom-buttons .btn').tooltip();
+
+    // zoom buttons calls
+    this.$('.zoom-buttons .zoom-in').on('click', function() {
+      scale = Math.min(socialNetwork.get('scale') + 0.2, 2);
+      view.zoomTo(scale);
+    });
+    this.$('.zoom-buttons .zoom-out').on('click', function() {
+      scale = Math.max(socialNetwork.get('scale') - 0.2, 0.4);
+      view.zoomTo(scale);
+    });
+    this.$('.zoom-buttons .zoom-reset').on('click', function() { view.zoomTo(1); });
   },
+
+  // zoom buttons execution
+  zoomTo: function(scale) {
+    var transaction = this.socialNetwork.get('store').transaction();
+    transaction.add(this.socialNetwork);
+    this.socialNetwork.set('scale', scale);
+    this.tick();
+    transaction.commit();
+  },
+
 
   tick: function() {
     this.root.attr(
