@@ -1,7 +1,8 @@
-App.UserController = Ember.ObjectController.extend({
+App.UserIndexController = Ember.ObjectController.extend({
   errorMessage: null,
 
   startEditing: function() {
+    console.log("user index: start editing");
     // create a new record on a local transaction
     this.transaction = this.get('store').transaction();
     this.set('content', this.transaction.createRecord(App.User, {}));
@@ -9,6 +10,7 @@ App.UserController = Ember.ObjectController.extend({
   },
 
   register: function() {
+    console.log("user index: register");
     validParams = this.get('email') != null &&
                   this.get('password') != null &&
                   this.get('password') == this.get('password_confirmation');
@@ -24,6 +26,7 @@ App.UserController = Ember.ObjectController.extend({
   },
 
   stopEditing: function() {
+    console.log("user index: stop editing");
     // rollback the local transaction if it hasn't already been cleared
     if (this.transaction) {
       this.transaction.rollback();
@@ -37,14 +40,8 @@ App.UserController = Ember.ObjectController.extend({
     // an id before we can transition to its route (which depends on its id)
     if (this.get('content.id')) {
       // TODO: sucess message
-      console.log(this.get('token'));
       App.Auth.authenticate(this.get('token'), this.get('id'));
       this.transitionToRoute('social_networks.index');
     }
   }.observes('content.token'),
-
-  cancel: function() {
-    this.stopEditing();
-    this.transitionToRoute('users.index');
-  },
 })

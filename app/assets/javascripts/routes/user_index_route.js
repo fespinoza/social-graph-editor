@@ -1,4 +1,4 @@
-App.UserRoute = Ember.Route.extend({
+App.UserIndexRoute = Ember.Route.extend({
   model: function() {
     // Because we are maintaining a transaction locally in the controller for editing,
     // the new record needs to be created in the controller.
@@ -8,8 +8,4 @@ App.UserRoute = Ember.Route.extend({
   setupController: function(controller) {
     controller.startEditing();
   },
-
-  deactivate: function() {
-    this.controllerFor('user').stopEditing();
-  }
 });
