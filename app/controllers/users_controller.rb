@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def login
     params[:user][:password] = User.encript(params[:user][:password])
+    params[:user][:password] = User.encrypt(params[:user][:password])
     respond_with User.where(params[:user]).first
     # TODO: solve case when no user is found
   end
