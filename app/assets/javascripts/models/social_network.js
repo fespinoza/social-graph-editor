@@ -12,9 +12,9 @@ App.SocialNetwork = DS.Model.extend({
   roles: DS.hasMany('App.Role'),
   user: DS.belongsTo('App.User'),
 
-  translationString: function() {
+  translation: function() {
     return this.get('translation_x') + ", " + this.get('translation_y');
-  },
+  }.property('translation_x', 'translation_y'),
 
   actorFamilies: function() {
     return this.get('families').toArray().filter(function (family) {
