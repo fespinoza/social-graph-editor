@@ -26,6 +26,10 @@ class User < ActiveRecord::Base
     }.to_json
   end
 
+  def password_reset!
+    update_attribute(:password, User.encrypt("temp123"))
+  end
+
   private
 
   def encrypt_password
