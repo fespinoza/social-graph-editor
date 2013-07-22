@@ -11,9 +11,7 @@
     {{#if App.Auth.isAuthenticated}}
       <ul class="nav pull-right">
         <li>
-          <span class="navbar-text">
-            {{App.Auth.session.user.email}}
-          </span>
+          {{#linkTo "user.edit" App.Auth.session.user}}{{App.Auth.session.user.email}}{{/linkTo}}
         </li>
         <li>
           <a href="#" {{action "logout"}}>Log Out</a>

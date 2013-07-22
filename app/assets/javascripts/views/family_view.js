@@ -14,9 +14,9 @@ App.FamilyView = Ember.View.extend({
       this.clearSelected();
     } else {
       $("#families .family").removeClass('selected');
-      this.$().addClass('selected');
-      this.get('controller').send('selectFamily', this.get('content'));
       this.set('controller.socialNetwork.currentMode', this.get('content.kind'));
+      this.get('controller').send('selectFamily', this.get('content'));
+      this.$().addClass('selected');
     }
   },
 

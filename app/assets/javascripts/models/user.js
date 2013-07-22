@@ -3,6 +3,7 @@ App.User = DS.Model.extend({
   email: DS.attr('string'),
   password: DS.attr('string'),
   token: DS.attr('string'),
+  newPassword: DS.attr('string'),
 
   // relations
   social_networks: DS.hasMany('App.SocialNetwork'),

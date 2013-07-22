@@ -1,5 +1,5 @@
 EmberSge::Application.routes.draw do
-  resources :users, only: [:create, :show, :login] do
+  resources :users, only: [:create, :show, :login, :update] do
     post :login, on: :collection
   end
   resources :social_networks do
