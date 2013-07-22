@@ -32,7 +32,6 @@ App.AuthManager = Ember.Object.extend({
   }.property('session.token', 'session.user'),
  
   authenticate: function(token, accountId) {
-    console.log("authenticate!");
     var user = App.User.find(accountId);
     this.set('session', Ember.Object.create({
       token: token,
