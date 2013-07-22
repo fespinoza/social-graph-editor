@@ -159,23 +159,18 @@ App.NodesView = Ember.View.extend({
   addNode: function() {
     view = this;
     return function (event) {
-      enabled = view.get('socialNetwork.currentMode') == "Actor" ||
-                view.get('socialNetwork.currentMode') == "Relation";
-      if(enabled) {
+      var socialNetwork = view.get('socialNetwork'),
+          currentMode = socialNetwork.get('currentMode');
+      if(currentMode == "Actor" || currentMode == "Relation") {
         console.log("click: add node");
-        var offset = $(this).offset(); 
-
-        kind = view.get('socialNetwork.currentMode');
-
-        scale = view.get('socialNetwork.scale');
-        verticalOffset = 40*scale;
-
+        var offset = $(this).offset(),
+            scale = socialNetwork.get('scale'),
+            verticalOffset = 20*scale;
         var coords = {
-          x: (event.pageX - offset.left)/scale,
-          y: (event.pageY - offset.top - verticalOffset)/scale,
+          x: (event.pageX - offset.left - socialNetwork.get('translation_x'))/scale,
+          y: (event.pageY - offset.top - verticalOffset - socialNetwork.get('translation_y'))/scale,
         }
-
-        view.controller.send('add', kind, coords.x, coords.y);
+        view.controller.send('add', currentMode, coords.x, coords.y);
       };
     }
   },
