@@ -7,11 +7,13 @@
     </div>
 
     {{render "nodes" nodes}}
-
     {{render "roles" roles}}
   </div>
-  <div class="span9">
-    <svg id="graph_canvas" data-social-network-id="{{unbound id}}">
-    </svg>
+  <div class="span9" style="position: relative;">
+    <div id="canvas_container">
+      <svg id="graph_canvas" data-social-network-id="{{unbound id}}">
+      </svg>
+      {{view App.CompassView}}
+    </div>
   </div>
 </div>
