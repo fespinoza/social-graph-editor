@@ -1,6 +1,5 @@
 App.NodesView = Ember.View.extend({
   templateName: 'nodes',
-  readyToRender: false,
 
   didInsertElement: function () {
     view = this;
@@ -8,41 +7,55 @@ App.NodesView = Ember.View.extend({
     $graphCanvas = this.$graphCanvas = $("#graph_canvas");
     this.socialNetwork = App.SocialNetwork.find($graphCanvas.data('social-network-id'));
     this.set('controller.socialNetwork', socialNetwork);
+
     $graphCanvas.on('click', this.addNode());
-    this.get('controller.content').on('didLoad', function () { view.renderSVG(); });
-    $graphCanvas.on('nodeUpdate', function () { view.renderSVG(); });
-    this.set('readyToRender', true);
+
+    this.get('controller.content').on('didLoad', function () { 
+      console.log("nodes did load");
+      view.renderSVG(); 
+    });
+
+    $graphCanvas.on('nodeUpdate', function () { 
+      console.log("node update");
+      view.renderSVG(); 
+    });
+
+    console.log("did insert element!");
+    this.renderSVG();
   },
 
-  renderSVG: function () {
-    // TODO: fix this ready to render thing
-    if (this.get('readyToRender')) {
-      console.log("insert svg content");
-      this.svg = d3.select("#graph_canvas .root");
-      // define the end arrow
-      this.svg
-        .append('svg:defs')
-        .append('svg:marker')
-        .attr('id', 'end-arrow')
-        .attr('viewBox', '0 -5 10 10')
-        .attr('refX', 6)
-        .attr('markerWidth', 3)
-        .attr('markerHeight', 3)
-        .attr('orient', 'auto')
-        .append('svg:path')
-        .attr('d', 'M0,-5L10,0L0,5')
-        .attr('fill', '#000');
-
-      // line displayed when dragging new nodes
-      this.drag_line = this.svg.append('svg:path')
-        .attr('class', 'link dragline hidden')
-        .attr('d', 'M0,0L0,0');
-      this.renderActorsSVG();
-      this.renderRelationsSVG();
-    } else {
-      console.log("not ready to render yet");
+  reRender: function() {
+    if (this.get('alreadyRendered')) {
+      console.log("re render!");
+      this.renderSVG();
     }
   }.observes('controller.length'),
+
+  renderSVG: function () {
+    console.log("insert svg content");
+    this.svg = d3.select("#graph_canvas .root");
+    // define the end arrow
+    this.svg
+      .append('svg:defs')
+      .append('svg:marker')
+      .attr('id', 'end-arrow')
+      .attr('viewBox', '0 -5 10 10')
+      .attr('refX', 6)
+      .attr('markerWidth', 3)
+      .attr('markerHeight', 3)
+      .attr('orient', 'auto')
+      .append('svg:path')
+      .attr('d', 'M0,-5L10,0L0,5')
+      .attr('fill', '#000');
+
+    // line displayed when dragging new nodes
+    this.drag_line = this.svg.append('svg:path')
+      .attr('class', 'link dragline hidden')
+      .attr('d', 'M0,0L0,0');
+    this.renderActorsSVG();
+    this.renderRelationsSVG();
+    this.set('alreadyRendered', true);
+   },
 
   renderActorsSVG: function() {
     data = this.get('controller.content').toArray().filter(function(node){
@@ -113,7 +126,7 @@ App.NodesView = Ember.View.extend({
   },
 
   tick: function () {
-    if (this.get('readyToRender')) {
+    if (this.get('alreadyRendered')) {
       this.tickActors();
       this.tickRelations();
       if (this.$graphCanvas) { this.$graphCanvas.trigger('nodeTick'); }

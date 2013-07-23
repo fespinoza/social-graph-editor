@@ -11,7 +11,7 @@
   </div>
   <div class="span9" style="position: relative;">
     <div id="canvas_container">
-      <svg id="graph_canvas" data-social-network-id="{{unbound id}}">
+      <svg id="graph_canvas" {{bindAttr data-social-network-id="id"}}>
       </svg>
       {{view App.CompassView}}
     </div>
