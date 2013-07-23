@@ -13,14 +13,28 @@ App.CompassView = Ember.View.extend({
       { class: '.right', coordinate: 'translation_x', delta: +20, },
     ];
     directions.forEach(function(direction){
-      this.$("#compass "+direction.class).on('click', function() {
-        var transaction = view.get('socialNetwork.store').transaction();
+      var selector = "#compass "+direction.class,
+          moveInDirection = function () {
+            console.log("move");
+            view.set('socialNetwork.'+direction.coordinate,
+              view.get('socialNetwork.'+direction.coordinate) + direction.delta);
+            canvas.trigger('canvasUpdate');
+          },
+          interval,
+          transaction;
+
+      this.$(selector).on('mousedown', function() {
+        transaction = view.get('socialNetwork.store').transaction();
         transaction.add(view.get('socialNetwork'));
-        view.set('socialNetwork.'+direction.coordinate,
-          view.get('socialNetwork.'+direction.coordinate) + direction.delta);
-        canvas.trigger('canvasUpdate');
-        transaction.commit();
-      })
+        interval = setInterval(moveInDirection, 100);
+      });
+      this.$(selector).on('mouseup mouseout', function() {
+        clearInterval(interval);
+        if (transaction) {
+          transaction.commit();
+          transaction = null;
+        }
+      });
     });
     this.$('.reset').on('click', function() {
       var transaction = view.get('socialNetwork.store').transaction();
