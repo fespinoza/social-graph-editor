@@ -2,7 +2,7 @@
 
 This it is my thesis project as Computer Science Engineer at the University of Chile. It is an open source project, so feel free to use, extend and learn from this code.
 
-It is a social network graphs modeling tool to assits researchers that uses the study of social networks in their
+It is a social network graph modeling tool to assit researchers that uses the study of social networks in their
 respective disciplines and allows them generate this data with a nice interfaces and export it in RDF/N3 format.
 
 Also it has the capability of join social network data from two different users, giving users of this
