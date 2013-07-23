@@ -72,28 +72,51 @@ App.SocialNetworksJoinController = Ember.Controller.extend({
   }.property('importedSocialNetwork.isLoaded','importedSocialNetwork.families'),
 
   join: function() {
-    var self = this;
-    data = { 
-      original_id: this.get('originalSocialNetwork.id'),
-      imported_id: this.get('importedSocialNetwork.id'),
-      equivalences: this.serializedEquivalences(),
-      token: App.Auth.get('session.token'),
-    };
-    $("body").addClass("loading");
-    $.post('/social_networks/join.json', data).then(
-      function(response) {
-        $("body").removeClass("loading");
-        console.log(response);
-        self.reset();
-        socialNetwork = App.SocialNetwork.find(response.social_network.id);
-        self.transitionToRoute('social_network.index', socialNetwork);
-      },
-      function(event) {
-        $("body").removeClass("loading");
-        self.reset();
-        self.set('errorMessage', "Social Network join failed.");
+    var transaction = this.get('store').transaction(),
+        importedSN = this.get('importedSocialNetwork'),
+        originalSN = this.get('originalSocialNetwork'),
+        equivalences = this.get('equivalences').toArray();
+
+    transaction.add(importedSN);
+    transaction.add(originalSN);
+
+    importedSN.deleteRecord();
+
+    // change nodes sn
+    importedSN.get('nodes').toArray().forEach(function(node){
+      transaction.add(node);
+      node.set('social_network', originalSN);
+    });
+
+    // change roles sn
+    importedSN.get('roles').toArray().forEach(function(role){
+      transaction.add(role);
+      role.set('social_network', originalSN);
+    });
+
+    // handle the case for families and its equivalences
+    equivalences.forEach(function(equivalence){
+      var originalFamily = equivalence.get('eq'),
+          importedFamily = equivalence.get('family');
+
+      // if exist a original family equivalence to the
+      // imported family
+      if (originalFamily) {
+        importedFamily.get('nodes').toArray().forEach(function(node){
+          transaction.add(node);
+          node.get('families').removeObject(importedFamily)
+                              .pushObject(originalFamily);
+        });
+      } else {
+        // if not the imported family is added to the 
+        // original social network
+        transaction.add(importedFamily);
+        importedFamily.set('social_network', originalSN);
       }
-    );
+    });
+
+    transaction.commit();
+    this.transitionToRoute('social_network', originalSN);
   },
 
   isFirstStep: function() {
@@ -103,14 +126,6 @@ App.SocialNetworksJoinController = Ember.Controller.extend({
   cancel: function() {
     this.reset();
     this.transitionToRoute('social_networks.index');
-  },
-
-  serializedEquivalences: function() {
-    result = {}
-    this.get('equivalences').toArray().forEach(function(equivalence){
-      result[equivalence.get('family.id')] = equivalence.get('eq.id');
-    });
-    return result;
   },
 
 });
