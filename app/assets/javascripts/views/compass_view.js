@@ -15,7 +15,6 @@ App.CompassView = Ember.View.extend({
     directions.forEach(function(direction){
       var selector = "#compass "+direction.class,
           moveInDirection = function () {
-            console.log("move");
             view.set('socialNetwork.'+direction.coordinate,
               view.get('socialNetwork.'+direction.coordinate) + direction.delta);
             canvas.trigger('canvasUpdate');
