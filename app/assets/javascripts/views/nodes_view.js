@@ -194,13 +194,14 @@ App.NodesView = Ember.View.extend({
     .on('dragstart', function (d) {
       view.set('targetNode', null);
       var currentMode = view.get('socialNetwork.currentMode'),
-          data = view.getData(d);
+          data = view.getData(d),
+          dataKind = data.get('kind');
       if (currentMode == "Hand" || currentMode == "Join") {
         // store initial position of the node
         d.__init__ = { x: data.get('x'), y: data.get('y') }
       }
 
-      if (currentMode == "Role" && data.get('kind') == "Actor") {
+      if ((currentMode == "Role" || currentMode == "Relation") && dataKind == "Actor") {
         // reposition drag line
         view.drag_line
           .style('marker-end', 'url(#end-arrow)')
@@ -219,7 +220,7 @@ App.NodesView = Ember.View.extend({
         view.tick();
       }
 
-      if (currentMode == "Role" && data.get('kind') == "Actor") {
+      if ((currentMode == "Role" || currentMode == "Relation") && data.get('kind') == "Actor") {
         // update drag line
         view.drag_line.attr('d', 'M' + data.get('cx') + ',' + data.get('cy') + 'L'
                             + d3.mouse(this)[0] + ',' + d3.mouse(this)[1]);
@@ -247,6 +248,16 @@ App.NodesView = Ember.View.extend({
         }
       }
 
+      if (currentMode == "Relation" && data.get('kind') == "Actor") {
+        if (view.get('targetNode.kind') == "Actor") {
+          view.get('controller').send('addBinaryRelation', data, view.get('targetNode'));
+        } else {
+          console.log("you can create binary relations between 2 actors");
+        }
+      }
+
+      dragLines = d3.selectAll(".dragline").classed("hidden", true);
+
       if (currentMode == "Join") {
         dropNode = view.getDropNode(data);
         console.log(dropNode);
@@ -265,7 +276,7 @@ App.NodesView = Ember.View.extend({
         delete d.__init__;
       }
 
-      view.drag_line.classed('hidden', true)
+      view.drag_line.classed('hidden', true);
       view.set('targetNode', null);
     });
   },
