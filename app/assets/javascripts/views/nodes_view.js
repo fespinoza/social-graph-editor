@@ -144,10 +144,21 @@ App.NodesView = Ember.View.extend({
       .attr("r", function(d) { return d.node.get('radius') - d.index * 4; })
       .attr('cx', function(d) { return d.node.get('cx'); })
       .attr('cy', function(d) { return d.node.get('cy'); })
-      .attr('fill', function (d) {
+      .attr('stroke', "black")
+      .style('stroke', function(d) { 
         family = d.family;
         if (family) {
+          return d3.rgb( family.get('color')).darker().toString(); 
+        }
+      })
+      .style('fill', function (d) {
+        family = d.family;
+        if (family) {
+          //if(selected) {
+          //d3.rgb(colors(d.id)).brighter().toString()
+          //} else {
           return family.get('color');
+          //}
         }
       });
   },
@@ -161,8 +172,13 @@ App.NodesView = Ember.View.extend({
     this.relationRect
       .attr('x', function(d) { return d.get('x') - d.get('radius')/2; })
       .attr('y', function(d) { return d.get('y') + d.get('radius')/2; })
-      .attr('fill', function (d) {
+      .style('stroke', function(d) { 
         family = d.get('families').toArray()[0];
+        if (family) {
+          return d3.rgb( family.get('color')).darker().toString(); 
+        }
+      })
+      .attr('fill', function (d) {
         if (family) {
           return family.get('color');
         }

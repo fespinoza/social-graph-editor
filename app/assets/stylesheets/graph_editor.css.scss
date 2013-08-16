@@ -17,9 +17,14 @@ svg#graph_canvas {
     cursor: crosshair;
   }
 
-  .node.figure.selectedNode {
-    stroke: blue;
-    stroke-width: 2;
+  .node {
+    &.actor, &.relation {
+      stroke-width: 1.5px;
+
+      &.selectedNode {
+        stroke-width: 3.5px;
+      }
+    }
   }
    
   path.link {
