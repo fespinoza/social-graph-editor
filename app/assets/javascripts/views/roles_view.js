@@ -38,7 +38,8 @@ App.RolesView = Ember.View.extend({
       .attr('x1', function(d) { return d.get('x1'); })
       .attr('y1', function(d) { return d.get('y1'); })
       .attr('x2', function(d) { return d.get('x2'); })
-      .attr('y2', function(d) { return d.get('y2'); });
+      .attr('y2', function(d) { return d.get('y2'); })
+      .style('marker-end', 'url(#end-arrow)' );
     this.roleText
       .text(function(d) { return d.get('name'); })
       .attr('x', function(d) { return d.get('text_x'); })
