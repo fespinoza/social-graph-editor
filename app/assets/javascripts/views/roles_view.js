@@ -57,10 +57,14 @@ App.RolesView = Ember.View.extend({
   roleClick: function() {
     roleView = this;
     return function(d) {
-      d3.selectAll("line.role").classed("selected", false);
       console.log("role "+d.get('id')+" clicked!");
-      roleView.set('controller.currentRole', d);
-      d3.select(this).classed("selected", true);
+      d3.selectAll("line.role").classed("selected", false);
+      if (roleView.get('controller.currentRole') == d) {
+        roleView.set('controller.currentRole', null);
+      } else {
+        roleView.set('controller.currentRole', d);
+        d3.select(this).classed("selected", true);
+      }
     }
   },
 });
