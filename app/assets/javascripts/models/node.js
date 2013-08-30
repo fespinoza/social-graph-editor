@@ -14,7 +14,7 @@ App.Node = DS.Model.extend({
 
   // computed attributes
   radius: function(){
-    return 16;
+    return 12;
   }.property(),
   cx: function () {
     return this.get('x');
