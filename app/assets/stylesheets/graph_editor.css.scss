@@ -12,7 +12,7 @@ svg#graph_canvas {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
- 
+
   &:not(.active):not(.ctrl) {
     cursor: crosshair;
   }
@@ -29,7 +29,7 @@ svg#graph_canvas {
       cursor: pointer;
     }
   }
-   
+
   text {
     font-size: 11px;
     pointer-events: none;
@@ -40,6 +40,26 @@ svg#graph_canvas {
       stroke-opacity: 0.9;
     }
   }
+
+  .link {
+    fill: none;
+    stroke: #000;
+    stroke-width: 4px;
+    cursor: default;
+
+    &.selected {
+      stroke-dasharray: 10,2;
+    }
+
+    &.dragline {
+      pointer-events: none;
+    }
+
+    &.hidden {
+      stroke-width: 0;
+    }
+  }
+
 
   line.role {
     stroke-width: 4;
@@ -115,7 +135,7 @@ svg#graph_canvas {
 
     &.selected {
       background-color: gray;
-      
+
       &:hover {
         background-color: #a0a0a0;
       }
