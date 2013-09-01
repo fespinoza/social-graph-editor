@@ -179,6 +179,7 @@ App.NodesView = Ember.View.extend({
         }
       })
       .attr('fill', function (d) {
+        family = d.get('families').toArray()[0];
         if (family) {
           return family.get('color');
         }
