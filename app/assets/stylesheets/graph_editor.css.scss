@@ -169,3 +169,15 @@ svg#graph_canvas {
 #canvas_container {
   position: relative;
 }
+
+.modal {
+  form {
+    margin: 0;
+  }
+
+  .modal-footer {
+    .pull-right {
+      margin-left: 5px;
+    }
+  }
+}
