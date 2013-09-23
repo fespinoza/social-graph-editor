@@ -12,20 +12,24 @@ App.FamiliesController = Ember.ArrayController.extend({
     }
     this.transaction = this.get('store').transaction();
     this.set('currentFamily', this.transaction.createRecord(App.Family, attributes));
+    this.get('currentFamily').resetErrors();
   },
 
   edit: function (family) {
     this.transaction = this.get('store').transaction();
     this.set('currentFamily', family);
     this.transaction.add(family);
+    this.get('currentFamily').resetErrors();
   },
 
   save: function() {
-    this.get('content').pushObject(this.get('currentFamily'));
-    this.transaction.commit();
-    this.transaction = null;
-    this.set('currentFamily', null);
-    $("#graph_canvas").trigger('nodeUpdate');
+    if (this.get('currentFamily').runValidations()) {
+      this.get('content').pushObject(this.get('currentFamily'));
+      this.transaction.commit();
+      this.transaction = null;
+      this.set('currentFamily', null);
+      $("#graph_canvas").trigger('nodeUpdate');
+    }
   },
 
   cancel: function() {
@@ -47,4 +51,12 @@ App.FamiliesController = Ember.ArrayController.extend({
   selectFamily: function(family) {
     this.set('socialNetwork.selectedFamily', family);
   },
+
+  formTitle: function() {
+    if (this.get('currentFamily.isNew')) {
+      return "Create";
+    } else {
+      return "Update";
+    }
+  }.property('currentFamily'),
 });
