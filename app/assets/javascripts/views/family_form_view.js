@@ -35,11 +35,6 @@ App.FamilyFormView = Ember.View.extend({
     }
   },
 
-  cancel: function() {
-    this.close();
-    this.get('controller').send('cancel');
-  },
-
   showErrorIfUndefined: function(fieldName, fieldId) {
     var attribute = this.get('content.'+fieldName.toLowerCase()),
         message   = fieldName + " must not be empty";
@@ -55,7 +50,11 @@ App.FamilyFormView = Ember.View.extend({
       }
       return false;
     }
+  },
 
+  cancel: function() {
+    this.close();
+    this.get('controller').send('cancel');
   },
 
 });
