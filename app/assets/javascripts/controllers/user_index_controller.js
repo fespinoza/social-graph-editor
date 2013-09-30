@@ -1,28 +1,16 @@
 App.UserIndexController = Ember.ObjectController.extend({
-  errorMessage: null,
 
   startEditing: function() {
     // create a new record on a local transaction
     this.transaction = this.get('store').transaction();
     this.set('content', this.transaction.createRecord(App.User, {}));
-    this.set('errorMessage', null);
   },
 
   register: function() {
-    validParams = this.get('email') != null &&
-                  this.get('password') != null &&
-                  this.get('password') == this.get('password_confirmation');
-    if (validParams) {
-      //commit and then clear the local transaction
-      this.transaction.commit();
-      this.transaction = null;
-      this.set('errorMessage', null);
-      // TODO: show email duplication error
-    } else {
-      message = "Email and Password must be presetent and " +
-                "Password and Password Confirmation must be equal";
-      this.set('errorMessage', message);
-    }
+    //commit and then clear the local transaction
+    this.transaction.commit();
+    this.transaction = null;
+    // TODO: show email duplication error
   },
 
   stopEditing: function() {
@@ -30,7 +18,6 @@ App.UserIndexController = Ember.ObjectController.extend({
     if (this.transaction) {
       this.transaction.rollback();
       this.transaction = null;
-      this.set('errorMessage', null);
     }
   },
 
