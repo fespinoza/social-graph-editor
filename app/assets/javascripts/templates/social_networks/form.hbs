@@ -1,7 +1,7 @@
-<form class="form-horizontal" {{action "save" on="submit"}}>
+<form class="form-horizontal" {{action "submit" on="submit" target="view"}}>
 
   <div class="control-group">
-    <label class="control-label" for="name">Name</label>
+    <label class="control-label" for="name">Name*</label>
     <div class="controls">
       {{input valueBinding="name" id="name"}}
     </div>

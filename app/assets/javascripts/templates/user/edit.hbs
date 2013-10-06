@@ -2,33 +2,33 @@
 
 {{partial "messages"}}
 
-<form class="form-horizontal" {{action "update" on="submit"}}>
+<form class="form-horizontal">
 
   <div class="control-group">
-    <label class="control-label" for="userEmail">Email</label>
+    <label class="control-label" for="userEmail">Email*</label>
     <div class="controls">
       {{input valueBinding="email" type="email" placeholder="Email" id="userEmail"}}
     </div>
   </div>
 
   <div class="control-group">
-    <label class="control-label" for="userPassword">Current Password</label>
+    <label class="control-label" for="userPassword">Current Password*</label>
     <div class="controls">
       {{input valueBinding="password" type="password" placeholder="Current Password" id="userPassword"}}
     </div>
   </div>
 
   <div class="control-group">
-    <label class="control-label" for="userNewPassword">New Password</label>
+    <label class="control-label" for="userNewPassword">New Password*</label>
     <div class="controls">
-      {{input valueBinding="newPassword" type="password" placeholder="New Password" id="userNewPassword"}}
+      {{input valueBinding="new_password" type="password" placeholder="New Password" id="userNewPassword"}}
     </div>
   </div>
 
   <div class="control-group">
-    <label class="control-label" for="userNewPasswordConfirmation">New Password Confirmation</label>
+    <label class="control-label" for="userNewPasswordConfirmation">New Password Confirmation*</label>
     <div class="controls">
-      {{input valueBinding="newPasswordConfirmation" type="password" placeholder="Confirm New Password" id="userNewPasswordConfirmation"}}
+      {{input valueBinding="new_password_confirmation" type="password" placeholder="Confirm New Password" id="userNewPasswordConfirmation"}}
     </div>
   </div>
 

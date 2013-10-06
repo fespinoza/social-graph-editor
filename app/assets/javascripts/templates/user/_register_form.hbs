@@ -2,24 +2,24 @@
 
 {{partial "messages"}}
 
-<form class="form-horizontal" {{action "register" on="submit"}}>
+<form class="form-horizontal">
 
   <div class="control-group">
-    <label class="control-label" for="newUserEmail">Email</label>
+    <label class="control-label" for="newUserEmail">Email*</label>
     <div class="controls">
       {{input valueBinding="email" type="email" placeholder="Email" id="newUserEmail"}}
     </div>
   </div>
 
   <div class="control-group">
-    <label class="control-label" for="newUserPassword">Password</label>
+    <label class="control-label" for="newUserPassword">Password*</label>
     <div class="controls">
       {{input valueBinding="password" type="password" placeholder="Password" id="newUserPassword"}}
     </div>
   </div>
 
   <div class="control-group">
-    <label class="control-label" for="userPasswordConfirmation">Password Confirmation</label>
+    <label class="control-label" for="userPasswordConfirmation">Password Confirmation*</label>
     <div class="controls">
       {{input valueBinding="password_confirmation" type="password" placeholder="Confirm Password" id="newUserPasswordConfirmation"}}
     </div>
@@ -27,7 +27,7 @@
 
   <div class="control-group">
     <div class="controls">
-      {{input class="btn btn-primary" type="submit" value="Register"}}
+      <button class="btn btn-primary" {{action "submit" target="view"}}>Register</button>
     </div>
   </div>
 </form>
