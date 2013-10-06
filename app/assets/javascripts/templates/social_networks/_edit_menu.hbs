@@ -34,7 +34,6 @@
         </ul>
       </div>
       
-
       <div class="edition-buttons">
         <div class="states">
           <span>Select Edition Mode:</span>
@@ -55,6 +54,12 @@
               <i class="icon-resize-small"></i>
             </button>
           </div>
+        </div>
+
+        <div class="extra-buttons">
+          {{#view App.SortButtonView}}
+            <button type="button" class="btn" title="Sort Nodes" {{action "sort" target="view"}}>Sort</button>
+          {{/view}}
         </div>
 
         <div class="zoom-buttons">
