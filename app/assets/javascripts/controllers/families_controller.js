@@ -47,4 +47,12 @@ App.FamiliesController = Ember.ArrayController.extend({
   selectFamily: function(family) {
     this.set('socialNetwork.selectedFamily', family);
   },
+
+  formTitle: function() {
+    if (this.get('currentFamily.isNew')) {
+      return "Create";
+    } else {
+      return "Update";
+    }
+  }.property('currentFamily'),
 });

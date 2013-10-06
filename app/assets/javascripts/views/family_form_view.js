@@ -5,6 +5,12 @@ App.FamilyFormView = Ember.View.extend({
 
   didInsertElement: function () {
     this.open();
+    var self = this,
+        validator = new App.Validator();
+    validator.extractValue = function(field) {
+      return self.get('content.'+field);
+    };
+    this.set('validator', validator);
   },
 
   willDestroyElement: function () {
@@ -25,10 +31,13 @@ App.FamilyFormView = Ember.View.extend({
   },
 
   submit: function() {
-    var isValid = true;
-    isValid = this.showErrorIfUndefined("Name", "#familyName") && isValid;
-    isValid = this.showErrorIfUndefined("Kind", "#familyKind") && isValid;
-
+    var v = this.get('validator'),
+        isValid = v.runValidations(function () {
+          return [
+            v.presenceOf("Name", "#familyName"),
+            v.presenceOf("Kind", "#familyKind"),
+          ];
+        });
     if (isValid) {
       this.get('controller').send('save');
       this.$().modal('hide');
@@ -38,24 +47,6 @@ App.FamilyFormView = Ember.View.extend({
   cancel: function() {
     this.close();
     this.get('controller').send('cancel');
-  },
-
-  showErrorIfUndefined: function(fieldName, fieldId) {
-    var attribute = this.get('content.'+fieldName.toLowerCase()),
-        message   = fieldName + " must not be empty";
-    if(attribute != "" && attribute != null) {
-      this.$(fieldId).parents(".control-group").removeClass("error");
-      this.$(fieldId).siblings(".help-inline").remove();
-      return true;
-    } else {
-      // if the error message was not already set on screen
-      if(this.$(fieldId).siblings(".help-inline").length == 0) {
-        this.$(fieldId).parents(".control-group").addClass("error");
-        this.$(fieldId).parents(".controls").append("<span class='help-inline'>"+message+"</span>");
-      }
-      return false;
-    }
-
   },
 
 });
