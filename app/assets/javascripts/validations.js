@@ -20,6 +20,7 @@ App.Validator = function(){
     // logic to extract attribute value from name
     getAttributeValue: function(fieldName) {
       var field = fieldName.replace(/([A-Z])/g, function($1){return "_"+$1.toLowerCase();}).replace(/^_/, '');
+      console.log(fieldName+": "+this.extractValue(field)+" ("+field+")");
       return this.extractValue(field); // this.get('controller.' + field);
     },
 
