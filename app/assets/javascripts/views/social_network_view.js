@@ -12,6 +12,7 @@ App.SocialNetworkView = Ember.View.extend({
     this.$('.states .btn').tooltip();
     this.$('.operations .edit').tooltip();
     this.$('.zoom-buttons .btn').tooltip();
+    this.$('.extra-buttons .btn').tooltip();
 
     // zoom buttons calls
     this.$('.zoom-buttons .zoom-in').on('click', function() {
