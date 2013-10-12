@@ -50,6 +50,7 @@ App.SortButtonView = Ember.View.extend({
   },
 
   sort: function() {
+    $("body").addClass("loading");
     console.log("sorting all nodes...");
     this.initForce();
     var force = this.get('force');
@@ -58,6 +59,7 @@ App.SortButtonView = Ember.View.extend({
     force.stop();
     this.updateNodes();
     $("#graph_canvas").trigger('forceTick');
+    $("body").removeClass("loading");
   },
 
   updateNodes: function() {
