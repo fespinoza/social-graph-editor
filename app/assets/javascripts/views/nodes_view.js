@@ -22,6 +22,11 @@ App.NodesView = Ember.View.extend({
 
     console.log("did insert element!");
     this.renderSVG();
+
+    $graphCanvas.on('customTick', function() {
+      console.log("custom tick");
+      view.tick(); 
+    });
   },
 
   reRender: function() {
