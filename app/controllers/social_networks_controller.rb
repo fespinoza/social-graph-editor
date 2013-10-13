@@ -1,6 +1,6 @@
 class SocialNetworksController < ApplicationController
   respond_to :json, :rdf
-  skip_before_filter :authenticate, only: :vocabulary
+  before_filter :authenticate, except: [:vocabulary]
 
   def index
     authenticate

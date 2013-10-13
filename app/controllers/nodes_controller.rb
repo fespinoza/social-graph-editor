@@ -1,5 +1,6 @@
 class NodesController < ApplicationController
   respond_to :json
+  before_filter :authenticate
 
   def index
     respond_with Node.find(params[:ids])
