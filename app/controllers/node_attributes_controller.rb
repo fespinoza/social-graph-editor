@@ -1,5 +1,6 @@
 class NodeAttributesController < ApplicationController
   respond_to :json
+  before_filter :authenticate
 
   def index
     nodes = NodeAttribute.find(params[:ids]) rescue NodeAttribute.all
