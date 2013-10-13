@@ -1,5 +1,6 @@
 class RolesController < ApplicationController
   respond_to :json
+  before_filter :authenticate
 
   def index
     respond_with Role.find(params[:ids])

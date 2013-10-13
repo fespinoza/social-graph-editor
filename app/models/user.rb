@@ -27,7 +27,11 @@ class User < ActiveRecord::Base
   end
 
   def password_reset!
-    update_attribute(:password, User.encrypt("temp123"))
+    update_attribute(:password, User.encrypt(User.default_password))
+  end
+
+  def self.default_password
+    "temp123"
   end
 
   private

@@ -1,5 +1,6 @@
 class FamiliesController < ApplicationController
   respond_to :json
+  before_filter :authenticate
 
   def index
     respond_with Family.find(params[:ids])
