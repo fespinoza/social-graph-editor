@@ -17,12 +17,13 @@ gem 'rdf-n3'
 gem 'activeadmin'
 
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
-  gem 'bootstrap-sass'        # use bootstrap in rails with sass
 end
+
+gem 'sass-rails',   '~> 3.2.3'
+gem 'bootstrap-sass'        # use bootstrap in rails with sass
 
 group :development do
   gem 'better_errors'       # awesome errors page
